@@ -1,0 +1,44 @@
+﻿@using School_Timetable.Models.Entities
+
+@{
+    var professorSubjects = ViewData["professorSubjects"] as List<string>;
+    var unassignedHours = ViewData["unassignedHours"] as List<int>;
+}
+
+@model List<School_Timetable.Models.Entities.Professor>
+
+<h1>Professors</h1>
+
+<form method="post">
+    <a class="text-white btn btn-success mt-3" asp-area="" asp-controller="Professors" asp-action="Create">Add Professor</a>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Subject</th>
+                <th>Unassigned hours</th>
+                <th>Classes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Model[i].Id</td>
+                    <td>@Model[i].LastName</td>
+                    <td>@Model[i].FirstName</td>
+                    <td>@professorSubjects[i]</td>
+                    <td>@unassignedHours[i]</td>
+                    <td class="text-danger">No classes assigned</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { professorId = Model[i].Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

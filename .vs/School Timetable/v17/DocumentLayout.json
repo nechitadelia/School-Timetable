@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\professors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\professors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\controllers\\professorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:controllers\\professorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\repository\\professorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:repository\\professorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\interfaces\\ischoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:interfaces\\ischoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\repository\\schoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:repository\\schoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\interfaces\\iprofessorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:interfaces\\iprofessorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ISchoolClassRepository.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Interfaces\\ISchoolClassRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\ISchoolClassRepository.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Interfaces\\ISchoolClassRepository.cs",
+              "RelativeToolTip": "Interfaces\\ISchoolClassRepository.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAQwCYAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T15:58:53.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Professors\\Index.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeToolTip": "Views\\Professors\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T15:01:59.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProfessorRepository.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Repository\\ProfessorRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\ProfessorRepository.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Repository\\ProfessorRepository.cs",
+              "RelativeToolTip": "Repository\\ProfessorRepository.cs",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAgwJMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T14:10:33.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProfessorsController.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Controllers\\ProfessorsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfessorsController.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Controllers\\ProfessorsController.cs",
+              "RelativeToolTip": "Controllers\\ProfessorsController.cs",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAkwGgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T13:58:38.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Professors\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Professors\\Edit.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Professors\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Professors\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T14:01:04.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SchoolClassRepository.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Repository\\SchoolClassRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\SchoolClassRepository.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Repository\\SchoolClassRepository.cs",
+              "RelativeToolTip": "Repository\\SchoolClassRepository.cs",
+              "ViewState": "AQIAAJAAAAAAAAAAAAAAAK8AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T15:59:03.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IProfessorRepository.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Interfaces\\IProfessorRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IProfessorRepository.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Interfaces\\IProfessorRepository.cs",
+              "RelativeToolTip": "Interfaces\\IProfessorRepository.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T15:49:17.276Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

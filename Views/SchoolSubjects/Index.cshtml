@@ -1,0 +1,36 @@
+﻿@using School_Timetable.Models.Entities
+
+@{
+    var professors = ViewData["professors"] as List<string>;
+}
+
+@model List<School_Timetable.Models.Entities.SchoolSubject>
+
+
+<h1>School Subjects</h1>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Professors</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subject in Model)
+        {
+            <tr>
+                @if (professors[subject.Id - 1] == "")
+                {
+                    <td>@subject.Name</td>
+                    <td class="text-danger">No professors</td>
+                }
+                else
+                {
+                    <td>@subject.Name</td>
+                    <td>@professors[subject.Id - 1]</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

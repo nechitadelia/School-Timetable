@@ -1,0 +1,43 @@
+﻿@using School_Timetable.Models.Entities
+
+@{
+    var availableLetter = ViewData["availableLetter"];
+}
+
+@model School_Timetable.Models.SchoolClassViewModel
+
+<h1>Delete Class</h1>
+
+<form method="post">
+    <div class="mt-3">
+        <label class="form-label">Year of study</label>
+        <select asp-for="YearOfStudy" class="schoolclass-dropdown">
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">ClassLetter</label>
+        <input readonly id="classLetter" type="text" class="form-control" asp-for="ClassLetter" />
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-danger">
+            Delete Class
+        </button>
+    </div>
+    <div class="mt-3 message">
+        <div class="deleteClass" id="deleteClass">
+            <p>You deleted a class!</p>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <button class="btn btn-info mt-3">
+            <a class="text-white text-decoration-none" asp-area="" asp-controller="SchoolClasses" asp-action="Index">Back to the list</a>
+        </button>
+    </div>
+</form>
