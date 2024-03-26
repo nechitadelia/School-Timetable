@@ -3,6 +3,7 @@
 @{
     var professorSubjects = ViewData["professorSubjects"] as List<string>;
     var unassignedHours = ViewData["unassignedHours"] as List<int>;
+    var professorClasses = ViewData["professorClasses"] as List<List<string>>;
 }
 
 @model List<School_Timetable.Models.Entities.Professor>
@@ -33,7 +34,21 @@
                     <td>@Model[i].FirstName</td>
                     <td>@professorSubjects[i]</td>
                     <td>@unassignedHours[i]</td>
-                    <td class="text-danger">No classes assigned</td>
+                    @if (professorClasses[i].Count > 0)
+                    {
+                        <td>
+                            <ul>
+                                @foreach (string schoolClass in professorClasses[i])
+                                {
+                                    <li>@schoolClass</li>
+                                }
+                            </ul>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-danger">No classes assigned</td>
+                    }
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { professorId = Model[i].Id }, new { @class = "btn btn-primary" })
                     </td>

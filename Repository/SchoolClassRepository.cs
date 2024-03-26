@@ -142,6 +142,15 @@ namespace School_Timetable.Repository
             return letters[newIndex];
         }
 
+        //get a class object from view model object
+        public SchoolClass GetClassFromViewModel(SchoolClassViewModel viewModel)
+        {
+            return _dbContext.SchoolClasses
+                .Where(c => c.YearOfStudy == viewModel.YearOfStudy)
+                .OrderBy(c => c.ClassLetter)
+                .Last();
+        }
+
         //add new class to database
         public async void AddClass(int yearOfStudy)
         {

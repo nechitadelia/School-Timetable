@@ -5,9 +5,9 @@
 
 const submit = document.getElementById("send");
 
-submit.addEventListener('click', (e) => {
+submit.addEventListener('click', () => {
 
-    e.preventDefault();
+    //e.preventDefault();
 
     //setTimeout(() => {
     //    window.location.reload();

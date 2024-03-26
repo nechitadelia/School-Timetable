@@ -63,15 +63,46 @@ namespace School_Timetable.Repository
             return _dbContext.Professors.Any(p => p.Id == professorId);
         }
 
-        //assign hours to a professor
-        public void AssignHours(int professorId)
+		//check if you can assign hours to a professor
+		public bool CanAssignHours(int professorId)
+		{
+			Professor professor = GetProfessor(professorId);
+			SchoolSubject subject = GetProfessorSubject(professorId);
+
+			if ((professor.AssignedHours + subject.HoursPerWeek) <= 20)
+			{
+                return true;
+			}
+            else
+            {
+                return false;
+            }
+		}
+
+        //check if a professor was already assigned to a class
+        public bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
+        {
+            //check if there is already a professor for the same class and subject
+            bool result = _dbContext.ClassProfessors.Any(c => c.SchoolClassId == schoolClass.Id && c.SubjectName == schoolSubject.Name);
+            
+            //bool result2 = _dbContext.ClassProfessors.Any(p => p.ProfessorId == professorId && p.SchoolClassId == schoolClass.Id);
+            if (result)
+            {
+                return false;
+            }
+            return true;
+        }
+
+		//assign hours to a professor
+		public void AssignHours(int professorId)
         {
             Professor professor = GetProfessor(professorId);
-            SchoolSubject subject = GetProfessorSubject(professorId);
-            if ((professor.AssignedHours + subject.HoursPerWeek) <= 20)
+			SchoolSubject subject = GetProfessorSubject(professorId);
+
+			if (CanAssignHours(professorId))
             {
-                professor.AssignedHours += subject.HoursPerWeek;
-            }
+				professor.AssignedHours += subject.HoursPerWeek;
+			}
         }
 
         //get a professor's unassigned hours
@@ -83,8 +114,26 @@ namespace School_Timetable.Repository
             return unassignedHours;
         }
 
-        //creating a new professor
-        public async void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
+		//unassign hours from a professor
+		public void UnassignHours(Professor professor)
+		{
+            professor.AssignedHours = 0;
+            Save();
+		}
+
+		//unassign hours from all professors
+		public void UnassignAllHours()
+        {
+            ICollection<Professor> professors = GetProfessors();
+
+            foreach (Professor p in professors)
+            {
+                UnassignHours(p);
+            }
+		}
+
+		//creating a new professor
+		public async void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
         {
             //cheching which subject was chosen by the user in the view
             SchoolSubject subject = new SchoolSubject();

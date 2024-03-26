@@ -12,11 +12,13 @@ namespace School_Timetable.Controllers
     {
         private readonly IProfessorRepository _professorRepository;
         private readonly ISubjectRepository _subjectRepository;
+        private readonly IClassProfessorRepository _classProfessorRepository;
 
-        public ProfessorsController(IProfessorRepository professorRepository, ISubjectRepository subjectRepository)
+        public ProfessorsController(IProfessorRepository professorRepository, ISubjectRepository subjectRepository, IClassProfessorRepository classProfessorRepository)
         {
             _professorRepository = professorRepository;
             _subjectRepository = subjectRepository;
+            _classProfessorRepository = classProfessorRepository;
         }
 
         [HttpGet]
@@ -24,27 +26,29 @@ namespace School_Timetable.Controllers
         {
             //getting a list of all professors from the database
             ICollection<Professor> professors = _professorRepository.GetProfessors();
-
-            //getting the list of subjects for all professors
+            
+            //creating the view data content
             List<string> professorSubjects = new List<string>();
+            List<int> unassignedHours = new List<int>();
+            List<List<string>> professorClasses = new List<List<string>>();
 
             foreach (Professor p in professors)
             {
+                //getting the list of subjects for all professors
                 SchoolSubject sub = _professorRepository.GetProfessorSubject(p.Id);
                 professorSubjects.Add(sub.Name);
-            }
 
-            //getting a list of unassigned hours for all professors
-            List<int> unassignedHours = new List<int>();
-
-            foreach (Professor p in professors)
-            {
+                //getting a list of unassigned hours for all professors
                 unassignedHours.Add(_professorRepository.GetUnassignedHours(p.Id));
+
+                //getting a list of the classes for all professors
+                professorClasses.Add(_classProfessorRepository.GetClassesOfAProfessor(p));
             }
 
             //saving the data of professors, so it can be sent to the View
             ViewData["professorSubjects"] = professorSubjects;
             ViewData["unassignedHours"] = unassignedHours;
+            ViewData["professorClasses"] = professorClasses;
 
             return View(professors);
         }
@@ -96,6 +100,7 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult Delete(Professor viewModel)
         {
+            _classProfessorRepository.UnassignAProfessor(viewModel);
             _professorRepository.DeleteProfessor(viewModel);
 
             return RedirectToAction("Index", "Professors");

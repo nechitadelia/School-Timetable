@@ -2,6 +2,7 @@
 
 @{
     var classesSubjects = ViewData["classesSubjects"] as List<List<SchoolSubject>>;
+    var classProfessors = ViewData["classProfessors"] as List<List<string>>;
 }
 
 @model List<School_Timetable.Models.Entities.SchoolClass>
@@ -9,10 +10,11 @@
 <h1>Classes</h1>
 
 <div class="schoolClass-buttons">
-    <button class="btn btn-success mt-3 text-white text-decoration-none" 
-            asp-controller="SchoolClasses" 
-            asp-action="Create">
-        Add Class
+    <button class="btn btn-success mt-3">
+        <a class="text-white text-decoration-none"
+           asp-area=""
+           asp-controller="SchoolClasses"
+           asp-action="Create">Add Class</a>
     </button>
 
     <button class="btn btn-danger mt-3">
@@ -33,11 +35,18 @@
             </tr>
         </thead>
         <tbody class="schoolClass-tableBody">
-            @foreach (var subject in classesSubjects[i])
+            @for (int j = 0; j < classesSubjects[i].Count; j++)
             {
                 <tr>
-                    <td class="schoolClass-subject">@subject.Name</td>
-                    <td class="text-danger">No professor assigned</td>
+                    <td class="schoolClass-subject">@classesSubjects[i][j].Name</td>
+                    @if(classProfessors[i][j] != "")
+                    {
+                        <td>@classProfessors[i][j]</td>
+                    }
+                    else
+                    {
+                        <td class="text-danger">No professor assigned</td>
+                    }
                 </tr>
             }
         </tbody>

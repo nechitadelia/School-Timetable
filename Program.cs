@@ -18,9 +18,10 @@ namespace School_Timetable
             builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
             builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
+			builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
 
-            //injection of the db context
-            builder.Services.AddDbContext<AppDbContext>(options =>
+			//injection of the db context
+			builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolTimetable")));
 
             var app = builder.Build();

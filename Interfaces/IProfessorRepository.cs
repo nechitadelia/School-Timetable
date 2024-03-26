@@ -24,14 +24,26 @@ namespace School_Timetable.Interfaces
         //check if a professor exists
         public bool PofessorExists(int professorId);
 
+        //check if you can assign hours to a professor
+        public bool CanAssignHours(int professorId);
+
+        //check if a professor was already assigned to a class
+        public bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
+
         //assign hours to a professor
         public void AssignHours(int professorId);
 
         //get a professor's unassigned hours
         public int GetUnassignedHours(int professorId);
 
-        //creating a new professor
-        public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);
+        //unassign hours from a professor
+        public void UnassignHours(Professor professor);
+
+        //unassign hours from all professors
+        public void UnassignAllHours();
+
+		//creating a new professor
+		public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);
 
         //edit a professors's data
         public void EditProfessor(Professor viewModel);

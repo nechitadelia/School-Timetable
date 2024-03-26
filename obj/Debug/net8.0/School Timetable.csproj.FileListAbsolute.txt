@@ -134,3 +134,4 @@ D:\Repo\School Timetable\obj\Debug\net8.0\refint\School Timetable.dll
 D:\Repo\School Timetable\obj\Debug\net8.0\School Timetable.pdb
 D:\Repo\School Timetable\obj\Debug\net8.0\School Timetable.genruntimeconfig.cache
 D:\Repo\School Timetable\obj\Debug\net8.0\ref\School Timetable.dll
+D:\Repo\School Timetable\obj\Debug\net8.0\School Timetable.sourcelink.json

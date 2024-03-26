@@ -12,8 +12,7 @@ namespace School_Timetable.Data
         public DbSet<SchoolSubject> SchoolSubjects { get; set; }
         public DbSet<Professor> Professors { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
-
-        //public DbSet<ClassProfessor> ClassProfessors { get; set; }
+        public DbSet<ClassProfessor> ClassProfessors { get; set; }
 
     }
 }

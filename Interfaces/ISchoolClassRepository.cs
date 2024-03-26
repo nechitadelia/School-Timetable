@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using School_Timetable.Models;
 using School_Timetable.Models.Entities;
 
 namespace School_Timetable.Interfaces
@@ -33,8 +34,11 @@ namespace School_Timetable.Interfaces
 		//get the next available letter for a new class
 		public char GetAvailableLetter(int yearOfStudy);
 
-        //add new class to database
-        public void AddClass(int yearOfStudy);
+        //get a class object from view model object
+        public SchoolClass GetClassFromViewModel(SchoolClassViewModel viewModel);
+
+		//add new class to database
+		public void AddClass(int yearOfStudy);
 
         //delete a class from the database
         public void DeleteClass(int yearOfStudy);
@@ -42,5 +46,7 @@ namespace School_Timetable.Interfaces
         //save changes to database
         public void Save();
 
+        //assign professors to one class
+        //public void AssignProfessorsToAClass(SchoolClass schoolClass);
 	}
 }

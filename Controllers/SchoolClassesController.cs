@@ -10,11 +10,13 @@ namespace School_Timetable.Controllers
     public class SchoolClassesController : Controller
     {
         private readonly ISchoolClassRepository _schoolClassRepository;
+		private readonly IClassProfessorRepository _classProfessorRepository;
 
-        public SchoolClassesController(ISchoolClassRepository schoolClassRepository)
+		public SchoolClassesController(ISchoolClassRepository schoolClassRepository, IClassProfessorRepository classProfessorRepository)
         {
             _schoolClassRepository = schoolClassRepository;
-        }
+			_classProfessorRepository = classProfessorRepository;
+		}
 
         [HttpGet]
         public IActionResult Index()
@@ -22,14 +24,19 @@ namespace School_Timetable.Controllers
             //getting a list of all classes from the database
             ICollection<SchoolClass> schoolClasses = _schoolClassRepository.GetAllClasses();
 
+            //getting the list of all subjects for all classes
             List<List<SchoolSubject>> classesSubjects = new List<List<SchoolSubject>>();
+			List<List<string>> classProfessors = new List<List<string>>();
 
-            foreach (var schoolClass in schoolClasses)
+			foreach (SchoolClass schoolClass in schoolClasses)
             {
-                classesSubjects.Add(_schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy));
+                List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
+				classesSubjects.Add(subjects);
+                classProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
             }
 
             ViewData["classesSubjects"] = classesSubjects;
+            ViewData["classProfessors"] = classProfessors;
 
             return View(schoolClasses);
         }
@@ -62,7 +69,10 @@ namespace School_Timetable.Controllers
 
         [HttpPost]
         public IActionResult Delete(SchoolClassViewModel viewModel)
-        {
+        {       
+            SchoolClass schoolClass = _schoolClassRepository.GetClassFromViewModel(viewModel);
+			_classProfessorRepository.UnassignAClass(schoolClass);
+
 			_schoolClassRepository.DeleteClass(viewModel.YearOfStudy);
 
 			return View();
