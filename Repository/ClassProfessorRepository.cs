@@ -48,7 +48,7 @@ namespace School_Timetable.Repository
                 .Any(p => p.ProfessorId == professor.Id);
         }
 
-        //get the professor of one subject of a class
+        //get the professor of one subject of a class - in a string
         public string GetProfessorOfASubject(SchoolClass schoolClass, SchoolSubject schoolSubject)
 		{
             if (ConnectionExists(schoolClass, schoolSubject) == true)
@@ -67,7 +67,7 @@ namespace School_Timetable.Repository
             }
 		}
 
-		//get a list of professors for one class
+		//get a list of professors for one class - in a list of strings
 		public List<string> GetProfessorsOfAClass(SchoolClass schoolClass, List<SchoolSubject> classSubjects)
 		{
 			List<string> professors = new List<string>();
@@ -76,6 +76,25 @@ namespace School_Timetable.Repository
 			{
                 string prof = GetProfessorOfASubject(schoolClass, sub);
                 professors.Add(prof);
+			}
+
+			return professors;
+		}
+
+		//get a list of professors for one class - in a list of Professor
+		public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass)
+		{
+			List<Professor> professors = new List<Professor>();
+
+			ICollection<int> professorsIds = _dbContext.ClassProfessors
+				.Where(c => c.SchoolClassId == schoolClass.Id)
+				.Select(p => p.ProfessorId)
+				.ToList();
+
+			foreach (int id in professorsIds)
+			{
+				Professor p = _dbContext.Professors.Where(p => p.Id == id).First();
+				professors.Add(p);
 			}
 
 			return professors;

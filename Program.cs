@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Repository;
+using School_Timetable.Services;
 
 namespace School_Timetable
 {
@@ -19,6 +20,7 @@ namespace School_Timetable
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
             builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
 			builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
+			builder.Services.AddScoped<ISchoolServices, SchoolServices>();
 
 			//injection of the db context
 			builder.Services.AddDbContext<AppDbContext>(options =>

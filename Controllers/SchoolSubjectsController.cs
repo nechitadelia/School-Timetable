@@ -5,6 +5,7 @@ using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
+using School_Timetable.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -13,33 +14,23 @@ namespace School_Timetable.Controllers
 {
     public class SchoolSubjectsController : Controller
     {
-        private readonly ISubjectRepository _subjectRepository;
+		private readonly ISchoolServices _schoolServices;
 
-        public SchoolSubjectsController(ISubjectRepository subjectRepository)
+		public SchoolSubjectsController(ISchoolServices schoolServices)
         {
-            _subjectRepository = subjectRepository;
-        }
+			_schoolServices = schoolServices;
+		}
 
         [HttpGet]
         public IActionResult Index()
         {
             //getting a list of all school's subjects
-            ICollection<SchoolSubject> subjects = _subjectRepository.GetSchoolSubjects();
-
-            //creating a list of strings with all professors, in the order of subjects
-            List<string> professors = new List<string>();
-
-            foreach (SchoolSubject sub in subjects)
-            {
-                string prof = _subjectRepository.ProfessorsListToString(sub.Id);
-                prof = prof.TrimEnd(',');
-                professors.Add(prof);
-            }
+            ICollection<SchoolSubject> subjects = _schoolServices.GetAllSchoolSubjects();
 
             //saving the data of professors, so it can be sent to the View
-            ViewData["professors"] = professors;
+            ViewData["professors"] = _schoolServices.GetProfessorsForSubjects(subjects);
 
-            return View(subjects);
+			return View(subjects);
         }
 
 

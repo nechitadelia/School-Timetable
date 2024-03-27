@@ -12,11 +12,14 @@ namespace School_Timetable.Interfaces
 		public bool ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject);
 		public bool ConnectionExists(Professor professor);
 
-        //get the professor of one subject of a class
+        //get the professor of one subject of a class - in a string
         public string GetProfessorOfASubject(SchoolClass schoolClass, SchoolSubject schoolSubject);
 
-		//get a list of professors for one class
+		//get a list of professors for one class - in a list of strings
 		public List<string> GetProfessorsOfAClass(SchoolClass schoolClass, List<SchoolSubject> classSubjects);
+
+		//get a list of professors for one class - in a list of Professor
+		public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass);
 
 		//get all the class ids for one professor
 		public ICollection<int> GetClassIds(Professor professor);

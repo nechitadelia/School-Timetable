@@ -114,22 +114,29 @@ namespace School_Timetable.Repository
             return unassignedHours;
         }
 
-		//unassign hours from a professor
-		public void UnassignHours(Professor professor)
+		//unassign all hours from a professor
+		public void UnassignAllHoursFromProfessor(Professor professor)
 		{
             professor.AssignedHours = 0;
             Save();
 		}
 
-		//unassign hours from all professors
-		public void UnassignAllHours()
+		//unassign all hours from all professors
+		public void UnassignAllHoursFromEveryone()
         {
             ICollection<Professor> professors = GetProfessors();
 
             foreach (Professor p in professors)
             {
-                UnassignHours(p);
+				UnassignAllHoursFromProfessor(p);
             }
+		}
+
+        //unassign hours to a professor (when a class is deleted)
+        public void UnassignHoursFromProfessor(Professor professor)
+        {
+            int subjectHours = GetProfessorSubject(professor.Id).HoursPerWeek;
+			professor.AssignedHours -= subjectHours;
 		}
 
 		//creating a new professor

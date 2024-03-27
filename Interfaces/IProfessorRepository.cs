@@ -36,11 +36,14 @@ namespace School_Timetable.Interfaces
         //get a professor's unassigned hours
         public int GetUnassignedHours(int professorId);
 
-        //unassign hours from a professor
-        public void UnassignHours(Professor professor);
+        //unassign all hours from a professor
+        public void UnassignAllHoursFromProfessor(Professor professor);
 
-        //unassign hours from all professors
-        public void UnassignAllHours();
+        //unassign all hours from all professors
+        public void UnassignAllHoursFromEveryone();
+
+        //unassign hours to a professor (when a class is deleted)
+        public void UnassignHoursFromProfessor(Professor professor);
 
 		//creating a new professor
 		public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);

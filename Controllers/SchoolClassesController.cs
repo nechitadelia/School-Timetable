@@ -4,41 +4,30 @@ using School_Timetable.Interfaces;
 using School_Timetable.Models;
 using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
+using School_Timetable.Services;
+using System.Collections.Generic;
 
 namespace School_Timetable.Controllers
 {
     public class SchoolClassesController : Controller
     {
-        private readonly ISchoolClassRepository _schoolClassRepository;
-		private readonly IClassProfessorRepository _classProfessorRepository;
+		private readonly ISchoolServices _schoolServices;
 
-		public SchoolClassesController(ISchoolClassRepository schoolClassRepository, IClassProfessorRepository classProfessorRepository)
+		public SchoolClassesController(ISchoolServices schoolServices)
         {
-            _schoolClassRepository = schoolClassRepository;
-			_classProfessorRepository = classProfessorRepository;
+			_schoolServices = schoolServices;
 		}
 
         [HttpGet]
         public IActionResult Index()
         {
-            //getting a list of all classes from the database
-            ICollection<SchoolClass> schoolClasses = _schoolClassRepository.GetAllClasses();
+            //getting a list of all classes
+            ICollection<SchoolClass> schoolClasses = _schoolServices.GetAllClasses();
 
-            //getting the list of all subjects for all classes
-            List<List<SchoolSubject>> classesSubjects = new List<List<SchoolSubject>>();
-			List<List<string>> classProfessors = new List<List<string>>();
+            ViewData["classesSubjects"] = _schoolServices.GetSubjectsForAllClasses(schoolClasses);
+			ViewData["classProfessors"] = _schoolServices.GetProfessorsForAllClasses(schoolClasses);
 
-			foreach (SchoolClass schoolClass in schoolClasses)
-            {
-                List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
-				classesSubjects.Add(subjects);
-                classProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
-            }
-
-            ViewData["classesSubjects"] = classesSubjects;
-            ViewData["classProfessors"] = classProfessors;
-
-            return View(schoolClasses);
+			return View(schoolClasses);
         }
 
         [HttpGet]
@@ -50,13 +39,10 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult Create(SchoolClassViewModel viewModel)
         {
-            //displaying the next available letter in the view model
-            char availableLetter = _schoolClassRepository.GetAvailableLetter(viewModel.YearOfStudy);
+            ViewData["availableLetter"] = _schoolServices.GetAvailableLetter(viewModel);
 
-            ViewData["availableLetter"] = availableLetter;
-
-            //add class to database
-            _schoolClassRepository.AddClass(viewModel.YearOfStudy);
+			//add class to database
+			_schoolServices.AddClass(viewModel);
 
             return View();
         }
@@ -69,11 +55,8 @@ namespace School_Timetable.Controllers
 
         [HttpPost]
         public IActionResult Delete(SchoolClassViewModel viewModel)
-        {       
-            SchoolClass schoolClass = _schoolClassRepository.GetClassFromViewModel(viewModel);
-			_classProfessorRepository.UnassignAClass(schoolClass);
-
-			_schoolClassRepository.DeleteClass(viewModel.YearOfStudy);
+        {
+			_schoolServices.DeleteClass(viewModel);
 
 			return View();
 		}
