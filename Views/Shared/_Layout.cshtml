@@ -7,44 +7,42 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/School_Timetable.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/schoolSubjects.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">School_Timetable</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ClassProfessor" asp-action="Index">Assign/Unassign professors to classes</a>
-                        </li>
-                    </ul>
-                </div>
+        <a asp-area="" asp-controller="Home" asp-action="Index">
+            <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
+        </a>
+        <nav>
+            <div class="nav-links">
+                <ul>
+                    <li class="link">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="link">
+                        <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
+                    </li>
+                    <li class="link">
+                        <a asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
+                    </li>
+                    <li class="link">
+                        <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
+                    </li>
+                    <li class="link">
+                        <a asp-area="" asp-controller="ClassProfessor" asp-action="Index">Assign/Unassign professors to classes</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <footer>
+        <p>&copy; 2024 Made by <a href="https://www.linkedin.com/in/delia-nechita/" target="_blank" title="Delia's website">Delia-Elena Nechita</a></p>
+    </footer>
 @*     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - School_Timetable - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

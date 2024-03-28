@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\School Timetable.bundle.scp.css"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\schoolSubjects.css",
+      "PackagePath": "staticwebassets\\css\\schoolSubjects.css"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -243,6 +251,22 @@
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\SchoolLogo.png",
+      "PackagePath": "staticwebassets\\src\\SchoolLogo.png"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\background1.jpg",
+      "PackagePath": "staticwebassets\\src\\background1.jpg"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\background1.psd",
+      "PackagePath": "staticwebassets\\src\\background1.psd"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\background2.jpg",
+      "PackagePath": "staticwebassets\\src\\background2.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.School Timetable.Microsoft.AspNetCore.StaticWebAssets.props",

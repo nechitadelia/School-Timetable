@@ -26,14 +26,14 @@ namespace School_Timetable.Controllers
 		{
 			_schoolServices.AssignAllProfessorsToAllClasses();
 
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", "SchoolClasses");
 		}
 
 		public IActionResult UnAssignAll()
 		{
 			_schoolServices.UnAssignAllProfessorsFromClasses();
 
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", "SchoolClasses");
 		}
 	}
 }

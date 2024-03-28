@@ -18,17 +18,105 @@ html {
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
+/*body {
+    background-color: #f4f6f8;
+}*/
+
+main {
+    margin-top: 100px;   
 }
 
 h1 {
     text-align: center;
-    margin: 30px 0;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    color: #002248;
 }
 
-/*view school class page*/
+/*navbar settings*/
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: 600ms;
+    padding: 30px 50px;
+    z-index: 100;
+    background-color: #00426d;
+}
 
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo {
+    width: 90px;
+    height: auto;
+}
+.nav-links {
+    position: relative;
+    top: 50%;
+}
+
+.nav-links li {
+    list-style: none;
+    float: left;
+}
+
+.nav-links li a {
+    color: #fff;
+    font-size: 1em;
+    margin: 0 30px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    transition: 200ms;
+}
+
+.nav-links li a:hover {
+    color: #fc9131;
+}
+
+/*footer settings*/
+footer {
+    width: 100vw;
+    height: 70px;
+    background-color: #212a30;
+    text-align: center;
+    z-index: 100;
+    margin-top: 0;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+footer p a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+
+footer p a:hover {
+    color: #fc9131;
+}
+
+
+/*view school class page*/
 .schoolClass-buttons button {
     width: 70%;
     position: relative;

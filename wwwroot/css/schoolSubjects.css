@@ -1,0 +1,71 @@
+﻿.subjects-container {
+    padding-bottom: 100px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.subjects-table {
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    transition: 0.5s ease;
+}
+
+.subjects-table:hover {
+    transform: translateX(10px) translateY(-10px);
+    box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.subjects-table thead {
+    background-color: #a3bac8;
+}
+
+.subjects-table thead th {
+    color: #002248;
+    padding: 17px 10px 17px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.first-column {
+    border-collapse: collapse;
+    border-top-left-radius: 10px;
+    border-right: 2px solid #a3bac8;
+    width: 25%;
+}
+
+.last-column {
+    border-collapse: collapse;
+    border-top-right-radius: 10px;
+}
+
+.subjects-table tbody {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.subjects-table tbody tr:nth-of-type(even) {
+    background-color: #f4f6f8;
+}
+
+.subjects-table tbody td {
+    padding: 17px 10px 17px 30px;
+    font-size: 0.95em;
+}
+
+.subject-name {
+    color: #002248;
+    width: 25%;
+    font-weight: 600;
+}
+
+.subject-professor {
+    color: #6e7082;
+}
+

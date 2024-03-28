@@ -6,31 +6,34 @@
 
 @model List<School_Timetable.Models.Entities.SchoolSubject>
 
-
-<h1>School Subjects</h1>
-
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Professors</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var subject in Model)
-        {
-            <tr>
-                @if (professors[subject.Id - 1] == "")
+<div class="subjects-container">
+    <h1>Subjects</h1>
+    <div class="table-container">
+        <table class="subjects-table">
+            <thead>
+                <tr>
+                    <th class="first-column">Subject name</th>
+                    <th class="last-column">Professors</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subject in Model)
                 {
-                    <td>@subject.Name</td>
-                    <td class="text-danger">No professors</td>
+                    <tr>
+                        @if (professors[subject.Id - 1] == "")
+                        {
+                            <td class="subject-name">@subject.Name</td>
+                            <td class="text-danger">No professors</td>
+                        }
+                        else
+                        {
+                            <td class="subject-name">@subject.Name</td>
+                            <td class="subject-professor">@professors[subject.Id - 1]</td>
+                        }
+                    </tr>
                 }
-                else
-                {
-                    <td>@subject.Name</td>
-                    <td>@professors[subject.Id - 1]</td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+
+</div>
