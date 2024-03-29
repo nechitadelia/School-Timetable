@@ -138,10 +138,36 @@ namespace School_Timetable.Services
 			return _schoolClassRepository.GetAvailableLetter(viewModel.YearOfStudy);
 		}
 
-		//-----------------------------------> CREATE METHODS <-----------------------------------
+		//get all the available letters for all school years
+		public List<char> GetAllAvailableLetters()
+		{
+            List<char> availableLetters = new List<char>();
 
-		//adding a new professor to database
-		public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
+            for (int year = 5; year <= 8; year++)
+			{
+				availableLetters.Add(_schoolClassRepository.GetAvailableLetter(year));
+            }
+
+			return availableLetters;
+		}
+
+		//get all the existing last letters for all school years
+		public List<char> GetAllExistingLetters()
+		{
+			List<char> existingLetters = new List<char>();
+
+            for (int year = 5; year <= 8; year++)
+            {
+                existingLetters.Add(_schoolClassRepository.GetLastLetter(year));
+            }
+
+			return existingLetters;
+        }
+
+        //-----------------------------------> CREATE METHODS <-----------------------------------
+
+        //adding a new professor to database
+        public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
 		{
 			_professorRepository.AddProfessor(viewModel, schoolSubjects);
 		}

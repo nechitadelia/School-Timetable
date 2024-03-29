@@ -45,11 +45,16 @@ namespace School_Timetable.Services
 		//get the next available letter for a new class, depending on the user input for the year of study
 		public char GetAvailableLetter(SchoolClassViewModel viewModel);
 
+		//get all the available letters for all school years
+		public List<char> GetAllAvailableLetters();
 
-		//-----------------------------------> CREATE METHODS <-----------------------------------
+		//get all the existing last letters for all school years
+		public List<char> GetAllExistingLetters();
 
-		//adding a new professor to database
-		public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);
+        //-----------------------------------> CREATE METHODS <-----------------------------------
+
+        //adding a new professor to database
+        public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);
 
 		//adding a new class to database
 		public void AddClass(SchoolClassViewModel viewModel);

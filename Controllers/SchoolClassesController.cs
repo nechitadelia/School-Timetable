@@ -33,32 +33,37 @@ namespace School_Timetable.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(SchoolClassViewModel viewModel)
         {
-            ViewData["availableLetter"] = _schoolServices.GetAvailableLetter(viewModel);
+            ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
 
-			//add class to database
-			_schoolServices.AddClass(viewModel);
+            //add class to database
+            _schoolServices.AddClass(viewModel);
 
-            return View();
+            return RedirectToAction("Create");
         }
 
         [HttpGet]
         public IActionResult Delete()
         {
+            ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
             return View();
         }
 
         [HttpPost]
         public IActionResult Delete(SchoolClassViewModel viewModel)
         {
-			_schoolServices.DeleteClass(viewModel);
+            ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
 
-			return View();
+            //delete class from database
+            _schoolServices.DeleteClass(viewModel);
+
+			return RedirectToAction("Delete");
 		}
 	}
 }

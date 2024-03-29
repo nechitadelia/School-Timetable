@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("School Timetable")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c046889bd65b537221a0d76180a231737f564e28")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a59795f1c225a529c0cfa1c55c0a8ff11544147d")]
 [assembly: System.Reflection.AssemblyProductAttribute("School Timetable")]
 [assembly: System.Reflection.AssemblyTitleAttribute("School Timetable")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

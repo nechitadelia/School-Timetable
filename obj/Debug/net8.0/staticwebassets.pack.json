@@ -21,6 +21,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateProfessor.js",
+      "PackagePath": "staticwebassets\\js\\CreateProfessor.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateSchoolClass.js",
+      "PackagePath": "staticwebassets\\js\\CreateSchoolClass.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolClass.js",
+      "PackagePath": "staticwebassets\\js\\DeleteSchoolClass.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditProfessor.js",
+      "PackagePath": "staticwebassets\\js\\EditProfessor.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
