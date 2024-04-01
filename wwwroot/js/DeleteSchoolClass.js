@@ -23,7 +23,7 @@ submit.addEventListener("click", () => {
             });
             setTimeout(() => {
                 form.submit();
-            }, 2000);
+            }, 1700);
         }
         else
         {

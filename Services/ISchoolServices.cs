@@ -18,8 +18,20 @@ namespace School_Timetable.Services
 		//getting a list of all subjects from the repository
 		public ICollection<SchoolSubject> GetAllSchoolSubjects();
 
-		//get one professor by id
-		public Professor GetProfessor(int professorId);
+		//get list of all fifth grade classes
+		public Stack<SchoolClass> GetFifthGradeClasses();
+
+		//get list of all sixth grade classes
+		public Stack<SchoolClass> GetSixthGradeClasses();
+
+		//get list of all seventh grade classes
+		public Stack<SchoolClass> GetSeventhGradeClasses();
+
+		//get list of all eighth grade classes
+		public Stack<SchoolClass> GetEighthGradeClasses();
+
+        //get one professor by id
+        public Professor GetProfessor(int professorId);
 
 		//getting a list of subjects for all professors
 		public List<string> GetAllProfessorsSubjects(ICollection<Professor> professors);
@@ -36,20 +48,35 @@ namespace School_Timetable.Services
 		//getting a list of strings with all professors, in the order of school subjects
 		public List<string> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects);
 
-		//getting the list of all subjects for all classes
-		public List<List<SchoolSubject>> GetSubjectsForAllClasses(ICollection<SchoolClass> schoolClasses);
+		//getting the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForFifthGrade();
 
-		//getting the list of all professors for all classes
-		public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses);
+		//getting the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForSixthGrade();
 
-		//get the next available letter for a new class, depending on the user input for the year of study
-		public char GetAvailableLetter(SchoolClassViewModel viewModel);
+		//getting the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForSeventhGrade();
+
+		//getting the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForEighthGrade();
+
+        //getting the list of all professors for all classes
+        //public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses);
+
+		//get the list of all professors for one year of study
+		public List<List<string>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses);
+
+        //get the next available letter for a new class, depending on the user input for the year of study
+        public char GetAvailableLetter(SchoolClassViewModel viewModel);
 
 		//get all the available letters for all school years
 		public List<char> GetAllAvailableLetters();
 
 		//get all the existing last letters for all school years
 		public List<char> GetAllExistingLetters();
+
+		//get all class collections (classes, subjects, professors)
+		public ClassCollectionsViewModel GetClassCollections();
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 

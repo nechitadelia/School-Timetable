@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w6kMWirFPjQbyOcLdu2uojW51Er1sZtXONOb7vz5wig=",
+  "Hash": "ZNVut7f4PI/5YnRHpDIot0+BdoZ15nXY6sKY7+QEIa8=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\home.css"
+    },
+    {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\css\\SchoolClasses.css",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "css/SchoolClasses.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\SchoolClasses.css"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\css\\schoolSubjects.css",
@@ -205,6 +224,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\EditProfessor.js"
+    },
+    {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/SchoolClasses.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\SchoolClasses.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\site.js",

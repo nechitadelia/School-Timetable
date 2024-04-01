@@ -22,12 +22,9 @@ namespace School_Timetable.Controllers
         public IActionResult Index()
         {
             //getting a list of all classes
-            ICollection<SchoolClass> schoolClasses = _schoolServices.GetAllClasses();
+            ClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
 
-            ViewData["classesSubjects"] = _schoolServices.GetSubjectsForAllClasses(schoolClasses);
-			ViewData["classProfessors"] = _schoolServices.GetProfessorsForAllClasses(schoolClasses);
-
-			return View(schoolClasses);
+			return View(classCollections);
         }
 
         [HttpGet]

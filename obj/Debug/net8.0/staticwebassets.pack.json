@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\School Timetable.bundle.scp.css"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\SchoolClasses.css",
+      "PackagePath": "staticwebassets\\css\\SchoolClasses.css"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\home.css",
       "PackagePath": "staticwebassets\\css\\home.css"
     },
@@ -35,6 +39,10 @@
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditProfessor.js",
       "PackagePath": "staticwebassets\\js\\EditProfessor.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",
+      "PackagePath": "staticwebassets\\js\\SchoolClasses.js"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\site.js",

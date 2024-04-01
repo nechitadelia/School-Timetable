@@ -18,9 +18,9 @@ html {
     min-height: 100%;
 }
 
-/*body {
+body {
     background-color: #f4f6f8;
-}*/
+}
 
 main {
     margin-top: 100px;   
@@ -113,45 +113,6 @@ footer p a {
 
 footer p a:hover {
     color: #fc9131;
-}
-
-
-/*view school class page*/
-.schoolClass-buttons button {
-    width: 70%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.schoolClass-table {
-    width: 70%;
-    margin: 50px 0;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.schoolClass-tableHead {
-    background-color: #244d59;
-    color: white;
-}
-
-    .schoolClass-tableHead th {
-        padding: 10px 0;
-        text-align: center;
-    }
-
-.schoolClass-tableBody td {
-    padding: 10px 0;
-    text-align: center;
-    border-bottom: 1px solid #244d59;
-}
-
-.schoolClass-subject {
-    font-weight: bold;
-    color: #244d59;
-    background-color: #ead5bc;
 }
 
 /*add class view page*/

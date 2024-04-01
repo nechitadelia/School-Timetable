@@ -48,7 +48,7 @@ namespace School_Timetable.Repository
             return new Stack<SchoolClass>(sixthGradeClasses);
         }
 
-        //get list of all sixth grade classes
+        //get list of all seventh grade classes
         public Stack<SchoolClass> GetSeventhGradeClasses()
         {
             ICollection<SchoolClass> seventhGradeClasses = _dbContext.SchoolClasses
@@ -59,8 +59,8 @@ namespace School_Timetable.Repository
             return new Stack<SchoolClass>(seventhGradeClasses);
         }
 
-        //get list of all sixth grade classes
-        public Stack<SchoolClass> GetEightGradeClasses()
+        //get list of all eighth grade classes
+        public Stack<SchoolClass> GetEighthGradeClasses()
         {
             ICollection<SchoolClass> eighthGradeClasses = _dbContext.SchoolClasses
                 .Where(c => c.YearOfStudy == 8)
@@ -118,7 +118,7 @@ namespace School_Timetable.Repository
                 case 7:
                     return GetSeventhGradeClasses();
                 case 8:
-                    return GetEightGradeClasses();
+                    return GetEighthGradeClasses();
                 default:
                     return new Stack<SchoolClass>();
             }

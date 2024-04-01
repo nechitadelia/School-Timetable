@@ -10,7 +10,7 @@ submit.addEventListener("click", () => {
 
     setTimeout(() => {
         form.submit();
-    }, 2000);
+    }, 1700);
 
     swal({
         title: "Good job!",

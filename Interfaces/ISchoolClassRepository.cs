@@ -16,11 +16,11 @@ namespace School_Timetable.Interfaces
         //get list of all sixth grade classes
         public Stack<SchoolClass> GetSixthGradeClasses();
 
-        //get list of all sixth grade classes
+        //get list of all seventh grade classes
         public Stack<SchoolClass> GetSeventhGradeClasses();
 
-        //get list of all sixth grade classes
-        public Stack<SchoolClass> GetEightGradeClasses();
+        //get list of all eighth grade classes
+        public Stack<SchoolClass> GetEighthGradeClasses();
 
         //get class subjects depending on its year
         public List<SchoolSubject> GetClassSubjects(int classYear);

@@ -30,7 +30,7 @@ namespace School_Timetable.Services
 		{
 			return _schoolClassRepository.GetAllClasses();
 		}
-		
+
 		//getting a list of all professors from the repository
 		public ICollection<Professor> GetAllProfessors()
 		{
@@ -41,6 +41,30 @@ namespace School_Timetable.Services
 		public ICollection<SchoolSubject> GetAllSchoolSubjects()
 		{
 			return _subjectRepository.GetSchoolSubjects();
+		}
+
+		//get list of all fifth grade classes
+		public Stack<SchoolClass> GetFifthGradeClasses()
+		{
+			return _schoolClassRepository.GetFifthGradeClasses();
+		}
+
+		//get list of all sixth grade classes
+		public Stack<SchoolClass> GetSixthGradeClasses()
+		{
+			return _schoolClassRepository.GetSixthGradeClasses();
+		}
+
+		//get list of all seventh grade classes
+		public Stack<SchoolClass> GetSeventhGradeClasses()
+		{
+			return _schoolClassRepository.GetSeventhGradeClasses();
+		}
+
+		//get list of all eighth grade classes
+		public Stack<SchoolClass> GetEighthGradeClasses()
+		{
+			return _schoolClassRepository.GetEighthGradeClasses();
 		}
 
 		//get one professor by id
@@ -89,7 +113,7 @@ namespace School_Timetable.Services
 			return _professorRepository.GetProfessorSubject(professorId);
 		}
 
-		//getting a list of strings with all professors, in the order of school subjects
+		//get a list of strings with all professors, in the order of school subjects
 		public List<string> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects)
 		{
 			List<string> professors = new List<string>();
@@ -104,33 +128,61 @@ namespace School_Timetable.Services
 			return professors;
 		}
 
-		//getting the list of all subjects for all classes
-		public List<List<SchoolSubject>> GetSubjectsForAllClasses(ICollection<SchoolClass> schoolClasses)
+		//get the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForFifthGrade()
 		{
-			List<List<SchoolSubject>> classesSubjects = new List<List<SchoolSubject>>();
-
-			foreach (SchoolClass schoolClass in schoolClasses)
-			{
-				List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
-				classesSubjects.Add(subjects);
-			}
-
-			return classesSubjects;
+			return _schoolClassRepository.GetClassSubjects(5);
 		}
 
+		//get the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForSixthGrade()
+		{
+			return _schoolClassRepository.GetClassSubjects(6);
+		}
+
+		//get the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForSeventhGrade()
+		{
+			return _schoolClassRepository.GetClassSubjects(7);
+		}
+
+		//get the list of all subjects for fifth grade
+		public List<SchoolSubject> GetSubjectsForEighthGrade()
+		{
+			return _schoolClassRepository.GetClassSubjects(8);
+		}
+
+
 		//getting the list of all professors for all classes
-		public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses)
+		//      public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses)
+		//{
+		//	List<List<string>> classesProfessors = new List<List<string>>();
+
+		//	foreach (SchoolClass schoolClass in schoolClasses)
+		//	{
+		//		List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
+		//		classesProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
+		//	}
+
+		//	return classesProfessors;
+		//}
+
+
+		//get the list of all professors for one year of study
+		public List<List<string>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses)
 		{
 			List<List<string>> classesProfessors = new List<List<string>>();
 
 			foreach (SchoolClass schoolClass in schoolClasses)
 			{
+
 				List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
 				classesProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
 			}
 
 			return classesProfessors;
 		}
+
 
 		//get the next available letter for a new class, depending on the user input for the year of study
 		public char GetAvailableLetter(SchoolClassViewModel viewModel)
@@ -141,12 +193,12 @@ namespace School_Timetable.Services
 		//get all the available letters for all school years
 		public List<char> GetAllAvailableLetters()
 		{
-            List<char> availableLetters = new List<char>();
+			List<char> availableLetters = new List<char>();
 
-            for (int year = 5; year <= 8; year++)
+			for (int year = 5; year <= 8; year++)
 			{
 				availableLetters.Add(_schoolClassRepository.GetAvailableLetter(year));
-            }
+			}
 
 			return availableLetters;
 		}
@@ -156,12 +208,41 @@ namespace School_Timetable.Services
 		{
 			List<char> existingLetters = new List<char>();
 
-            for (int year = 5; year <= 8; year++)
-            {
-                existingLetters.Add(_schoolClassRepository.GetLastLetter(year));
-            }
+			for (int year = 5; year <= 8; year++)
+			{
+				existingLetters.Add(_schoolClassRepository.GetLastLetter(year));
+			}
 
 			return existingLetters;
+		}
+
+		//get all class collections (classes, subjects, professors)
+		public ClassCollectionsViewModel GetClassCollections()
+		{
+			Stack<SchoolClass> fifthGradeClasses = GetFifthGradeClasses();
+			Stack<SchoolClass> sixthGradeClasses = GetSixthGradeClasses();
+            Stack<SchoolClass> seventhGradeClasses = GetSeventhGradeClasses();
+            Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
+
+			ClassCollectionsViewModel classCollections = new ClassCollectionsViewModel() 
+			{
+                fifthGradeClasses = fifthGradeClasses,
+				sixthGradeClasses = sixthGradeClasses,
+				seventhGradeClasses = seventhGradeClasses,
+				eighthGradeClasses = eighthGradeClasses,
+
+                fifthGradeSubjects = GetSubjectsForFifthGrade(),
+				sixthGradeSubjects = GetSubjectsForSixthGrade(),
+				seventhGradeSubjects = GetSubjectsForSeventhGrade(),
+				eighthGradeSubjects = GetSubjectsForEighthGrade(),
+
+                fifthGradeProfessors = GetProfessorsForOneYearOfStudy(fifthGradeClasses),
+				sixthGradeProfessors = GetProfessorsForOneYearOfStudy(sixthGradeClasses),
+				seventhGradeProfessors = GetProfessorsForOneYearOfStudy(seventhGradeClasses),
+				eighthGradeProfessors = GetProfessorsForOneYearOfStudy(eighthGradeClasses)
+            };
+
+			return classCollections;
         }
 
         //-----------------------------------> CREATE METHODS <-----------------------------------

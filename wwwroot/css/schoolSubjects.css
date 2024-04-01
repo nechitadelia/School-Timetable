@@ -12,7 +12,9 @@
 .subjects-table {
     width: 80%;
     max-width: 1000px;
+    background-color: #fff;
     border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
     transition: 0.5s ease;
 }
@@ -35,19 +37,8 @@
 }
 
 .first-column {
-    border-collapse: collapse;
-    border-top-left-radius: 10px;
     border-right: 2px solid #a3bac8;
     width: 25%;
-}
-
-.last-column {
-    border-collapse: collapse;
-    border-top-right-radius: 10px;
-}
-
-.subjects-table tbody {
-    font-family: 'Quicksand', sans-serif;
 }
 
 .subjects-table tbody tr:nth-of-type(even) {
@@ -55,14 +46,13 @@
 }
 
 .subjects-table tbody td {
-    padding: 17px 10px 17px 30px;
-    font-size: 0.95em;
+    padding: 15px 10px 15px 30px;
 }
 
 .subject-name {
     color: #002248;
     width: 25%;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .subject-professor {
