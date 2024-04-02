@@ -16,12 +16,6 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-    transition: 0.5s ease;
-}
-
-.subjects-table:hover {
-    transform: translateX(10px) translateY(-10px);
-    box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .subjects-table thead {
@@ -33,7 +27,6 @@
     padding: 17px 10px 17px 30px;
     font-size: 1em;
     font-weight: bold;
-    text-transform: uppercase;
 }
 
 .first-column {
@@ -58,4 +51,3 @@
 .subject-professor {
     color: #6e7082;
 }
-

@@ -42,7 +42,7 @@ namespace School_Timetable.Interfaces
         //unassign all hours from all professors
         public void UnassignAllHoursFromEveryone();
 
-        //unassign hours to a professor (when a class is deleted)
+        //unassign hours from a professor (when a class is deleted)
         public void UnassignHoursFromProfessor(Professor professor);
 
 		//creating a new professor

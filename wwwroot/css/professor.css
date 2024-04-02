@@ -1,0 +1,97 @@
+﻿
+.professors-container {
+    width: 100%;
+}
+
+.professors-container form {
+    width: 100%; 
+}
+
+.add-professor-container {
+    width: 90%;
+    max-width: 1100px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.add-professor-container a {
+    width: 150px;
+    border-radius: 70px;
+    padding: 10px 30px;
+}
+
+.professors-table {
+    width: 90%;
+    max-width: 1100px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #00426d;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 50px 0 100px 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.professors-table thead {
+    background-color: #a3bac8;
+}
+
+.professors-table thead th {
+    padding: 15px 10px 15px 30px;
+    border-right: 2px solid #a3bac8;
+}
+
+.professors-table tbody td {
+    padding: 15px 10px 15px 30px;
+}
+
+.professors-table tbody tr:nth-of-type(even) {
+    background-color: #f4f6f8;
+}
+
+.professor-name {
+    font-weight: bold;
+}
+
+.unassigned-hours {
+    width: 17%;
+    font-weight: 500;
+}
+.professors-table tbody .professors-classes-list {
+    padding-left: 0;
+    padding-bottom: 0;
+    width: 15%;
+}
+
+.professors-classes-list ul li {
+    list-style: none;
+}
+
+.professors-classes-list ul li i {
+    color: green;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.edit-button-table {
+    width: 10%;
+}
+
+.form-container input {
+    padding: 7px;
+}
+
+/* professor edit page */
+.save-delete-buttons-professor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.save-delete-buttons-professor div {
+    margin: 0 20px;
+}

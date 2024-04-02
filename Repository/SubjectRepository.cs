@@ -56,7 +56,7 @@ namespace School_Timetable.Repository
 
             foreach (Professor p in professors)
             {
-                text.Append($" {p.FirstName} {p.LastName},");
+                text.Append($" {p.LastName} {p.FirstName},");
             }
 
             return text.ToString();

@@ -1,6 +1,6 @@
 ﻿
 .schoolClass-container {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -37,33 +37,9 @@
     width: 100%;
     max-width: 250px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 30px;
     border-radius: 70px;
     font-weight: bold;
-}
-
-.add-delete-buttons .create-button {
-    color: #fff;
-    background-color: #0e8858;
-    text-decoration: none;
-    text-align: center;
-    transition: 0.3s ease;
-}
-
-.add-delete-buttons .create-button:hover {
-    background-color: #0c744a;
-}
-
-.add-delete-buttons .delete-button {
-    color: #fff;
-    background-color: #e02b45;
-    text-decoration: none;
-    text-align: center;
-    transition: 0.3s ease;
-}
-
-.add-delete-buttons .delete-button:hover {
-    background-color: #bf253b;
 }
 
 .grades-buttons {

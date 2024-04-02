@@ -1,5 +1,5 @@
 ﻿const form = document.getElementById("editProfessorform");
-const editButton = document.getElementById("editProfessorButton");
+const editButton = document.getElementById("saveProfessorButton");
 const deleteButton = document.getElementById("deleteProfessorButton");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");

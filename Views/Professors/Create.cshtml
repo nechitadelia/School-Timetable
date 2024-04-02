@@ -6,31 +6,38 @@
 
 @model School_Timetable.Models.ProfessorViewModel
 
-<h1>Add Professor</h1>
-
-<form method="post" id="createProfessorform">
-	<div class="mt-3">
-		<label for="firstName" class="form-label">First Name</label>
-		<input type="text" class="form-control" asp-for="FirstName" id="firstName" />
+<div class="form-container">
+	<div class="back-button-container">
+		<a class="back-button" asp-area="" asp-controller="Professors" asp-action="Index">Back to list</a>
 	</div>
 
-	<div class="mt-3">
-		<label for="lastName" class="form-label">Last Name</label>
-		<input type="text" class="form-control" asp-for="LastName" id="lastName" />
-	</div>
+	<h1>Add Professor</h1>
+
+	<form method="post" id="createProfessorform">
+		<div class="mt-3">
+			<label for="firstName" class="form-label">First Name</label>
+			<input type="text" class="form-control" asp-for="FirstName" id="firstName" required />
+		</div>
+
+		<div class="mt-3">
+			<label for="lastName" class="form-label">Last Name</label>
+			<input type="text" class="form-control" asp-for="LastName" id="lastName" required />
+		</div>
+
+		<div class="mt-3">
+			<label for="SchoolSubjectName" class="form-label">Specialization</label>
+			<select asp-for="SchoolSubjectName" id="SchoolSubjectName">
+				@foreach (var sub in schoolSubjects)
+				{
+					<option>@sub.Name</option>
+				}
+			</select>
+		</div>
+	</form>
 
 	<div class="mt-3">
-		<select asp-for="SchoolSubjectName">
-			@foreach (var sub in schoolSubjects)
-			{
-				<option>@sub.Name</option>
-			}
-		</select>
+		<button type="submit" class="create-button" id="createProfessorButton">Add Professor</button>
 	</div>
-</form>
-
-<div class="mt-3">
-	<button type="submit" class="btn btn-primary" id="createProfessorButton">Add Professor</button>
 </div>
 
 <script src="~/js/CreateProfessor.js" asp-append-version="true"></script>

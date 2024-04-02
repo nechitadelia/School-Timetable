@@ -68,15 +68,16 @@ namespace School_Timetable.Controllers
         {
 			_schoolServices.EditProfessor(viewModel);
 
-            return RedirectToAction("Index", "Professors");
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult Delete(Professor viewModel)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult Delete(int professorId)
         {
-			_schoolServices.DeleteProfessor(viewModel);
+			Professor professor = _schoolServices.GetProfessor(professorId);
+			_schoolServices.DeleteProfessor(professor);
 
-            return RedirectToAction("Index", "Professors");
+            return RedirectToAction("Index");
         }
     }
 }

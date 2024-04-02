@@ -34,7 +34,8 @@ namespace School_Timetable.Repository
         public Professor GetProfessor(string lastName, string firstName)
         {
             return _dbContext.Professors
-                .First(p => p.LastName == lastName && p.FirstName == firstName);
+                .Where(p => p.LastName == lastName && p.FirstName == firstName)
+                .FirstOrDefault();
         }
 
         //get a professor's subject by his/her id
@@ -85,7 +86,6 @@ namespace School_Timetable.Repository
             //check if there is already a professor for the same class and subject
             bool result = _dbContext.ClassProfessors.Any(c => c.SchoolClassId == schoolClass.Id && c.SubjectName == schoolSubject.Name);
             
-            //bool result2 = _dbContext.ClassProfessors.Any(p => p.ProfessorId == professorId && p.SchoolClassId == schoolClass.Id);
             if (result)
             {
                 return false;
@@ -132,7 +132,7 @@ namespace School_Timetable.Repository
             }
 		}
 
-        //unassign hours to a professor (when a class is deleted)
+        //unassign hours from a professor (when a class is deleted)
         public void UnassignHoursFromProfessor(Professor professor)
         {
             int subjectHours = GetProfessorSubject(professor.Id).HoursPerWeek;
@@ -160,7 +160,7 @@ namespace School_Timetable.Repository
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
                 AssignedHours = 0,
-                SchoolSubject = subject,
+                //SchoolSubject = subject,
                 SchoolSubjectId = subject.Id
             };
 
@@ -172,9 +172,9 @@ namespace School_Timetable.Repository
 		//edit a professors's data
 		public void EditProfessor(Professor viewModel)
 		{
-			Professor professor = GetProfessor(viewModel.Id);
+            Professor professor = GetProfessor(viewModel.Id);
 
-			if (professor != null)
+            if (professor != null)
 			{
 				professor.FirstName = viewModel.FirstName;
 				professor.LastName = viewModel.LastName;

@@ -20,6 +20,7 @@ html {
 
 body {
     background-color: #f4f6f8;
+    width: 100%;
 }
 
 main {
@@ -88,7 +89,7 @@ nav {
 
 /*footer settings*/
 footer {
-    width: 100vw;
+    width: 100%;
     height: 70px;
     background-color: #212a30;
     text-align: center;
