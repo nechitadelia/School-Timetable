@@ -73,63 +73,43 @@ namespace School_Timetable.Services
 			return _professorRepository.GetProfessor(professorId);
 		}
 
-		//getting a list of subjects for all professors
-		public List<string> GetAllProfessorsSubjects(ICollection<Professor> professors)
-		{
-			List<string> professorSubjects = new List<string>();
-			foreach (Professor p in professors)
-			{
-				SchoolSubject sub = _professorRepository.GetProfessorSubject(p.Id);
-				professorSubjects.Add(sub.Name);
-			}
-			return professorSubjects;
-		}
-
-		//getting a list of unassigned hours for all professors
-		public List<int> GetAllProfessorsUnassignedHours(ICollection<Professor> professors)
-		{
-			List<int> unassignedHours = new List<int>();
-			foreach (Professor p in professors)
-			{
-				unassignedHours.Add(_professorRepository.GetUnassignedHours(p.Id));
-			}
-			return unassignedHours;
-		}
-
-		//getting a list of the classes for all professors
-		public List<List<string>> GetAllProfessorsClasses(ICollection<Professor> professors)
-		{
-			List<List<string>> professorClasses = new List<List<string>>();
-			foreach (Professor p in professors)
-			{
-				professorClasses.Add(_classProfessorRepository.GetClassesOfAProfessor(p));
-			}
-			return professorClasses;
-		}
+        //get a professor's unassigned hours
+        public int GetUnassignedHours(int professorId)
+        {
+			return _professorRepository.GetUnassignedHours(professorId);
+        }
 
 		//get a professor's subject by his/her id
-		public SchoolSubject GetProfessorSubject(int professorId)
+		public SchoolSubject GetSubjectOfProfessor(int professorId)
 		{
-			return _professorRepository.GetProfessorSubject(professorId);
+			return _professorRepository.GetSubjectOfProfessor(professorId);
 		}
 
-		//get a list of strings with all professors, in the order of school subjects
-		public List<string> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects)
+        //get the list of classes for one professor
+        public List<SchoolClass> GetClassesOfAProfessor(Professor professor)
+        {
+			return _classProfessorRepository.GetClassesOfAProfessor(professor);
+        }
+
+        //get a list of all professors for each school subject - for Subjects View
+        public List<List<Professor>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects)
 		{
-			List<string> professors = new List<string>();
+			List<List<Professor>> professors = new List<List<Professor>>();
 
 			foreach (SchoolSubject sub in subjects)
 			{
-				string prof = _subjectRepository.ProfessorsListToString(sub.Id);
-				prof = prof.TrimEnd(',');
-				professors.Add(prof);
+				List<Professor> prof = _subjectRepository.GetProfessorsOfASubject(sub.Id)
+                    .OrderBy(p => p.LastName)
+                    .ThenBy(p => p.FirstName)
+                    .ToList();
+                professors.Add(prof);
 			}
 
 			return professors;
 		}
 
-		//get the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForFifthGrade()
+        //get the list of all subjects for fifth grade
+        public List<SchoolSubject> GetSubjectsForFifthGrade()
 		{
 			return _schoolClassRepository.GetClassSubjects(5);
 		}
@@ -152,42 +132,32 @@ namespace School_Timetable.Services
 			return _schoolClassRepository.GetClassSubjects(8);
 		}
 
+        //get a list of professors for one class
+        public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass)
+        {
+            List<Professor> professors = new List<Professor>();
+			List<SchoolSubject> classSubjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy);
 
-		//getting the list of all professors for all classes
-		//      public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses)
-		//{
-		//	List<List<string>> classesProfessors = new List<List<string>>();
+            foreach (SchoolSubject sub in classSubjects)
+            {
+                Professor prof = _classProfessorRepository.GetProfessorOfASubjectOfOneClass(schoolClass, sub);
+                professors.Add(prof);
+            }
 
-		//	foreach (SchoolClass schoolClass in schoolClasses)
-		//	{
-		//		List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
-		//		classesProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
-		//	}
+            return professors;
+        }
 
-		//	return classesProfessors;
-		//}
-
-
-		//get the list of all professors for one year of study
-		public List<List<string>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses)
+        //get the list of all professors for one year of study
+        public List<List<Professor>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses)
 		{
-			List<List<string>> classesProfessors = new List<List<string>>();
+			List<List<Professor>> classesProfessors = new List<List<Professor>>();
 
 			foreach (SchoolClass schoolClass in schoolClasses)
 			{
-
-				List<SchoolSubject> subjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy); //get the list of all subjects for one class
-				classesProfessors.Add(_classProfessorRepository.GetProfessorsOfAClass(schoolClass, subjects)); //get the list of all professors of one class
+				classesProfessors.Add(GetProfessorsOfAClass(schoolClass)); //get the list of all professors of one class
 			}
 
 			return classesProfessors;
-		}
-
-
-		//get the next available letter for a new class, depending on the user input for the year of study
-		public char GetAvailableLetter(SchoolClassViewModel viewModel)
-		{
-			return _schoolClassRepository.GetAvailableLetter(viewModel.YearOfStudy);
 		}
 
 		//get all the available letters for all school years
@@ -245,12 +215,35 @@ namespace School_Timetable.Services
 			return classCollections;
         }
 
+		//get a collection of all professors
+		public List<ProfessorCollectionsViewModel> GetProfessorCollections()
+		{
+            List<ProfessorCollectionsViewModel> professorCollections = new List<ProfessorCollectionsViewModel>();
+
+			ICollection<Professor> allProfessors = GetAllProfessors();
+
+			foreach (Professor professor in allProfessors)
+			{
+				professorCollections.Add(new ProfessorCollectionsViewModel
+				{
+					Id = professor.Id,
+					FirstName = professor.FirstName,
+					LastName = professor.LastName,
+					ProfessorSubject = GetSubjectOfProfessor(professor.Id),
+					UnassignedHours = GetUnassignedHours(professor.Id),
+					ClassesOfProfessor = GetClassesOfAProfessor(professor)
+                });
+			}
+
+			return professorCollections;
+        }
+
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new professor to database
-        public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
+        public void AddProfessor(ProfessorViewModel viewModel)
 		{
-			_professorRepository.AddProfessor(viewModel, schoolSubjects);
+            _professorRepository.AddProfessor(viewModel);
 		}
 
 		//adding a new class to database
@@ -262,7 +255,7 @@ namespace School_Timetable.Services
 		//assign all professors to all classes
 		public void AssignAllProfessorsToAllClasses()
 		{
-			ICollection<SchoolClass> schoolClasses = _schoolClassRepository.GetAllClasses();
+			ICollection<SchoolClass> schoolClasses = GetAllClasses();
 
 			foreach (SchoolClass schoolClass in schoolClasses) //iterating through all the classes of a school
 			{
@@ -270,7 +263,9 @@ namespace School_Timetable.Services
 
 				foreach (SchoolSubject subject in classSubjects) //iterating through all the subjects of one class
 				{
-					ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
+					ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id)
+						.OrderBy(p => p.Id)
+						.ToList();
 
 					if (professors != null)
 					{
@@ -311,21 +306,26 @@ namespace School_Timetable.Services
 			//find out which class will be deleted, based on user input
 			SchoolClass schoolClass = _schoolClassRepository.GetClassFromViewModel(viewModel);
 
-			//get the list of professors for the class that will be deleted
-			List<Professor> professors = _classProfessorRepository.GetProfessorsOfAClass(schoolClass);
-
-			//unassign hours from all professors who were teaching that class
-			foreach (Professor p in professors)
+			if (schoolClass != null)
 			{
-				_professorRepository.UnassignHoursFromProfessor(p);
+                //get the list of professors for the class that will be deleted
+                List<Professor> professors = GetProfessorsOfAClass(schoolClass);
 
-			}
+                //unassign hours from all professors who were teaching that class
+                foreach (Professor p in professors)
+                {
+                    if (p != null)
+					{
+                        _professorRepository.UnassignHoursFromProfessor(p);
+                    }
+                }
 
-			//unassign class from connections
-			_classProfessorRepository.UnassignAClass(schoolClass);
+                //unassign class from connections
+                _classProfessorRepository.UnassignAClass(schoolClass);
 
-			//delete the class from database
-			_schoolClassRepository.DeleteClass(viewModel.YearOfStudy);
+                //delete the class from database
+                _schoolClassRepository.DeleteClass(viewModel.YearOfStudy);
+            }
 		}
 
 		//unassign all professors from all classes

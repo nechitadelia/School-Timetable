@@ -23,43 +23,19 @@ namespace School_Timetable.Repository
         }
 
         //get one subject by id
-        public SchoolSubject GetSchoolSubject(int id)
+        public SchoolSubject GetSchoolSubject(int subjectId)
         {
             return _dbContext.SchoolSubjects
-                .Where(s => s.Id == id)
+                .Where(s => s.Id == subjectId)
                 .First();
         }
 
-        //get one subject by name
-        public SchoolSubject GetSchoolSubject(string name)
-        {
-            return _dbContext.SchoolSubjects
-                .Where(s => s.Name == name)
-                .First();
-        }
-
-        //get a list of professors of one subject
+        //get a list of professors for one subject
         public List<Professor> GetProfessorsOfASubject(int subjectId)
         {
             return _dbContext.Professors
                 .Where(p => p.SchoolSubjectId == subjectId)
-                .OrderBy(p => p.Id)
                 .ToList();
-        }
-
-        //turn the list of professors for a subject into a string
-        public string ProfessorsListToString(int subjectId)
-        {
-            List<Professor> professors = GetProfessorsOfASubject(subjectId);
-
-            StringBuilder text = new StringBuilder();
-
-            foreach (Professor p in professors)
-            {
-                text.Append($" {p.LastName} {p.FirstName},");
-            }
-
-            return text.ToString();
         }
     }
 }

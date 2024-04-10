@@ -48,56 +48,21 @@ namespace School_Timetable.Repository
                 .Any(p => p.ProfessorId == professor.Id);
         }
 
-        //get the professor of one subject of a class - in a string
-        public string GetProfessorOfASubject(SchoolClass schoolClass, SchoolSubject schoolSubject)
+        //get the professor of one subject of a class
+        public Professor GetProfessorOfASubjectOfOneClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
 		{
-            if (ConnectionExists(schoolClass, schoolSubject) == true)
+			if (ConnectionExists(schoolClass, schoolSubject) == true)
 			{
-                int professorId = _dbContext.ClassProfessors
-                .Where(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name)
-                .First().ProfessorId;
+				int professorId = _dbContext.ClassProfessors
+				.Where(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name)
+				.First().ProfessorId;
 
-                Professor p = _dbContext.Professors.Where(p => p.Id == professorId).First();
-
-                return ($"{p.LastName} {p.FirstName}");
-            }
+				return _dbContext.Professors.Where(p => p.Id == professorId).First();
+			}
 			else
 			{
-				return "";
-            }
-		}
-
-		//get a list of professors for one class - in a list of strings
-		public List<string> GetProfessorsOfAClass(SchoolClass schoolClass, List<SchoolSubject> classSubjects)
-		{
-			List<string> professors = new List<string>();
-
-			foreach (SchoolSubject sub in classSubjects)
-			{
-                string prof = GetProfessorOfASubject(schoolClass, sub);
-                professors.Add(prof);
+				return null;
 			}
-
-			return professors;
-		}
-
-		//get a list of professors for one class - in a list of Professor
-		public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass)
-		{
-			List<Professor> professors = new List<Professor>();
-
-			ICollection<int> professorsIds = _dbContext.ClassProfessors
-				.Where(c => c.SchoolClassId == schoolClass.Id)
-				.Select(p => p.ProfessorId)
-				.ToList();
-
-			foreach (int id in professorsIds)
-			{
-				Professor p = _dbContext.Professors.Where(p => p.Id == id).First();
-				professors.Add(p);
-			}
-
-			return professors;
 		}
 
         //get all the class ids for one professor
@@ -120,10 +85,9 @@ namespace School_Timetable.Repository
         }
 
         //get the list of classes for one professor
-        public List<string> GetClassesOfAProfessor(Professor professor)
+        public List<SchoolClass> GetClassesOfAProfessor(Professor professor)
 		{
             List<SchoolClass> schoolClasses = new List<SchoolClass>();
-            List<string> schoolClassesString = new List<string>();
             ICollection<int> schoolClassesIds = GetClassIds(professor);
 
             //creating the list of School Classes based in the collection of ids
@@ -136,17 +100,11 @@ namespace School_Timetable.Repository
 			//ordering the school classes
 			schoolClasses = schoolClasses.OrderBy(s => s.YearOfStudy).ThenBy(s => s.ClassLetter).ToList();
 
-            //creating the list of class names in a list of string
-            foreach (var s in schoolClasses)
-			{
-				schoolClassesString.Add($"{s.YearOfStudy}{s.ClassLetter}");
-            }
-
-            return schoolClassesString;
+            return schoolClasses;
         }
 
-		//delete a collection of ClassProfessor from database
-		public void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors)
+        //delete a collection of ClassProfessor from database
+        public void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors)
 		{
             foreach (ClassProfessor cp in classProfessors)
             {

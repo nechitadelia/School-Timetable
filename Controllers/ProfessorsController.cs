@@ -13,25 +13,21 @@ namespace School_Timetable.Controllers
     {
         private readonly ISchoolServices _schoolServices;
 
-		public ProfessorsController(ISchoolServices schoolServices)
+        public ProfessorsController(ISchoolServices schoolServices)
         {
             _schoolServices = schoolServices;
-		}
+        }
 
+        // GET - View all professors
         [HttpGet]
         public IActionResult Index()
         {
-            //getting a list of all professors
-            ICollection<Professor> professors = _schoolServices.GetAllProfessors();
-            
-            //saving the data of professors, so it can be sent to the View
-            ViewData["professorSubjects"] = _schoolServices.GetAllProfessorsSubjects(professors);
-            ViewData["unassignedHours"] = _schoolServices.GetAllProfessorsUnassignedHours(professors);
-            ViewData["professorClasses"] = _schoolServices.GetAllProfessorsClasses(professors);
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
 
-            return View(professors);
+            return View(professorsCollections);
         }
 
+        // GET - create a professor
         [HttpGet]
         public IActionResult Create()
         {
@@ -40,42 +36,99 @@ namespace School_Timetable.Controllers
             return View();
         }
 
+        // POST - create a professor
         [HttpPost]
         public IActionResult Create(ProfessorViewModel viewModel)
         {
             //getting a list of all subjects
-            ICollection<SchoolSubject> schoolSubjects = _schoolServices.GetAllSchoolSubjects();
+            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
 
-			//creating and saving the new professor
-			_schoolServices.AddProfessor(viewModel, schoolSubjects);
-
-            ViewData["schoolSubjects"] = schoolSubjects;
+            if (ModelState.IsValid)
+            {
+                //creating and saving the new professor
+                _schoolServices.AddProfessor(viewModel);
+                ModelState.Clear();
+            }
 
             return View();
         }
 
-        [HttpGet, ActionName("Edit")]
-        public IActionResult Edit(int professorId)
-        {
-            Professor professor = _schoolServices.GetProfessor(professorId);
-			ViewData["professorSubject"] = _schoolServices.GetProfessorSubject(professorId);
-
-			return View(professor);
-        }
-
+        // POST - assign professors to all classes
         [HttpPost]
-        public IActionResult Edit(Professor viewModel)
+        public IActionResult Assign()
         {
-			_schoolServices.EditProfessor(viewModel);
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
+
+            if (professorsCollections.Count != 0)
+            {
+                _schoolServices.AssignAllProfessorsToAllClasses();
+            }
 
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ActionName("Delete")]
+        // POST - unassign professors from all classes
+        [HttpPost]
+        public IActionResult UnAssignAll()
+        {
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
+
+            if (professorsCollections.Count != 0)
+            {
+                _schoolServices.UnAssignAllProfessorsFromClasses();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        // GET - edit a professor
+        [HttpGet]
+        [Route("Edit/{professorId}")]
+        public IActionResult Edit(int professorId)
+        {
+            Professor professor = _schoolServices.GetProfessor(professorId);
+            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(professorId);
+
+            return View(professor);
+        }
+
+        // POST - edit a professor
+        [HttpPost]
+		[Route("Edit/{professorId}")]
+		public IActionResult Edit(Professor viewModel)
+        {
+            Professor professor = _schoolServices.GetProfessor(viewModel.Id);
+            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(viewModel.Id);
+
+            if (ModelState.IsValid)
+            {
+                _schoolServices.EditProfessor(viewModel);
+                return RedirectToAction("Index");
+            }
+            return View(professor);
+        }
+
+        // GET - delete a professor
+        [HttpGet]
+        [Route("Delete/{professorId}")]
         public IActionResult Delete(int professorId)
         {
-			Professor professor = _schoolServices.GetProfessor(professorId);
-			_schoolServices.DeleteProfessor(professor);
+            Professor professor = _schoolServices.GetProfessor(professorId);
+            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(professorId);
+
+            return View(professor);
+        }
+
+
+        // DELETE a professor
+        [HttpPost]
+        [Route("Delete/{professorId}")]
+        public IActionResult Delete(Professor viewModel)
+        {
+            if (viewModel != null)
+            {
+				_schoolServices.DeleteProfessor(viewModel);
+			}
 
             return RedirectToAction("Index");
         }

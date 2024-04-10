@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
@@ -15,31 +16,25 @@ namespace School_Timetable.Repository
             _dbContext = dbContext;
         }
 
-        //get list of all professors
+        //get list of all professors, in ascending order
         public ICollection<Professor> GetProfessors()
         {
             return _dbContext.Professors
-                .OrderBy(p => p.Id)
-                .ToList();
+                .OrderBy(p => p.LastName)
+                .ThenBy(p => p.FirstName)
+                .ToList();               
         }
 
         //get one professor by id
         public Professor GetProfessor(int professorId)
         {
             return _dbContext.Professors
-                .Find(professorId);
-        }
-
-        //get one professor by name
-        public Professor GetProfessor(string lastName, string firstName)
-        {
-            return _dbContext.Professors
-                .Where(p => p.LastName == lastName && p.FirstName == firstName)
-                .FirstOrDefault();
+                .Where(p => p.Id == professorId)
+                .First();
         }
 
         //get a professor's subject by his/her id
-        public SchoolSubject GetProfessorSubject(int professorId)
+        public SchoolSubject GetSubjectOfProfessor(int professorId)
         {
             Professor professor = GetProfessor(professorId);
             int subjectId = professor.SchoolSubjectId;
@@ -51,24 +46,11 @@ namespace School_Timetable.Repository
             return subject;
         }
 
-        //get a professor's subject name by his/her name
-        //public int GetProfessorSubject(string lastName, string firstName)
-        //{
-        //    Professor professor = GetProfessor(lastName, firstName);
-        //    return professor.SchoolSubjectId;
-        //}
-
-        //check if a professor exists
-        public bool PofessorExists(int professorId)
-        {
-            return _dbContext.Professors.Any(p => p.Id == professorId);
-        }
-
 		//check if you can assign hours to a professor
 		public bool CanAssignHours(int professorId)
 		{
-			Professor professor = GetProfessor(professorId);
-			SchoolSubject subject = GetProfessorSubject(professorId);
+            Professor professor = GetProfessor(professorId);
+			SchoolSubject subject = GetSubjectOfProfessor(professorId);
 
 			if ((professor.AssignedHours + subject.HoursPerWeek) <= 20)
 			{
@@ -97,11 +79,12 @@ namespace School_Timetable.Repository
 		public void AssignHours(int professorId)
         {
             Professor professor = GetProfessor(professorId);
-			SchoolSubject subject = GetProfessorSubject(professorId);
+			SchoolSubject subject = GetSubjectOfProfessor(professorId);
 
 			if (CanAssignHours(professorId))
             {
 				professor.AssignedHours += subject.HoursPerWeek;
+                Save();
 			}
         }
 
@@ -124,7 +107,7 @@ namespace School_Timetable.Repository
 		//unassign all hours from all professors
 		public void UnassignAllHoursFromEveryone()
         {
-            ICollection<Professor> professors = GetProfessors();
+            IEnumerable<Professor> professors = GetProfessors();
 
             foreach (Professor p in professors)
             {
@@ -135,38 +118,26 @@ namespace School_Timetable.Repository
         //unassign hours from a professor (when a class is deleted)
         public void UnassignHoursFromProfessor(Professor professor)
         {
-            int subjectHours = GetProfessorSubject(professor.Id).HoursPerWeek;
+            int subjectHours = GetSubjectOfProfessor(professor.Id).HoursPerWeek;
 			professor.AssignedHours -= subjectHours;
 		}
 
-		//creating a new professor
-		public async void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects)
+		//create a new professor
+		public async void AddProfessor(ProfessorViewModel viewModel)
         {
-            //cheching which subject was chosen by the user in the view
-            SchoolSubject subject = new SchoolSubject();
+            SchoolSubject subject = _dbContext.SchoolSubjects.Where(s => s.Id == viewModel.SchoolSubjectId).First();
 
-            foreach (SchoolSubject sub in schoolSubjects)
-            {
-                if (sub.Name == viewModel.SchoolSubjectName)
-                {
-                    subject = sub;
-                    break;
-                }
-            }
-
-            //creating the new professor entity from the user input
             Professor professor = new Professor
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
                 AssignedHours = 0,
-                //SchoolSubject = subject,
-                SchoolSubjectId = subject.Id
+                ProfessorSubject = subject,
+                SchoolSubjectId = viewModel.SchoolSubjectId
             };
 
             await _dbContext.Professors.AddAsync(professor);
             Save();
-
 		}
 
 		//edit a professors's data
@@ -186,11 +157,9 @@ namespace School_Timetable.Repository
 		//delete a professor from the database
 		public void DeleteProfessor(Professor viewModel)
         {
-            Professor professor = _dbContext.Professors
-                .AsNoTracking()
-                .First(p => p.Id == viewModel.Id);
+			Professor professor = GetProfessor(viewModel.Id);
 
-            _dbContext.Professors.Remove(professor);
+			_dbContext.Professors.Remove(professor);
 			Save();
 		}
 

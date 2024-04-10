@@ -73,37 +73,28 @@ namespace School_Timetable.Repository
         //get the subjects for one class depending on its year
         public List<SchoolSubject> GetClassSubjects(int classYear)
         {
-            //get all the school subjects in a list of strings (name of subjects)
-            List<SchoolSubject> schoolSubjects = _dbContext.SchoolSubjects
-                .OrderBy(s => s.Id)
-                .Select(s => s)
-                .ToList();
-
-            //assign the main subjects for all classes
-            List<SchoolSubject> classSubjects = new List<SchoolSubject>();
-
-            for (int i = 0; i < 6; i++)
+            switch(classYear)
             {
-                classSubjects.Add(schoolSubjects[i]);
+                case 5: return _dbContext.SchoolSubjects
+                                .Where(s => s.YearOfStudy == 5)
+                                .Select(s => s)
+                                .ToList();
+                case 6: return _dbContext.SchoolSubjects
+                                .Where(s => s.YearOfStudy == 5 || s.YearOfStudy == 6)
+                                .OrderBy(s => s.Id)
+                                .Select(s => s)
+                                .ToList();
+                case 7: return _dbContext.SchoolSubjects
+                                .Where(s => s.YearOfStudy == 5 || s.YearOfStudy == 6 || s.YearOfStudy == 7)
+                                .OrderBy(s => s.Id)
+                                .Select(s => s)
+                                .ToList();
+                case 8: return _dbContext.SchoolSubjects
+                                .OrderBy(s => s.Id)
+                                .Select(s => s)
+                                .ToList();
+                default: return new List<SchoolSubject>();
             }
-
-            //add additional subjects for classes 6-8
-            if (classYear > 5)
-            {
-                classSubjects.Add(schoolSubjects[6]);
-            }
-
-            if (classYear > 6)
-            {
-                classSubjects.Add(schoolSubjects[7]);
-            }
-
-            if (classYear > 7)
-            {
-                classSubjects.Add(schoolSubjects[8]);
-            }
-
-            return classSubjects;
         }
 
         //get the classes of one year, depending on the year of study as input
@@ -128,7 +119,14 @@ namespace School_Timetable.Repository
         public char GetLastLetter(int yearOfStudy)
         {
             Stack<SchoolClass> schoolClasses = GetClassesofOneYear(yearOfStudy);
-			return schoolClasses.Peek().ClassLetter;
+            if (schoolClasses.Count == 0)
+            {
+                return '/';
+            }
+            else
+            {
+                return schoolClasses.Peek().ClassLetter;
+            }
 		}
 
         //get the next available letter for a new class
@@ -137,9 +135,15 @@ namespace School_Timetable.Repository
             string letters = "ABCDEFGHIJKLMNOPRSTUVXYZ";
 
             char lastletter = GetLastLetter(yearOfStudy);
-            int newIndex = letters.IndexOf(lastletter) + 1;
-
-            return letters[newIndex];
+            if (lastletter == '/')
+            {
+                return letters[0];
+            }
+            else
+            {
+                int newIndex = letters.IndexOf(lastletter) + 1;
+                return letters[newIndex];
+            }
         }
 
         //get a class object from view model object
@@ -169,12 +173,14 @@ namespace School_Timetable.Repository
         {
             char lastLetter = GetLastLetter(yearOfStudy);
 
-            SchoolClass existingClass = _dbContext.SchoolClasses
-                .First(c => c.YearOfStudy == yearOfStudy && c.ClassLetter == lastLetter);
+            if (lastLetter != '/') 
+            {
+                SchoolClass existingClass = _dbContext.SchoolClasses
+                    .First(c => c.YearOfStudy == yearOfStudy && c.ClassLetter == lastLetter);
 
-            _dbContext.SchoolClasses.Remove(existingClass);
-            Save();
-
+                _dbContext.SchoolClasses.Remove(existingClass);
+                Save();
+            }
 		}
 
 		//save changes to database

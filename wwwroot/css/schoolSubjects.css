@@ -23,7 +23,7 @@
 }
 
 .subjects-table thead th {
-    color: #002248;
+    color: #00426d;
     padding: 17px 10px 17px 30px;
     font-size: 1em;
     font-weight: bold;
@@ -43,11 +43,25 @@
 }
 
 .subject-name {
-    color: #002248;
+    color: #00426d;
     width: 25%;
     font-weight: bold;
 }
 
 .subject-professor {
     color: #6e7082;
+}
+
+.subjects-table tbody ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.subjects-table tbody ul li {
+    padding: 2px 0;
+}
+
+.subjects-table span {
+    font-weight: 700;
 }

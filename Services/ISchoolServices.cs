@@ -10,100 +10,97 @@ namespace School_Timetable.Services
 		//-----------------------------------> READ METHODS <-----------------------------------
 
 		//getting a list of all classes from the repository
-		public ICollection<SchoolClass> GetAllClasses();
+		ICollection<SchoolClass> GetAllClasses();
 
 		//getting a list of all professors from the repository
-		public ICollection<Professor> GetAllProfessors();
+		ICollection<Professor> GetAllProfessors();
 
 		//getting a list of all subjects from the repository
-		public ICollection<SchoolSubject> GetAllSchoolSubjects();
+		ICollection<SchoolSubject> GetAllSchoolSubjects();
 
 		//get list of all fifth grade classes
-		public Stack<SchoolClass> GetFifthGradeClasses();
+		Stack<SchoolClass> GetFifthGradeClasses();
 
 		//get list of all sixth grade classes
-		public Stack<SchoolClass> GetSixthGradeClasses();
+		Stack<SchoolClass> GetSixthGradeClasses();
 
 		//get list of all seventh grade classes
-		public Stack<SchoolClass> GetSeventhGradeClasses();
+		Stack<SchoolClass> GetSeventhGradeClasses();
 
 		//get list of all eighth grade classes
-		public Stack<SchoolClass> GetEighthGradeClasses();
+		Stack<SchoolClass> GetEighthGradeClasses();
 
         //get one professor by id
-        public Professor GetProfessor(int professorId);
+        Professor GetProfessor(int professorId);
 
-		//getting a list of subjects for all professors
-		public List<string> GetAllProfessorsSubjects(ICollection<Professor> professors);
-
-		//getting a list of unassigned hours for all professors
-		public List<int> GetAllProfessorsUnassignedHours(ICollection<Professor> professors);
-
-		//getting a list of the classes for all professors
-		public List<List<string>> GetAllProfessorsClasses(ICollection<Professor> professors);
+		//get a professor's unassigned hours
+		int GetUnassignedHours(int professorId);
 
 		//get a professor's subject by his/her id
-		public SchoolSubject GetProfessorSubject(int professorId);
+		SchoolSubject GetSubjectOfProfessor(int professorId);
 
-		//getting a list of strings with all professors, in the order of school subjects
-		public List<string> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects);
+		//get the list of classes for one professor
+		List<SchoolClass> GetClassesOfAProfessor(Professor professor);
 
-		//getting the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForFifthGrade();
-
-		//getting the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForSixthGrade();
+        //get a list of all professors for each school subject  - for Subjects View
+        List<List<Professor>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects);
 
 		//getting the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForSeventhGrade();
+		List<SchoolSubject> GetSubjectsForFifthGrade();
 
 		//getting the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForEighthGrade();
+		List<SchoolSubject> GetSubjectsForSixthGrade();
 
-        //getting the list of all professors for all classes
-        //public List<List<string>> GetProfessorsForAllClasses(ICollection<SchoolClass> schoolClasses);
+		//getting the list of all subjects for fifth grade
+		List<SchoolSubject> GetSubjectsForSeventhGrade();
 
-		//get the list of all professors for one year of study
-		public List<List<string>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses);
+		//getting the list of all subjects for fifth grade
+		List<SchoolSubject> GetSubjectsForEighthGrade();
 
-        //get the next available letter for a new class, depending on the user input for the year of study
-        public char GetAvailableLetter(SchoolClassViewModel viewModel);
+		//get a list of professors for one class
+		List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass);
+
+        //get the list of all professors for one year of study
+        List<List<Professor>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses);
 
 		//get all the available letters for all school years
-		public List<char> GetAllAvailableLetters();
+		List<char> GetAllAvailableLetters();
 
 		//get all the existing last letters for all school years
-		public List<char> GetAllExistingLetters();
+		List<char> GetAllExistingLetters();
 
 		//get all class collections (classes, subjects, professors)
-		public ClassCollectionsViewModel GetClassCollections();
+		ClassCollectionsViewModel GetClassCollections();
+
+		//get a collection of all professors
+		List<ProfessorCollectionsViewModel> GetProfessorCollections();
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new professor to database
-        public void AddProfessor(ProfessorViewModel viewModel, ICollection<SchoolSubject> schoolSubjects);
+        void AddProfessor(ProfessorViewModel viewModel);
 
 		//adding a new class to database
-		public void AddClass(SchoolClassViewModel viewModel);
+		void AddClass(SchoolClassViewModel viewModel);
 
 		//assign all professors to all classes
-		public void AssignAllProfessorsToAllClasses();
+		void AssignAllProfessorsToAllClasses();
 
 		//-----------------------------------> UPDATE METHODS <-----------------------------------
 
 		//edit a professors's data
-		public void EditProfessor(Professor professor);
+		void EditProfessor(Professor professor);
 
 		//-----------------------------------> DELETE METHODS <-----------------------------------
 
 		//delete a professor from database
-		public void DeleteProfessor(Professor professor);
+		void DeleteProfessor(Professor professor);
 
 		//delete a class from database
-		public void DeleteClass(SchoolClassViewModel viewModel);
+		void DeleteClass(SchoolClassViewModel viewModel);
 
 		//unassign all professors from all classes
-		public void UnAssignAllProfessorsFromClasses();
+		void UnAssignAllProfessorsFromClasses();
 
 	}
 }

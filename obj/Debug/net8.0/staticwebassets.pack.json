@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\js\\CreateSchoolClass.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteProfessor.js",
+      "PackagePath": "staticwebassets\\js\\DeleteProfessor.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolClass.js",
       "PackagePath": "staticwebassets\\js\\DeleteSchoolClass.js"
     },

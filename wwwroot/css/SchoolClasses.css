@@ -134,3 +134,24 @@
 .schoolClass-tableBody tr:nth-of-type(even) {
     background-color: #f4f6f8;
 }
+
+.noClasses {
+    width: 35%;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.noClasses p {
+    color: #b7394b;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ffcdd2;
+    padding: 20px 10px;
+    border-radius: 5px;
+}

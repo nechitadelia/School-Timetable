@@ -8,13 +8,33 @@ submit.addEventListener("click", () => {
     let firstNameValue = firstName.value;
     let lastNameValue = lastName.value;
 
-    setTimeout(() => {
-        form.submit();
-    }, 1700);
+    if (checkName(firstNameValue) && checkName(lastNameValue)) {
+        setTimeout(() => {
+            form.submit();
+        }, 1700);
 
-    swal({
-        title: "Good job!",
-        text: "Success! Professor " + firstNameValue + " " + lastNameValue + " has been added!",
-        icon: "success",
-    });
+        swal({
+            title: "Good job!",
+            text: "Success! Professor " + firstNameValue + " " + lastNameValue + " has been added!",
+            icon: "success",
+        });
+    }
+    else {
+        form.submit();
+    }
 });
+
+function checkName(name) {
+    if (name == "") {
+        return false;
+    }
+    else if (name.length <= 1) {
+        return false;
+    }
+    else if (!(/^[a-zA-Z]+$/.test(name))) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}

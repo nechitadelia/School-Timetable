@@ -34,11 +34,11 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SchoolSubjectId")
                         .HasColumnType("int");
@@ -47,7 +47,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("SchoolSubjectId");
 
-                    b.ToTable("Professors");
+                    b.ToTable("Professors", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.SchoolClass", b =>
@@ -60,14 +60,14 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("ClassLetter")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<int>("YearOfStudy")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SchoolClasses");
+                    b.ToTable("SchoolClasses", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.SchoolSubject", b =>
@@ -83,11 +83,11 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SchoolSubjects");
+                    b.ToTable("SchoolSubjects", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.Professor", b =>

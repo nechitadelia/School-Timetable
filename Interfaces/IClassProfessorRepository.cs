@@ -6,40 +6,34 @@ namespace School_Timetable.Interfaces
 	public interface IClassProfessorRepository
 	{
 		//creating a new professor
-		public void AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
+		void AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
 
 		//check if a connection exists in the ClassProfessor table
-		public bool ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject);
-		public bool ConnectionExists(Professor professor);
+		bool ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject);
+		bool ConnectionExists(Professor professor);
 
-        //get the professor of one subject of a class - in a string
-        public string GetProfessorOfASubject(SchoolClass schoolClass, SchoolSubject schoolSubject);
-
-		//get a list of professors for one class - in a list of strings
-		public List<string> GetProfessorsOfAClass(SchoolClass schoolClass, List<SchoolSubject> classSubjects);
-
-		//get a list of professors for one class - in a list of Professor
-		public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass);
+		//get the professor of one subject of a class
+		Professor GetProfessorOfASubjectOfOneClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
 
 		//get all the class ids for one professor
-		public ICollection<int> GetClassIds(Professor professor);
+		ICollection<int> GetClassIds(Professor professor);
 
-		//get the list of classes for one professor
-		public List<string> GetClassesOfAProfessor(Professor professor);
-
+        //get the list of classes for one professor
+        List<SchoolClass> GetClassesOfAProfessor(Professor professor);
+		
 		//delete a collection of ClassProfessor from database
-		public void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);
+		void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);
 
         //unassign a professor from classes
-        public void UnassignAProfessor(Professor professor);
+        void UnassignAProfessor(Professor professor);
 
         //unassign all professors from all classes
-        public void UnassignAllProfessors();
+        void UnassignAllProfessors();
 
 		//delete a class from ClassProfessor table
-		public void UnassignAClass(SchoolClass schoolClass);
+		void UnassignAClass(SchoolClass schoolClass);
 
 		//save changes to database
-		public void Save();
+		void Save();
 	}
 }

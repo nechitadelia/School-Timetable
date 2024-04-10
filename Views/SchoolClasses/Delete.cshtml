@@ -30,7 +30,14 @@
             <select disabled asp-for="ClassLetter" class="schoolclass-dropdown" id="ClassLetter">
                 @for (int i = 0; i < allExistingLetters.Count; i++)
                 {
-                    <option value="@schoolyears[i]">@allExistingLetters[i]</option>
+                    if (allExistingLetters[i] == '/')
+                    {
+                        <option value="@schoolyears[i]">No existing classes</option>
+                    }
+                    else
+                    {
+                        <option value="@schoolyears[i]">@allExistingLetters[i]</option>
+                    }
                 }
             </select>
         </div>
