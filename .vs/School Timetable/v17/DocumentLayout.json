@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\repository\\schoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:repository\\schoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|D:\\Repo\\School Timetable\\views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\interfaces\\ischoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:interfaces\\ischoolclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\deleteprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\deleteprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|D:\\Repo\\School Timetable\\controllers\\professorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:controllers\\professorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\css\\professor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +26,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ISchoolClassRepository.cs",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\Interfaces\\ISchoolClassRepository.cs",
-              "RelativeDocumentMoniker": "Interfaces\\ISchoolClassRepository.cs",
-              "ToolTip": "D:\\Repo\\School Timetable\\Interfaces\\ISchoolClassRepository.cs",
-              "RelativeToolTip": "Interfaces\\ISchoolClassRepository.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAswDAAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T16:00:06.17Z",
+              "Title": "DeleteProfessor.js",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteProfessor.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\DeleteProfessor.js",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteProfessor.js",
+              "RelativeToolTip": "wwwroot\\js\\DeleteProfessor.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-04-11T13:54:38.574Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SchoolClassRepository.cs",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\Repository\\SchoolClassRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\SchoolClassRepository.cs",
-              "ToolTip": "D:\\Repo\\School Timetable\\Repository\\SchoolClassRepository.cs",
-              "RelativeToolTip": "Repository\\SchoolClassRepository.cs",
-              "ViewState": "AQIAAJ4AAAAAAAAAAAAuwL8AAAABAAAA",
+              "DocumentIndex": 2,
+              "Title": "ProfessorsController.cs",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Controllers\\ProfessorsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfessorsController.cs",
+              "ToolTip": "D:\\Repo\\School Timetable\\Controllers\\ProfessorsController.cs",
+              "RelativeToolTip": "Controllers\\ProfessorsController.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAYwB8AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-10T15:59:21.554Z",
+              "WhenOpened": "2024-04-11T13:52:43.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "professor.css",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\professor.css",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css",
+              "RelativeToolTip": "wwwroot\\css\\professor.css",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAAAJcAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-04-11T11:59:08.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Professors\\Index.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeToolTip": "Views\\Professors\\Index.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADkAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-11T10:57:00.296Z",
               "EditorCaption": ""
             }
           ]

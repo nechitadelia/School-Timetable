@@ -5,8 +5,8 @@ namespace School_Timetable.Interfaces
 {
 	public interface IClassProfessorRepository
 	{
-		//creating a new professor
-		void AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
+        //assign one professor to one class
+        void AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
 
 		//check if a connection exists in the ClassProfessor table
 		bool ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject);
@@ -24,11 +24,11 @@ namespace School_Timetable.Interfaces
 		//delete a collection of ClassProfessor from database
 		void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);
 
-        //unassign a professor from classes
-        void UnassignAProfessor(Professor professor);
+        //unassign a professor from all classes
+        void UnassignAProfessorFromAllClasses(Professor professor);
 
         //unassign all professors from all classes
-        void UnassignAllProfessors();
+        void UnassignAllProfessorsFromAllClasses();
 
 		//delete a class from ClassProfessor table
 		void UnassignAClass(SchoolClass schoolClass);

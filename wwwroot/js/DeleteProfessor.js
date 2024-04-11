@@ -13,7 +13,7 @@ deleteButton.addEventListener("click", () => {
     }, 1700);
 
     swal({
-        title: "Good job!",
+        title: "Success!",
         text: "Professor " + firstNameValue + " " + lastNameValue + " has been deleted!",
         icon: "success",
     });

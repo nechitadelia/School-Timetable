@@ -44,6 +44,6 @@ namespace School_Timetable.Interfaces
         void DeleteClass(int yearOfStudy);
 
         //save changes to database
-        Task<IActionResult> Save();
+        void Save();
 	}
 }

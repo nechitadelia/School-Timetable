@@ -252,6 +252,18 @@ namespace School_Timetable.Services
 			_schoolClassRepository.AddClass(viewModel.YearOfStudy);
 		}
 
+		//assign one professor to one class
+		public void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
+		{
+            SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
+
+            if (_professorRepository.CanAssignHours(professor.Id) && _professorRepository.CanAssignClass(schoolClass, professorSubject))
+            {
+                _classProfessorRepository.AddProfessorToAClass(schoolClass, professor); //assigning a professor to one class subject
+                _professorRepository.AssignHours(professor.Id);
+            }
+        }
+
 		//assign all professors to all classes
 		public void AssignAllProfessorsToAllClasses()
 		{
@@ -267,17 +279,12 @@ namespace School_Timetable.Services
 						.OrderBy(p => p.Id)
 						.ToList();
 
-					if (professors != null)
+					if (professors.Count > 0)
 					{
 						foreach (Professor p in professors) //iterating through all the professors of one subject
 						{
-							if (_professorRepository.CanAssignHours(p.Id) && _professorRepository.CanAssignClass(schoolClass, subject))
-							{
-								_classProfessorRepository.AddProfessorToAClass(schoolClass, p); //assigning a professor to one class subject
-								_professorRepository.AssignHours(p.Id);
-								break;
-							}
-						}
+                            AssignOneProfessorToOneClass(schoolClass, p);
+                        }
 					}
 				}
 			}
@@ -296,9 +303,35 @@ namespace School_Timetable.Services
 		//delete a professor from database
 		public void DeleteProfessor(Professor professor)
 		{
-			_classProfessorRepository.UnassignAProfessor(professor);
+			//get the classes of the deleted professor
+			List<SchoolClass> classesOfProfessor = GetClassesOfAProfessor(professor);
+            SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
+
+            //unassign the professor from all classes
+            _classProfessorRepository.UnassignAProfessorFromAllClasses(professor);
+
+			//delete professor from database
 			_professorRepository.DeleteProfessor(professor);
-		}
+
+            //reassign the classes to the rest of the professors, if there are any left/available
+            ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(professorSubject.Id)
+                        .OrderBy(p => p.Id)
+                        .ToList();
+
+            if (professors.Count > 0)
+			{
+                foreach (SchoolClass schoolClass in classesOfProfessor)
+                {
+                    if (professors.Count > 0)
+                    {
+                        foreach (Professor p in professors)
+                        {
+                            AssignOneProfessorToOneClass(schoolClass, p);
+                        }
+                    }
+                }
+            }
+        }
 
 		//delete a class from database
 		public void DeleteClass(SchoolClassViewModel viewModel)
@@ -328,10 +361,10 @@ namespace School_Timetable.Services
             }
 		}
 
-		//unassign all professors from all classes
-		public void UnAssignAllProfessorsFromClasses()
+        //unassign all professors from all classes
+        public void UnAssignAllProfessorsFromClasses()
 		{
-			_classProfessorRepository.UnassignAllProfessors();
+			_classProfessorRepository.UnassignAllProfessorsFromAllClasses();
 			_professorRepository.UnassignAllHoursFromEveryone();
 		}
 

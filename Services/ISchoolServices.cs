@@ -83,8 +83,11 @@ namespace School_Timetable.Services
 		//adding a new class to database
 		void AddClass(SchoolClassViewModel viewModel);
 
-		//assign all professors to all classes
-		void AssignAllProfessorsToAllClasses();
+		//assign one professor to one class
+		void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
+
+        //assign all professors to all classes
+        void AssignAllProfessorsToAllClasses();
 
 		//-----------------------------------> UPDATE METHODS <-----------------------------------
 
@@ -99,8 +102,8 @@ namespace School_Timetable.Services
 		//delete a class from database
 		void DeleteClass(SchoolClassViewModel viewModel);
 
-		//unassign all professors from all classes
-		void UnAssignAllProfessorsFromClasses();
+        //unassign all professors from all classes
+        void UnAssignAllProfessorsFromClasses();
 
 	}
 }

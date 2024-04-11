@@ -15,7 +15,7 @@ namespace School_Timetable.Repository
 			_dbContext = dbContext;
 		}
 
-		//creating a new professor
+		//assign one professor to one class
 		public async void AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
 		{
 			//searching the name of the subject based on the id
@@ -113,15 +113,15 @@ namespace School_Timetable.Repository
             }
         }
 
-		//unassign a professor from classes
-		public void UnassignAProfessor(Professor professor)
+		//unassign a professor from all classes
+		public void UnassignAProfessorFromAllClasses(Professor professor)
 		{
 			ICollection<ClassProfessor> cp = _dbContext.ClassProfessors.Where(p => p.ProfessorId == professor.Id).ToList();
 			DeleteClassProfessor(cp);
 		}
 
 		//unassign all professors from all classes
-		public void UnassignAllProfessors()
+		public void UnassignAllProfessorsFromAllClasses()
 		{
 			ICollection<ClassProfessor> cp = _dbContext.ClassProfessors.ToList();
 			DeleteClassProfessor(cp);

@@ -47,10 +47,9 @@ namespace School_Timetable.Controllers
             {
                 //creating and saving the new professor
                 _schoolServices.AddProfessor(viewModel);
-                ModelState.Clear();
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         // POST - assign professors to all classes
