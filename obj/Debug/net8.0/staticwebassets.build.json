@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eB9KsTUI5nvbOFV/9+rRtH1KG4Ud/pJlXdTpCFY0fNs=",
+  "Hash": "c7Yl43sfi6i8XGr/pd2GMA1c6SBJdpJAjagPr1c1wKo=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -1459,6 +1459,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\src\\background2.jpg"
+    },
+    {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\src\\graduation.png",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "src/graduation.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\src\\graduation.png"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\src\\SchoolLogo.png",

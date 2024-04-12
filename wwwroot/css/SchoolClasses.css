@@ -155,3 +155,46 @@
     padding: 20px 10px;
     border-radius: 5px;
 }
+
+.graduate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.graduate-container img {
+    width: 40%;
+    height: auto;
+    margin: 40px 0;
+}
+
+.graduate-container p {
+    margin: 5px 0;
+    color: #00426d;
+    font-weight: 500;
+}
+
+#graduationClassform {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+#graduationClassform div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#graduateClassesButton {
+    width: 30%;
+    max-width: 300px;
+    padding: 10px 20px;
+    text-align: center;
+    border: none;
+    border-radius: 70px;
+    font-weight: 500;
+    color: #00426d;
+}

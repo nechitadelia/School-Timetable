@@ -46,6 +46,19 @@
     color: #fff;
 }
 
+.graduate-button {
+    color: #fff;
+    background-color: #dfa72e;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.graduate-button:hover {
+    background-color: #ebb030;
+    color: #fff;
+}
+
 #createClassform,
 #deleteClassform,
 #createProfessorform,

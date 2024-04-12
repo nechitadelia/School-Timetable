@@ -305,6 +305,10 @@
       "PackagePath": "staticwebassets\\src\\background2.jpg"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\graduation.png",
+      "PackagePath": "staticwebassets\\src\\graduation.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.School Timetable.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

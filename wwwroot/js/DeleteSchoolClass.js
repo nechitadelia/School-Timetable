@@ -18,7 +18,7 @@ submit.addEventListener("click", () => {
 
         swal({
             title: "Success!",
-            text: "Professor " + firstNameValue + " " + lastNameValue + " has been deleted!",
+            text: "The class " + yearValue + classLetterValue + " has been deleted!",
             icon: "success",
         });
 

@@ -2,19 +2,14 @@
 
 @model School_Timetable.Models.ClassCollectionsViewModel
 
-<div class="schoolClass-container">
-    <div>
-        <p>You are about to graduate all classes.</p>
-    </div>
-    <div>
-        <p>Are you sure you want to do this?</p>
-    </div>
+<div class="graduate-container">
+    <img src="~/src/graduation.png" alt="graduation" />
+    <p>You are about to graduate all classes for a new school year.</p>
+    <p>Are you sure you want to do this?</p>
 
-    <form method="post" id="deleteClassform">
-        <div class="graduate-classes-button">
-            <div>
-                <button type="submit" class="graduate-button" id="graduateClassesButton" asp-controller="SchoolClasses" asp-action="GraduateClasses">Confirm</button>
-            </div>
+    <form method="post" id="graduationClassform">
+        <div>
+            <button type="submit" class="btn-warning" id="graduateClassesButton" asp-controller="SchoolClasses" asp-action="GraduateClasses">Confirm</button>
         </div>
     </form>
 </div>
