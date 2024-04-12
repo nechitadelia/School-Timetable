@@ -61,10 +61,6 @@
       "PackagePath": "staticwebassets\\js\\SchoolClasses.js"
     },
     {
-      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
-    },
-    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

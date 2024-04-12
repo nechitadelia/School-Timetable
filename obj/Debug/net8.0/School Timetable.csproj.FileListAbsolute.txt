@@ -136,3 +136,4 @@ D:\Repo\School Timetable\obj\Debug\net8.0\School Timetable.genruntimeconfig.cach
 D:\Repo\School Timetable\obj\Debug\net8.0\ref\School Timetable.dll
 D:\Repo\School Timetable\obj\Debug\net8.0\School Timetable.sourcelink.json
 D:\Repo\School Timetable\bin\Debug\net8.0\package-lock.json
+D:\Repo\School Timetable\bin\Debug\net8.0\package.json

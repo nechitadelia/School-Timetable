@@ -46,6 +46,22 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
+        public IActionResult GraduateClasses()
+        {
+            //getting a list of all classes
+            ClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+
+            return View(classCollections);
+        }
+
+        [HttpPost]
+        public IActionResult GraduateClasses(ClassCollectionsViewModel viewModel)
+        {
+            _schoolServices.GraduateClasses();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public IActionResult Delete()
         {
             ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();

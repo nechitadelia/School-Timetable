@@ -46,25 +46,25 @@ namespace School_Timetable.Services
 		//get list of all fifth grade classes
 		public Stack<SchoolClass> GetFifthGradeClasses()
 		{
-			return _schoolClassRepository.GetFifthGradeClasses();
+			return _schoolClassRepository.GetClassesofOneYear(5);
 		}
 
 		//get list of all sixth grade classes
 		public Stack<SchoolClass> GetSixthGradeClasses()
 		{
-			return _schoolClassRepository.GetSixthGradeClasses();
+			return _schoolClassRepository.GetClassesofOneYear(6);
 		}
 
 		//get list of all seventh grade classes
 		public Stack<SchoolClass> GetSeventhGradeClasses()
 		{
-			return _schoolClassRepository.GetSeventhGradeClasses();
+			return _schoolClassRepository.GetClassesofOneYear(7);
 		}
 
 		//get list of all eighth grade classes
 		public Stack<SchoolClass> GetEighthGradeClasses()
 		{
-			return _schoolClassRepository.GetEighthGradeClasses();
+			return _schoolClassRepository.GetClassesofOneYear(8);
 		}
 
 		//get one professor by id
@@ -298,6 +298,12 @@ namespace School_Timetable.Services
 			_professorRepository.EditProfessor(professor);
 		}
 
+		//graduate all classes - change classes to the next school year
+		public void GraduateClasses()
+		{
+			_schoolClassRepository.GraduateClasses();
+        }
+
 		//-----------------------------------> DELETE METHODS <-----------------------------------
 
 		//delete a professor from database
@@ -337,9 +343,9 @@ namespace School_Timetable.Services
 		public void DeleteClass(SchoolClassViewModel viewModel)
 		{
 			//find out which class will be deleted, based on user input
-			SchoolClass schoolClass = _schoolClassRepository.GetClassFromViewModel(viewModel);
+			SchoolClass schoolClass = _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);
 
-			if (schoolClass != null)
+            if (schoolClass != null)
 			{
                 //get the list of professors for the class that will be deleted
                 List<Professor> professors = GetProfessorsOfAClass(schoolClass);
@@ -357,7 +363,7 @@ namespace School_Timetable.Services
                 _classProfessorRepository.UnassignAClass(schoolClass);
 
                 //delete the class from database
-                _schoolClassRepository.DeleteClass(viewModel.YearOfStudy);
+                _schoolClassRepository.DeleteClass(schoolClass);
             }
 		}
 

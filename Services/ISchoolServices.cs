@@ -94,10 +94,13 @@ namespace School_Timetable.Services
 		//edit a professors's data
 		void EditProfessor(Professor professor);
 
-		//-----------------------------------> DELETE METHODS <-----------------------------------
+		//graduate all classes - change classes to the next school year
+		void GraduateClasses();
 
-		//delete a professor from database
-		void DeleteProfessor(Professor professor);
+        //-----------------------------------> DELETE METHODS <-----------------------------------
+
+        //delete a professor from database
+        void DeleteProfessor(Professor professor);
 
 		//delete a class from database
 		void DeleteClass(SchoolClassViewModel viewModel);

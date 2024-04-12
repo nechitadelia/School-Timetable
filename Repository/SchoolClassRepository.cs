@@ -15,6 +15,15 @@ namespace School_Timetable.Repository
             _dbContext = dbContext;
         }
 
+        //get the last class from one year of study
+        public SchoolClass GetLastClassFromOneYear(int yearOfStudy)
+        {
+            return _dbContext.SchoolClasses
+                .Where(c => c.YearOfStudy == yearOfStudy)
+                .OrderBy(c => c.ClassLetter)
+                .Last();
+        }
+
         //get list of all classes, in order
         public ICollection<SchoolClass> GetAllClasses()
         {
@@ -26,54 +35,21 @@ namespace School_Timetable.Repository
             return schoolClasses;
         }
 
-        //get list of all fifth grade classes
-        public Stack<SchoolClass> GetFifthGradeClasses()
+        //get the classes of one year, depending on the year of study as input
+        public Stack<SchoolClass> GetClassesofOneYear(int yearOfStudy)
         {
-            ICollection<SchoolClass> fifthGradeClasses = _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == 5)
+            ICollection<SchoolClass> schoolClasses = _dbContext.SchoolClasses
+                .Where(c => c.YearOfStudy == yearOfStudy)
                 .OrderBy(c => c.ClassLetter)
                 .ToList();
-
-            return new Stack<SchoolClass>(fifthGradeClasses);
-        }
-
-        //get list of all sixth grade classes
-        public Stack<SchoolClass> GetSixthGradeClasses()
-        {
-            var sixthGradeClasses = _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == 6)
-                .OrderBy(c => c.ClassLetter)
-                .ToList();
-
-            return new Stack<SchoolClass>(sixthGradeClasses);
-        }
-
-        //get list of all seventh grade classes
-        public Stack<SchoolClass> GetSeventhGradeClasses()
-        {
-            ICollection<SchoolClass> seventhGradeClasses = _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == 7)
-                .OrderBy(c => c.ClassLetter)
-                .ToList();
-
-            return new Stack<SchoolClass>(seventhGradeClasses);
-        }
-
-        //get list of all eighth grade classes
-        public Stack<SchoolClass> GetEighthGradeClasses()
-        {
-            ICollection<SchoolClass> eighthGradeClasses = _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == 8)
-                .OrderBy(c => c.ClassLetter)
-                .ToList();
-
-            return new Stack<SchoolClass>(eighthGradeClasses);
+            
+            return new Stack<SchoolClass>(schoolClasses);
         }
 
         //get the subjects for one class depending on its year
-        public List<SchoolSubject> GetClassSubjects(int classYear)
+        public List<SchoolSubject> GetClassSubjects(int yearOfStudy)
         {
-            switch(classYear)
+            switch(yearOfStudy)
             {
                 case 5: return _dbContext.SchoolSubjects
                                 .Where(s => s.YearOfStudy == 5)
@@ -94,24 +70,6 @@ namespace School_Timetable.Repository
                                 .Select(s => s)
                                 .ToList();
                 default: return new List<SchoolSubject>();
-            }
-        }
-
-        //get the classes of one year, depending on the year of study as input
-        public Stack<SchoolClass> GetClassesofOneYear(int yearOfStudy)
-        {
-            switch (yearOfStudy)
-            {
-                case 5:
-                    return GetFifthGradeClasses();
-                case 6:
-                    return GetSixthGradeClasses();
-                case 7:
-                    return GetSeventhGradeClasses();
-                case 8:
-                    return GetEighthGradeClasses();
-                default:
-                    return new Stack<SchoolClass>();
             }
         }
 
@@ -146,13 +104,29 @@ namespace School_Timetable.Repository
             }
         }
 
-        //get a class object from view model object
-        public SchoolClass GetClassFromViewModel(SchoolClassViewModel viewModel)
+        //graduate all classes - change classes to the next school year
+        public void GraduateClasses()
         {
-            return _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == viewModel.YearOfStudy)
-                .OrderBy(c => c.ClassLetter)
-                .Last();
+            //get all the eighth grade classes and delete them
+            Stack<SchoolClass> eighthGradeClasses = GetClassesofOneYear(8);
+            if (eighthGradeClasses.Count > 0)
+            {
+                foreach (SchoolClass schoolClass in eighthGradeClasses)
+                {
+                    DeleteClass(schoolClass);
+                }
+            }
+
+            //get the remaining classes (5-7) and increment the year of study
+            ICollection<SchoolClass> allClasses = GetAllClasses();
+            if (allClasses.Count > 0)
+            {
+                for (int i = allClasses.Count - 1; i >= 0; i--)
+                {
+                    allClasses.ElementAt(i).YearOfStudy += 1;
+                    Save();
+                }
+            }
         }
 
         //add new class to database
@@ -169,14 +143,14 @@ namespace School_Timetable.Repository
 		}
 
         //delete a class from the database
-        public void DeleteClass(int yearOfStudy)
+        public void DeleteClass(SchoolClass schoolClass)
         {
-            char lastLetter = GetLastLetter(yearOfStudy);
+            char lastLetter = GetLastLetter(schoolClass.YearOfStudy);
 
             if (lastLetter != '/') 
             {
                 SchoolClass existingClass = _dbContext.SchoolClasses
-                    .First(c => c.YearOfStudy == yearOfStudy && c.ClassLetter == lastLetter);
+                    .First(c => c.YearOfStudy == schoolClass.YearOfStudy && c.ClassLetter == lastLetter);
 
                 _dbContext.SchoolClasses.Remove(existingClass);
                 Save();

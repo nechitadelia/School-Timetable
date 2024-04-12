@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RPSPG5lsoUb+yIuoF5HIMtdruhDY01OXYB3+Z7BT+R4=",
+  "Hash": "eB9KsTUI5nvbOFV/9+rRtH1KG4Ud/pJlXdTpCFY0fNs=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -319,25 +319,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\SchoolClasses.js"
-    },
-    {
-      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\site.js",
-      "SourceId": "School Timetable",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
-      "BasePath": "_content/School Timetable",
-      "RelativePath": "js/site.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
