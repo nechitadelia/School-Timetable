@@ -301,7 +301,15 @@ namespace School_Timetable.Services
 		//graduate all classes - change classes to the next school year
 		public void GraduateClasses()
 		{
-			_schoolClassRepository.GraduateClasses();
+            //unassign eighth grade classes from connections
+            Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
+			foreach (SchoolClass schoolClass in eighthGradeClasses)
+			{
+                _classProfessorRepository.UnassignAClass(schoolClass);
+            }
+
+			//graduate the rest of the classes (5-7)
+            _schoolClassRepository.GraduateClasses();
         }
 
 		//-----------------------------------> DELETE METHODS <-----------------------------------

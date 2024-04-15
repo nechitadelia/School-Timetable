@@ -297,14 +297,6 @@
       "PackagePath": "staticwebassets\\src\\background1.jpg"
     },
     {
-      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\background1.psd",
-      "PackagePath": "staticwebassets\\src\\background1.psd"
-    },
-    {
-      "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\background2.jpg",
-      "PackagePath": "staticwebassets\\src\\background2.jpg"
-    },
-    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\src\\graduation.png",
       "PackagePath": "staticwebassets\\src\\graduation.png"
     },

@@ -91,14 +91,17 @@ namespace School_Timetable.Repository
             ICollection<int> schoolClassesIds = GetClassIds(professor);
 
             //creating the list of School Classes based in the collection of ids
-            foreach (var id in schoolClassesIds)
-            {
-                SchoolClass s = _dbContext.SchoolClasses.Where(c => c.Id == id).First();
-                schoolClasses.Add(s);
-            }
+			if (schoolClassesIds != null)
+			{
+                foreach (int id in schoolClassesIds)
+                {
+                    SchoolClass s = _dbContext.SchoolClasses.Where(c => c.Id == id).First();
+                    schoolClasses.Add(s);
+                }
 
-			//ordering the school classes
-			schoolClasses = schoolClasses.OrderBy(s => s.YearOfStudy).ThenBy(s => s.ClassLetter).ToList();
+                //ordering the school classes
+                schoolClasses = schoolClasses.OrderBy(s => s.YearOfStudy).ThenBy(s => s.ClassLetter).ToList();
+            }
 
             return schoolClasses;
         }
