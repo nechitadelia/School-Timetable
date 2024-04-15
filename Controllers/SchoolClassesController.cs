@@ -29,7 +29,7 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-        [Route("/Create")]
+        [Route("/SchoolClasses/Create")]
         public IActionResult Create()
         {
             ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
@@ -48,7 +48,7 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-        [Route("/GraduateClasses")]
+        [Route("/SchoolClasses/GraduateClasses")]
         public IActionResult GraduateClasses()
         {
             //getting a list of all classes
@@ -65,7 +65,7 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-        [Route("/Delete")]
+        [Route("/SchoolClasses/Delete")]
         public IActionResult Delete()
         {
             ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
