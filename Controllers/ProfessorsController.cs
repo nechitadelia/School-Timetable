@@ -20,6 +20,7 @@ namespace School_Timetable.Controllers
 
         // GET - View all professors
         [HttpGet]
+        [Route("/Professors")]
         public IActionResult Index()
         {
             List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
@@ -29,6 +30,7 @@ namespace School_Timetable.Controllers
 
         // GET - create a professor
         [HttpGet]
+        [Route("/Professors/Create")]
         public IActionResult Create()
         {
             ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();

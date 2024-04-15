@@ -21,6 +21,29 @@ namespace School_Timetable.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("School_Timetable.Models.Entities.ClassProfessor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProfessorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SchoolClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubjectName")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassProfessors");
+                });
+
             modelBuilder.Entity("School_Timetable.Models.Entities.Professor", b =>
                 {
                     b.Property<int>("Id")
@@ -34,11 +57,13 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("SchoolSubjectId")
                         .HasColumnType("int");
@@ -47,7 +72,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("SchoolSubjectId");
 
-                    b.ToTable("Professors", (string)null);
+                    b.ToTable("Professors");
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.SchoolClass", b =>
@@ -60,14 +85,14 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("ClassLetter")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("char(1)");
 
                     b.Property<int>("YearOfStudy")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SchoolClasses", (string)null);
+                    b.ToTable("SchoolClasses");
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.SchoolSubject", b =>
@@ -83,22 +108,25 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("YearOfStudy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SchoolSubjects", (string)null);
+                    b.ToTable("SchoolSubjects");
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Entities.Professor", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.SchoolSubject", "SchoolSubject")
+                    b.HasOne("School_Timetable.Models.Entities.SchoolSubject", "ProfessorSubject")
                         .WithMany()
                         .HasForeignKey("SchoolSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SchoolSubject");
+                    b.Navigation("ProfessorSubject");
                 });
 #pragma warning restore 612, 618
         }

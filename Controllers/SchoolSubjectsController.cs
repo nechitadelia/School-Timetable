@@ -22,6 +22,7 @@ namespace School_Timetable.Controllers
 		}
 
         [HttpGet]
+        [Route("/SchoolSubjects")]
         public IActionResult Index()
         {
             //getting a list of all school's subjects
