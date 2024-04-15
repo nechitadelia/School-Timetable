@@ -8,41 +8,36 @@ submit.addEventListener("click", () => {
     let yearValue = yearOfStudy.options[yearOfStudy.selectedIndex].text;
     let classLetterValue = classLetter.options[classLetter.selectedIndex].text;
 
-    alert("success!");
-
     if (classLetterValue.length == 1)
     {
-        setTimeout(() => {
-            form.submit();
-        }, 1700);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The class " + yearValue + classLetterValue + " has been deleted!",
+                    icon: "success"
+                });
 
-        swal({
-            title: "Success!",
-            text: "The class " + yearValue + classLetterValue + " has been deleted!",
-            icon: "success",
+                setTimeout(() => {
+                    form.submit();
+                }, 1700);
+            }
+            else {
+                Swal.fire({
+                    title: "Cancelled",
+                    text: "The class was not deleted!",
+                    icon: "error"
+                });
+            }
         });
-
-
-        //swal({
-        //    title: "Are you sure?",
-        //    text: "Once deleted, you will not be able to recover the same class!",
-        //    icon: "warning",
-        //    buttons: true,
-        //    dangerMode: true,
-        //})
-        //.then((willDelete) => {
-        //    if (willDelete) {
-        //        swal("The class " + yearValue + classLetterValue + " has been deleted!", {
-        //            icon: "success",
-        //        });
-        //        setTimeout(() => {
-        //            form.submit();
-        //        }, 1700);
-        //    }
-        //    else {
-        //        swal("The class was not deleted!");
-        //    }
-        //});
     }
 });
 

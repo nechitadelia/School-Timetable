@@ -13,9 +13,9 @@ editButton.addEventListener("click", () => {
             form.submit();
         }, 1700);
 
-        swal({
-            title: "Good job!",
-            text: "Success! The data for " + firstNameValue + " " + lastNameValue + " has been updated!",
+        Swal.fire({
+            title: "Success!",
+            text: "The data for " + firstNameValue + " " + lastNameValue + " has been updated!",
             icon: "success",
         });
     }

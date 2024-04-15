@@ -12,7 +12,7 @@ deleteButton.addEventListener("click", () => {
         form.submit();
     }, 1700);
 
-    swal({
+    Swal.fire({
         title: "Success!",
         text: "Professor " + firstNameValue + " " + lastNameValue + " has been deleted!",
         icon: "success",

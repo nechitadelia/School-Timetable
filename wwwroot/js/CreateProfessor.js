@@ -13,7 +13,7 @@ submit.addEventListener("click", () => {
             form.submit();
         }, 1700);
 
-        swal({
+        Swal.fire({
             title: "Good job!",
             text: "Success! Professor " + firstNameValue + " " + lastNameValue + " has been added!",
             icon: "success",

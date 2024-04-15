@@ -12,9 +12,9 @@ submit.addEventListener("click", () => {
         form.submit();
     }, 1700);
 
-    swal({
-        title: "Good job!",
-        text: "Success! The class " + yearValue + classLetterValue + " has been created!",
+    Swal.fire({
+        title: "Success!",
+        text: "The class " + yearValue + classLetterValue + " has been created!",
         icon: "success",
     });
 });
