@@ -303,9 +303,26 @@ namespace School_Timetable.Services
 		{
             //unassign eighth grade classes from connections
             Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
+
 			foreach (SchoolClass schoolClass in eighthGradeClasses)
 			{
+                //get the list of professors for the class that will be deleted
+                List<Professor> professors = GetProfessorsOfAClass(schoolClass);
+
+                //unassign hours from all professors who were teaching that class
+                foreach (Professor p in professors)
+                {
+                    if (p != null)
+                    {
+                        _professorRepository.UnassignHoursFromProfessor(p);
+                    }
+                }
+
+                //unassign class from connections
                 _classProfessorRepository.UnassignAClass(schoolClass);
+
+                //delete the class from database
+                _schoolClassRepository.DeleteClass(schoolClass);
             }
 
 			//graduate the rest of the classes (5-7)
