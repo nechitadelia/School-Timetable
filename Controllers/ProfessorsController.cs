@@ -49,9 +49,10 @@ namespace School_Timetable.Controllers
             {
                 //creating and saving the new professor
                 _schoolServices.AddProfessor(viewModel);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View(viewModel);
         }
 
         // POST - assign professors to all classes
@@ -98,7 +99,6 @@ namespace School_Timetable.Controllers
 		[Route("Edit/{professorId}")]
 		public IActionResult Edit(Professor viewModel)
         {
-            Professor professor = _schoolServices.GetProfessor(viewModel.Id);
             ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(viewModel.Id);
 
             if (ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace School_Timetable.Controllers
                 _schoolServices.EditProfessor(viewModel);
                 return RedirectToAction("Index");
             }
-            return View(professor);
+            return View(viewModel);
         }
 
         // GET - delete a professor
