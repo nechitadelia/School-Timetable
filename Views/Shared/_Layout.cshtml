@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - School Planner</title>
+    <title>School Planner</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/School_Timetable.styles.css" asp-append-version="true" />
@@ -22,15 +22,31 @@
         <nav>
             <div class="nav-links">
                 <ul>
-                    <li class="link">
-                        <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
-                    </li>
-                    <li class="link">
-                        <a asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
-                    </li>
-                    <li class="link">
-                        <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="link">
+                            <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
+                        </li>
+                        <li class="link">
+                            <a asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
+                        </li>
+                        <li class="link">
+                            <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
+                        </li>
+                        <li class="link">
+                            <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="link">
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="link">
+                            <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </nav>

@@ -1,6 +1,8 @@
-﻿using School_Timetable.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models.Entities;
+using System.Collections.Generic;
 using System.Text;
 
 namespace School_Timetable.Repository
@@ -8,26 +10,33 @@ namespace School_Timetable.Repository
     public class SubjectRepository : ISubjectRepository
     {
         private readonly AppDbContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SubjectRepository(AppDbContext dbContext)
+        public SubjectRepository(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         //get list of all subjects
-        public ICollection<SchoolSubject> GetSchoolSubjects()
+        public async Task<ICollection<SchoolSubject>> GetSchoolSubjects()
         {
-            return _dbContext.SchoolSubjects
+            var currentUser = _httpContextAccessor.HttpContext?.User;
+
+            ICollection<SchoolSubject> schoolSubjects = await _dbContext.SchoolSubjects
+                .Where(s => s.AppUserId == currentUser.ToString())
                 .OrderBy(s => s.Id)
-                .ToList();
+                .ToListAsync();
+
+            return schoolSubjects;
         }
 
         //get one subject by id
-        public SchoolSubject GetSchoolSubject(int subjectId)
+        public async Task<SchoolSubject> GetSchoolSubject(int subjectId)
         {
-            return _dbContext.SchoolSubjects
+            return await _dbContext.SchoolSubjects
                 .Where(s => s.Id == subjectId)
-                .First();
+                .FirstAsync();
         }
 
         //get a list of professors for one subject

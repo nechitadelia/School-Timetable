@@ -5,7 +5,6 @@ using School_Timetable.Interfaces;
 using School_Timetable.Models;
 using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
-using School_Timetable.Services;
 
 namespace School_Timetable.Controllers
 {
@@ -31,24 +30,24 @@ namespace School_Timetable.Controllers
         // GET - create a professor
         [HttpGet]
         [Route("/Professors/Create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
+            ViewData["schoolSubjects"] = await _schoolServices.GetAllSchoolSubjects();
 
             return View();
         }
 
         // POST - create a professor
         [HttpPost]
-        public IActionResult Create(ProfessorViewModel viewModel)
+        public async Task<IActionResult> Create(ProfessorViewModel viewModel)
         {
             //getting a list of all subjects
-            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
+            ViewData["schoolSubjects"] = await _schoolServices.GetAllSchoolSubjects();
 
             if (ModelState.IsValid)
             {
-                //creating and saving the new professor
-                _schoolServices.AddProfessor(viewModel);
+				//creating and saving the new professor
+				_schoolServices.AddProfessor(viewModel);
                 return RedirectToAction("Index");
             }
 
@@ -89,7 +88,6 @@ namespace School_Timetable.Controllers
         public IActionResult Edit(int professorId)
         {
             Professor professor = _schoolServices.GetProfessor(professorId);
-            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(professorId);
 
             return View(professor);
         }
@@ -99,8 +97,6 @@ namespace School_Timetable.Controllers
 		[Route("Edit/{professorId}")]
 		public IActionResult Edit(Professor viewModel)
         {
-            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(viewModel.Id);
-
             if (ModelState.IsValid)
             {
                 _schoolServices.EditProfessor(viewModel);
@@ -115,7 +111,6 @@ namespace School_Timetable.Controllers
         public IActionResult Delete(int professorId)
         {
             Professor professor = _schoolServices.GetProfessor(professorId);
-            ViewData["professorSubject"] = _schoolServices.GetSubjectOfProfessor(professorId);
 
             return View(professor);
         }

@@ -7,5 +7,7 @@ namespace School_Timetable.Models.Entities
         public int SchoolClassId { get; set; }
         public string SubjectName { get; set; }
         public int ProfessorId { get; set; }
+        public string? AppUserId { get; set; }
+        public AppUser? AppUser { get; set; }
     }
 }

@@ -18,8 +18,8 @@ namespace School_Timetable.Interfaces
 		//get all the class ids for one professor
 		ICollection<int> GetClassIds(Professor professor);
 
-        //get the list of classes for one professor
-        List<SchoolClass> GetClassesOfAProfessor(Professor professor);
+		//get the list of classes for one professor
+		List<SchoolClass> GetClassesOfAProfessor(Professor professor);
 		
 		//delete a collection of ClassProfessor from database
 		void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);

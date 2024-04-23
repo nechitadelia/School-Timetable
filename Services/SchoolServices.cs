@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace School_Timetable.Services
 {
-	public class SchoolServices : ISchoolServices
+    public class SchoolServices : ISchoolServices
 	{
 		private readonly IProfessorRepository _professorRepository;
 		private readonly ISchoolClassRepository _schoolClassRepository;
@@ -38,9 +38,9 @@ namespace School_Timetable.Services
 		}
 
 		//getting a list of all subjects from the repository
-		public ICollection<SchoolSubject> GetAllSchoolSubjects()
+		public async Task<ICollection<SchoolSubject>> GetAllSchoolSubjects()
 		{
-			return _subjectRepository.GetSchoolSubjects();
+			return await _subjectRepository.GetSchoolSubjects();
 		}
 
 		//get list of all fifth grade classes
@@ -98,8 +98,8 @@ namespace School_Timetable.Services
 
 			foreach (SchoolSubject sub in subjects)
 			{
-				List<Professor> prof = _subjectRepository.GetProfessorsOfASubject(sub.Id)
-                    .OrderBy(p => p.LastName)
+				List<Professor> prof = _subjectRepository.GetProfessorsOfASubject(sub.Id);
+                prof = prof.OrderBy(p => p.LastName)
                     .ThenBy(p => p.FirstName)
                     .ToList();
                 professors.Add(prof);
@@ -255,7 +255,7 @@ namespace School_Timetable.Services
 		//assign one professor to one class
 		public void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
 		{
-            SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
+            SchoolSubject professorSubject = professor.ProfessorSubject;
 
             if (_professorRepository.CanAssignHours(professor.Id) && _professorRepository.CanAssignClass(schoolClass, professorSubject))
             {
@@ -275,8 +275,8 @@ namespace School_Timetable.Services
 
 				foreach (SchoolSubject subject in classSubjects) //iterating through all the subjects of one class
 				{
-					ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id)
-						.OrderBy(p => p.Id)
+					ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
+					professors = professors.OrderBy(p => p.Id)
 						.ToList();
 
 					if (professors.Count > 0)
@@ -336,7 +336,7 @@ namespace School_Timetable.Services
 		{
 			//get the classes of the deleted professor
 			List<SchoolClass> classesOfProfessor = GetClassesOfAProfessor(professor);
-            SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
+			SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
 
             //unassign the professor from all classes
             _classProfessorRepository.UnassignAProfessorFromAllClasses(professor);
@@ -344,10 +344,9 @@ namespace School_Timetable.Services
 			//delete professor from database
 			_professorRepository.DeleteProfessor(professor);
 
-            //reassign the classes to the rest of the professors, if there are any left/available
-            ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(professorSubject.Id)
-                        .OrderBy(p => p.Id)
-                        .ToList();
+			//reassign the classes to the rest of the professors, if there are any left/available
+			ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(professorSubject.Id);
+			professors = professors.OrderBy(p => p.Id).ToList();
 
             if (professors.Count > 0)
 			{
@@ -398,6 +397,5 @@ namespace School_Timetable.Services
 			_classProfessorRepository.UnassignAllProfessorsFromAllClasses();
 			_professorRepository.UnassignAllHoursFromEveryone();
 		}
-
 	}
 }

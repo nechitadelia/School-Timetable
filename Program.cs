@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
+using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
 using School_Timetable.Services;
 
@@ -15,16 +20,35 @@ namespace School_Timetable
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //dependency injection - add repository
+            //injection of the db context
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolTimetable")));
+
+            //add identity
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 8;
+            })
+            .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.AddMemoryCache();
+            //add cookie authentication
+            builder.Services.AddSession();
+            //add scheme
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
+            //dependency injection - add repositories and services
             builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
             builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
-			builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
-			builder.Services.AddScoped<ISchoolServices, SchoolServices>();
-
-			//injection of the db context
-			builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolTimetable")));
+            builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
+            builder.Services.AddScoped<ISchoolServices, SchoolServices>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();
 
@@ -40,6 +64,8 @@ namespace School_Timetable
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

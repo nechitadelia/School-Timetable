@@ -4,7 +4,6 @@ using School_Timetable.Interfaces;
 using School_Timetable.Models;
 using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
-using School_Timetable.Services;
 using System.Collections.Generic;
 
 namespace School_Timetable.Controllers

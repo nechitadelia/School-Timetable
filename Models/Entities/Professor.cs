@@ -22,5 +22,7 @@ namespace School_Timetable.Models.Entities
 
         public SchoolSubject ProfessorSubject { get; set; }
         public int SchoolSubjectId { get; set; }
+        public string? AppUserId { get; set; }
+        public AppUser? AppUser { get; set; }
     }
 }

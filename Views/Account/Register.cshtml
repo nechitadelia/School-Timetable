@@ -1,0 +1,40 @@
+﻿@model School_Timetable.ViewModels.RegisterViewModel
+
+<div class="container mt-5">
+	<div class="row justify-content-center align-items-center">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Register</h1>
+
+			@if (TempData["Error"] != null)
+			{
+				<div class="col-md-12 alert alert-danger">
+					<span>Sorry! @TempData["Error"]</span>
+				</div>
+			}
+
+			<form method="post" asp-action="Register">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="@Model.EmailAddress">Email Address</label>
+					<input type="email" asp-for="@Model.EmailAddress" class="form-control" />
+					<span asp-validation-for="@Model.EmailAddress" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="@Model.Password">Password</label>
+					<input type="password" asp-for="@Model.Password" class="form-control" />
+					<span asp-validation-for="@Model.Password" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="@Model.ConfirmPassword">Confirm Password</label>
+					<input type="password" asp-for="@Model.ConfirmPassword" class="form-control" />
+					<span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<button type="submit" class="btn btn-success">Register</button>
+					<a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

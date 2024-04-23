@@ -6,26 +6,26 @@ namespace School_Timetable.Interfaces
 {
     public interface IProfessorRepository
     {
-        //get list of all professors, in ascending order
-        ICollection<Professor> GetProfessors();
+		//get list of all professors, in ascending order
+		ICollection<Professor> GetProfessors();
 
-        //get one professor by id
-        Professor GetProfessor(int professorId);
+		//get one professor by id
+		Professor GetProfessor(int professorId);
 
-        //get a professor's subject by his/her id
-        SchoolSubject GetSubjectOfProfessor(int professorId);
+		//get a professor's subject by his/her id
+		SchoolSubject GetSubjectOfProfessor(int professorId);
 
-        //check if you can assign hours to a professor
-        bool CanAssignHours(int professorId);
+		//check if you can assign hours to a professor
+		bool CanAssignHours(int professorId);
 
-        //check if a professor was already assigned to a class
-        bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
+		//check if a professor was already assigned to a class
+		bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
 
         //assign hours to a professor
         void AssignHours(int professorId);
 
-        //get a professor's unassigned hours
-        int GetUnassignedHours(int professorId);
+		//get a professor's unassigned hours
+		int GetUnassignedHours(int professorId);
 
         //unassign all hours from a professor
         void UnassignAllHoursFromProfessor(Professor professor);

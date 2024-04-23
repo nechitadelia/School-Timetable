@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
@@ -27,12 +28,10 @@ namespace School_Timetable.Repository
         //get list of all classes, in order
         public ICollection<SchoolClass> GetAllClasses()
         {
-            ICollection<SchoolClass> schoolClasses = _dbContext.SchoolClasses
+			return _dbContext.SchoolClasses
                 .OrderBy(c => c.YearOfStudy)
                 .ThenBy(c => c.ClassLetter)
                 .ToList();
-
-            return schoolClasses;
         }
 
         //get the classes of one year, depending on the year of study as input
@@ -130,7 +129,7 @@ namespace School_Timetable.Repository
         }
 
         //add new class to database
-        public async void AddClass(int yearOfStudy)
+        public void AddClass(int yearOfStudy)
         {
 			SchoolClass newClass = new SchoolClass
             {
@@ -138,7 +137,7 @@ namespace School_Timetable.Repository
                 ClassLetter = GetAvailableLetter(yearOfStudy)
 			};
 
-            await _dbContext.SchoolClasses.AddAsync(newClass);
+            _dbContext.SchoolClasses.Add(newClass);
 			Save();
 		}
 

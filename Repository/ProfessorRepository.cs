@@ -30,6 +30,7 @@ namespace School_Timetable.Repository
         {
             return _dbContext.Professors
                 .Where(p => p.Id == professorId)
+                .Include(p => p.ProfessorSubject)
                 .First();
         }
 
@@ -37,22 +38,16 @@ namespace School_Timetable.Repository
         public SchoolSubject GetSubjectOfProfessor(int professorId)
         {
             Professor professor = GetProfessor(professorId);
-            int subjectId = professor.SchoolSubjectId;
-
-            SchoolSubject subject = _dbContext.SchoolSubjects
-                .Where(s => s.Id == subjectId)
-                .First();
-
-            return subject;
+            return professor.ProfessorSubject;
         }
 
 		//check if you can assign hours to a professor
 		public bool CanAssignHours(int professorId)
 		{
             Professor professor = GetProfessor(professorId);
-			SchoolSubject subject = GetSubjectOfProfessor(professorId);
+			//SchoolSubject subject = await GetSubjectOfProfessor(professorId);
 
-			if ((professor.AssignedHours + subject.HoursPerWeek) <= 20)
+			if ((professor.AssignedHours + professor.ProfessorSubject.HoursPerWeek) <= 20)
 			{
                 return true;
 			}
@@ -107,7 +102,7 @@ namespace School_Timetable.Repository
 		//unassign all hours from all professors
 		public void UnassignAllHoursFromEveryone()
         {
-            IEnumerable<Professor> professors = GetProfessors();
+            ICollection<Professor> professors = GetProfessors();
 
             foreach (Professor p in professors)
             {
@@ -118,8 +113,8 @@ namespace School_Timetable.Repository
         //unassign hours from a professor (when a class is deleted)
         public void UnassignHoursFromProfessor(Professor professor)
         {
-            int subjectHours = GetSubjectOfProfessor(professor.Id).HoursPerWeek;
-			professor.AssignedHours -= subjectHours;
+            //int subjectHours = GetSubjectOfProfessor(professor.Id).HoursPerWeek;
+			professor.AssignedHours -= professor.ProfessorSubject.HoursPerWeek;
 		}
 
 		//create a new professor

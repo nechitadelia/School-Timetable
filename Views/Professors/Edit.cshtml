@@ -1,12 +1,6 @@
 ﻿@using School_Timetable.Models.Entities
 
-@{
-	var professorSubject = ViewData["professorSubject"] as SchoolSubject;
-}
-
-
 @model School_Timetable.Models.Entities.Professor
-
 
 @if (Model is null)
 {
@@ -40,7 +34,7 @@ else
 
 			<div class="mt-3">
 				<label class="form-label">Subject</label>
-				<input type="text" class="form-control" asp-for="@professorSubject.Name" readonly />
+				<input type="text" class="form-control" asp-for="@Model.ProfessorSubject.Name" readonly />
 			</div>
 		</form>
 

@@ -3,6 +3,7 @@ using School_Timetable.Interfaces;
 using School_Timetable.Models.Entities;
 using School_Timetable.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace School_Timetable.Repository
 {
@@ -51,7 +52,7 @@ namespace School_Timetable.Repository
         //get the professor of one subject of a class
         public Professor GetProfessorOfASubjectOfOneClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
 		{
-			if (ConnectionExists(schoolClass, schoolSubject) == true)
+			if (ConnectionExists(schoolClass, schoolSubject))
 			{
 				int professorId = _dbContext.ClassProfessors
 				.Where(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name)
@@ -68,16 +69,14 @@ namespace School_Timetable.Repository
         //get all the class ids for one professor
         public ICollection<int> GetClassIds(Professor professor)
         {
-            if (ConnectionExists(professor) == true)
+            if (ConnectionExists(professor))
             {
                 //saving all the ids of the classes that a professor has
-                ICollection<int> schoolClassesIds = _dbContext.ClassProfessors
-                .Where(p => p.ProfessorId == professor.Id)
-                .Select(s => s.SchoolClassId)
+                return _dbContext.ClassProfessors
+				.Where(p => p.ProfessorId == professor.Id)
+				.Select(s => s.SchoolClassId)
 				.ToList();
-
-                return schoolClassesIds;
-            }
+			}
             else
             {
                 return [];
