@@ -1,4 +1,4 @@
-﻿using School_Timetable.Models.Entities;
+﻿using School_Timetable.Models;
 
 namespace School_Timetable.Interfaces
 {

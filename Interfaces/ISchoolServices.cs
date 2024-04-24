@@ -1,6 +1,6 @@
 ﻿using School_Timetable.Models;
-using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
+using School_Timetable.ViewModels;
 
 namespace School_Timetable.Interfaces
 {
@@ -15,7 +15,7 @@ namespace School_Timetable.Interfaces
         ICollection<Professor> GetAllProfessors();
 
 		//getting a list of all subjects from the repository
-		Task<ICollection<SchoolSubject>> GetAllSchoolSubjects();
+		ICollection<SchoolSubject> GetAllSchoolSubjects();
 
 		//get list of all fifth grade classes
 		Stack<SchoolClass> GetFifthGradeClasses();
@@ -72,15 +72,15 @@ namespace School_Timetable.Interfaces
 		ClassCollectionsViewModel GetClassCollections();
 
 		//get a collection of all professors
-		List<ProfessorCollectionsViewModel> GetProfessorCollections();
+		List<ProfessorCollectionsViewModel> GetProfessorCollections(string currentUserId);
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new professor to database
-        void AddProfessor(ProfessorViewModel viewModel);
+        void AddProfessor(CreateProfessorViewModel viewModel);
 
         //adding a new class to database
-        void AddClass(SchoolClassViewModel viewModel);
+        void AddClass(CreateSchoolClassViewModel viewModel);
 
         //assign one professor to one class
         void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
@@ -102,7 +102,7 @@ namespace School_Timetable.Interfaces
         void DeleteProfessor(Professor professor);
 
         //delete a class from database
-        void DeleteClass(SchoolClassViewModel viewModel);
+        void DeleteClass(CreateSchoolClassViewModel viewModel);
 
         //unassign all professors from all classes
         void UnAssignAllProfessorsFromClasses();

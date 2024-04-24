@@ -1,11 +1,11 @@
-﻿@using School_Timetable.Models.Entities
+﻿@using School_Timetable.ViewModels
 
 @{
     var allExistingLetters = ViewData["allExistingLetters"] as List<char>;
     List<int> schoolyears = new List<int> { 5, 6, 7, 8 };
 }
 
-@model School_Timetable.Models.SchoolClassViewModel
+@model CreateSchoolClassViewModel
 
 <div class="form-container">
     <div class="back-button-container">

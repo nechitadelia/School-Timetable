@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
+using School_Timetable.ViewModels;
 
 namespace School_Timetable.Interfaces
 {
@@ -37,7 +37,7 @@ namespace School_Timetable.Interfaces
         void UnassignHoursFromProfessor(Professor professor);
 
 		//create a new professor
-		void AddProfessor(ProfessorViewModel viewModel);
+		void AddProfessor(CreateProfessorViewModel viewModel);
 
         //edit a professors's data
         void EditProfessor(Professor viewModel);

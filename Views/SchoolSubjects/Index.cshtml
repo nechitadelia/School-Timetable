@@ -1,10 +1,11 @@
-﻿@using School_Timetable.Models.Entities
+﻿@using School_Timetable.ViewModels
+@using School_Timetable.Models
 
 @{
     var professors = ViewData["professors"] as List<List<Professor>>;
 }
 
-@model List<School_Timetable.Models.Entities.SchoolSubject>
+@model List<SchoolSubject>
 
 <div class="subjects-container">
     <h1>Subjects</h1>

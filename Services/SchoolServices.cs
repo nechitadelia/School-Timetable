@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
+using School_Timetable.ViewModels;
 using System.Collections.Generic;
 
 namespace School_Timetable.Services
@@ -38,9 +38,9 @@ namespace School_Timetable.Services
 		}
 
 		//getting a list of all subjects from the repository
-		public async Task<ICollection<SchoolSubject>> GetAllSchoolSubjects()
+		public ICollection<SchoolSubject> GetAllSchoolSubjects()
 		{
-			return await _subjectRepository.GetSchoolSubjects();
+			return _subjectRepository.GetSchoolSubjects();
 		}
 
 		//get list of all fifth grade classes
@@ -216,7 +216,7 @@ namespace School_Timetable.Services
         }
 
 		//get a collection of all professors
-		public List<ProfessorCollectionsViewModel> GetProfessorCollections()
+		public List<ProfessorCollectionsViewModel> GetProfessorCollections(string currentUserId)
 		{
             List<ProfessorCollectionsViewModel> professorCollections = new List<ProfessorCollectionsViewModel>();
 
@@ -231,7 +231,8 @@ namespace School_Timetable.Services
 					LastName = professor.LastName,
 					ProfessorSubject = GetSubjectOfProfessor(professor.Id),
 					UnassignedHours = GetUnassignedHours(professor.Id),
-					ClassesOfProfessor = GetClassesOfAProfessor(professor)
+					ClassesOfProfessor = GetClassesOfAProfessor(professor),
+					AppUserId = currentUserId
                 });
 			}
 
@@ -241,15 +242,15 @@ namespace School_Timetable.Services
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new professor to database
-        public void AddProfessor(ProfessorViewModel viewModel)
+        public void AddProfessor(CreateProfessorViewModel viewModel)
 		{
             _professorRepository.AddProfessor(viewModel);
 		}
 
 		//adding a new class to database
-		public void AddClass(SchoolClassViewModel viewModel)
+		public void AddClass(CreateSchoolClassViewModel viewModel)
 		{
-			_schoolClassRepository.AddClass(viewModel.YearOfStudy);
+			_schoolClassRepository.AddClass(viewModel);
 		}
 
 		//assign one professor to one class
@@ -364,7 +365,7 @@ namespace School_Timetable.Services
         }
 
 		//delete a class from database
-		public void DeleteClass(SchoolClassViewModel viewModel)
+		public void DeleteClass(CreateSchoolClassViewModel viewModel)
 		{
 			//find out which class will be deleted, based on user input
 			SchoolClass schoolClass = _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);

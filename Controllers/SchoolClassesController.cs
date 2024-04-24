@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
+using School_Timetable.Utilities;
+using School_Timetable.ViewModels;
 using System.Collections.Generic;
 
 namespace School_Timetable.Controllers
@@ -11,11 +12,13 @@ namespace School_Timetable.Controllers
     public class SchoolClassesController : Controller
     {
 		private readonly ISchoolServices _schoolServices;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public SchoolClassesController(ISchoolServices schoolServices)
+        public SchoolClassesController(ISchoolServices schoolServices, IHttpContextAccessor httpContextAccessor)
         {
 			_schoolServices = schoolServices;
-		}
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         [HttpGet]
         [Route("/SchoolClasses")]
@@ -32,11 +35,15 @@ namespace School_Timetable.Controllers
         public IActionResult Create()
         {
             ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
-            return View();
+
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel { AppUserId = currentUserId };
+            
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(SchoolClassViewModel viewModel)
+        public IActionResult Create(CreateSchoolClassViewModel viewModel)
         {
             ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
 
@@ -72,7 +79,7 @@ namespace School_Timetable.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(SchoolClassViewModel viewModel)
+        public IActionResult Delete(CreateSchoolClassViewModel viewModel)
         {
             ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
 

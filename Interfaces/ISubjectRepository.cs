@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using School_Timetable.Models.Entities;
+using School_Timetable.Models;
 using System.Text;
 
 namespace School_Timetable.Interfaces
@@ -7,7 +7,7 @@ namespace School_Timetable.Interfaces
     public interface ISubjectRepository
     {
 		//get list of all subjects
-		Task<ICollection<SchoolSubject>> GetSchoolSubjects();
+		ICollection<SchoolSubject> GetSchoolSubjects();
 
 		//get one subject by id
 		Task<SchoolSubject> GetSchoolSubject(int subjectId);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
+using School_Timetable.ViewModels;
 
 namespace School_Timetable.Interfaces
 {
@@ -29,7 +29,7 @@ namespace School_Timetable.Interfaces
         void GraduateClasses();
 
         //add new class to database
-        void AddClass(int yearOfStudy);
+        void AddClass(CreateSchoolClassViewModel viewModel);
 
         //delete a class from the database
         void DeleteClass(SchoolClass schoolClass);

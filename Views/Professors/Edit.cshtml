@@ -1,6 +1,7 @@
-﻿@using School_Timetable.Models.Entities
+﻿@using School_Timetable.ViewModels
+@using School_Timetable.Models
 
-@model School_Timetable.Models.Entities.Professor
+@model Professor
 
 @if (Model is null)
 {
@@ -17,7 +18,7 @@ else
 
 		<form method="post" id="editProfessorform">
 			<div class="hidden-elem">
-				<input asp-for="Id" value="@Model.Id" readonly />
+				<input type="hidden" asp-for="Id" value="@Model.Id" readonly />
 			</div>
 
 			<div class="mt-3">

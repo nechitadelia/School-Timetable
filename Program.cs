@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
-using School_Timetable.Models.Entities;
+using School_Timetable.Models;
 using School_Timetable.Repository;
 using School_Timetable.Services;
 
@@ -48,7 +48,6 @@ namespace School_Timetable
             builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
             builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
             builder.Services.AddScoped<ISchoolServices, SchoolServices>();
-            builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();
 

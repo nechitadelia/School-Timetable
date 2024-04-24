@@ -1,26 +1,30 @@
 ﻿using School_Timetable.Data;
 using School_Timetable.Interfaces;
-using School_Timetable.Models.Entities;
 using School_Timetable.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using School_Timetable.Utilities;
 
 namespace School_Timetable.Repository
 {
-	public class ClassProfessorRepository : IClassProfessorRepository
+    public class ClassProfessorRepository : IClassProfessorRepository
 	{
 		private readonly AppDbContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public ClassProfessorRepository(AppDbContext dbContext)
+        public ClassProfessorRepository(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor)
 		{
 			_dbContext = dbContext;
-		}
+            _httpContextAccessor = httpContextAccessor;
+        }
 
 		//assign one professor to one class
 		public async void AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
 		{
-			//searching the name of the subject based on the id
-			string subjectName = _dbContext.SchoolSubjects
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            //searching the name of the subject based on the id
+            string subjectName = _dbContext.SchoolSubjects
 				.Where(s => s.Id == professor.SchoolSubjectId)
 				.First().Name;
 
@@ -29,7 +33,8 @@ namespace School_Timetable.Repository
 			{
 				SchoolClassId = schoolClass.Id,
 				SubjectName = subjectName,
-				ProfessorId = professor.Id
+				ProfessorId = professor.Id,
+				AppUserId = currentUserId
 			};
 
 			await _dbContext.ClassProfessors.AddAsync(classProfessor);
@@ -125,7 +130,11 @@ namespace School_Timetable.Repository
 		//unassign all professors from all classes
 		public void UnassignAllProfessorsFromAllClasses()
 		{
-			ICollection<ClassProfessor> cp = _dbContext.ClassProfessors.ToList();
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            ICollection<ClassProfessor> cp = _dbContext.ClassProfessors
+				.Where(cp => cp.AppUserId == currentUserId)
+				.ToList();
 			DeleteClassProfessor(cp);
         }
 

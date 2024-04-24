@@ -3,24 +3,29 @@ using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
+using School_Timetable.Utilities;
+using School_Timetable.ViewModels;
 
 namespace School_Timetable.Repository
 {
     public class SchoolClassRepository : ISchoolClassRepository
     {
         private readonly AppDbContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SchoolClassRepository(AppDbContext dbContext)
+        public SchoolClassRepository(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         //get the last class from one year of study
         public SchoolClass GetLastClassFromOneYear(int yearOfStudy)
         {
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
             return _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == yearOfStudy)
+                .Where(c => c.AppUserId == currentUserId.ToString() && c.YearOfStudy == yearOfStudy)
                 .OrderBy(c => c.ClassLetter)
                 .Last();
         }
@@ -28,7 +33,10 @@ namespace School_Timetable.Repository
         //get list of all classes, in order
         public ICollection<SchoolClass> GetAllClasses()
         {
-			return _dbContext.SchoolClasses
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            return _dbContext.SchoolClasses
+                .Where(c => c.AppUserId == currentUserId.ToString())
                 .OrderBy(c => c.YearOfStudy)
                 .ThenBy(c => c.ClassLetter)
                 .ToList();
@@ -37,8 +45,10 @@ namespace School_Timetable.Repository
         //get the classes of one year, depending on the year of study as input
         public Stack<SchoolClass> GetClassesofOneYear(int yearOfStudy)
         {
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
             ICollection<SchoolClass> schoolClasses = _dbContext.SchoolClasses
-                .Where(c => c.YearOfStudy == yearOfStudy)
+                .Where(c => c.AppUserId == currentUserId.ToString() && c.YearOfStudy == yearOfStudy)
                 .OrderBy(c => c.ClassLetter)
                 .ToList();
             
@@ -48,23 +58,26 @@ namespace School_Timetable.Repository
         //get the subjects for one class depending on its year
         public List<SchoolSubject> GetClassSubjects(int yearOfStudy)
         {
-            switch(yearOfStudy)
+            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
+            switch (yearOfStudy)
             {
                 case 5: return _dbContext.SchoolSubjects
-                                .Where(s => s.YearOfStudy == 5)
+                                .Where(s => s.AppUserId == currentUserId.ToString() && s.YearOfStudy == 5)
                                 .Select(s => s)
                                 .ToList();
                 case 6: return _dbContext.SchoolSubjects
-                                .Where(s => s.YearOfStudy == 5 || s.YearOfStudy == 6)
+                                .Where(s => s.AppUserId == currentUserId.ToString() && (s.YearOfStudy == 5 || s.YearOfStudy == 6))
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
                                 .ToList();
                 case 7: return _dbContext.SchoolSubjects
-                                .Where(s => s.YearOfStudy == 5 || s.YearOfStudy == 6 || s.YearOfStudy == 7)
+                                .Where(s => s.AppUserId == currentUserId.ToString() && (s.YearOfStudy == 5 || s.YearOfStudy == 6 || s.YearOfStudy == 7))
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
                                 .ToList();
                 case 8: return _dbContext.SchoolSubjects
+                                .Where(s => s.AppUserId == currentUserId.ToString())
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
                                 .ToList();
@@ -129,13 +142,14 @@ namespace School_Timetable.Repository
         }
 
         //add new class to database
-        public void AddClass(int yearOfStudy)
+        public void AddClass(CreateSchoolClassViewModel viewModel)
         {
 			SchoolClass newClass = new SchoolClass
             {
-                YearOfStudy = yearOfStudy,
-                ClassLetter = GetAvailableLetter(yearOfStudy)
-			};
+                YearOfStudy = viewModel.YearOfStudy,
+                ClassLetter = GetAvailableLetter(viewModel.YearOfStudy),
+                AppUserId = viewModel.AppUserId
+            };
 
             _dbContext.SchoolClasses.Add(newClass);
 			Save();

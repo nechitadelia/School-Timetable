@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using School_Timetable.Data;
-using School_Timetable.Dtos.Account;
 using School_Timetable.Interfaces;
-using School_Timetable.Models.Entities;
+using School_Timetable.Models;
 using School_Timetable.ViewModels;
 
 namespace School_Timetable.Controllers
@@ -109,7 +108,8 @@ namespace School_Timetable.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Logout()
+        [Route("/Logout")]
+        public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home");

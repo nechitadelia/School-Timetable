@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using School_Timetable.Models.Entities;
+using School_Timetable.Models;
 
 namespace School_Timetable.Interfaces
 {
-	public interface IClassProfessorRepository
+    public interface IClassProfessorRepository
 	{
         //assign one professor to one class
         void AddProfessorToAClass(SchoolClass schoolClass, Professor professor);

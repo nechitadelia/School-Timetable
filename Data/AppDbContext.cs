@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using School_Timetable.Models.Entities;
+using School_Timetable.Models;
 
 namespace School_Timetable.Data
 {

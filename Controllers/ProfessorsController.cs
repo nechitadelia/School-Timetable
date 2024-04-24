@@ -3,18 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
 using School_Timetable.Repository;
+using School_Timetable.Utilities;
+using School_Timetable.ViewModels;
 
 namespace School_Timetable.Controllers
 {
     public class ProfessorsController : Controller
     {
         private readonly ISchoolServices _schoolServices;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ProfessorsController(ISchoolServices schoolServices)
+        public ProfessorsController(ISchoolServices schoolServices, IHttpContextAccessor httpContextAccessor)
         {
             _schoolServices = schoolServices;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET - View all professors
@@ -22,7 +25,8 @@ namespace School_Timetable.Controllers
         [Route("/Professors")]
         public IActionResult Index()
         {
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             return View(professorsCollections);
         }
@@ -30,19 +34,23 @@ namespace School_Timetable.Controllers
         // GET - create a professor
         [HttpGet]
         [Route("/Professors/Create")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewData["schoolSubjects"] = await _schoolServices.GetAllSchoolSubjects();
+            //getting a list of all subjects
+            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
 
-            return View();
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            CreateProfessorViewModel viewModel = new CreateProfessorViewModel { AppUserId = currentUserId };
+
+            return View(viewModel);
         }
 
         // POST - create a professor
         [HttpPost]
-        public async Task<IActionResult> Create(ProfessorViewModel viewModel)
+        public IActionResult Create(CreateProfessorViewModel viewModel)
         {
-            //getting a list of all subjects
-            ViewData["schoolSubjects"] = await _schoolServices.GetAllSchoolSubjects();
+            
+            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
 
             if (ModelState.IsValid)
             {
@@ -58,7 +66,8 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult Assign()
         {
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             if (professorsCollections.Count != 0)
             {
@@ -72,7 +81,8 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult UnAssignAll()
         {
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections();
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             if (professorsCollections.Count != 0)
             {

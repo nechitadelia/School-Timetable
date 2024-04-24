@@ -1,11 +1,11 @@
-﻿@using School_Timetable.Models.Entities
+﻿@using School_Timetable.ViewModels
 
 @{
     var allAvailableLetters = ViewData["allAvailableLetters"] as List<char>;
     List<int> schoolyears = new List<int> { 5, 6, 7, 8 };
 }
 
-@model School_Timetable.Models.SchoolClassViewModel
+@model CreateSchoolClassViewModel
 
 <div class="form-container">
     <div class="back-button-container">
@@ -15,6 +15,7 @@
     <h1>Add Class</h1>
 
     <form method="post" id="createClassform">
+        <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
         <div class="mt-3">
             <label for="YearOfStudy" class="form-label">Year of study</label>
             <select asp-for="YearOfStudy" class="schoolclass-dropdown" id="YearOfStudy">

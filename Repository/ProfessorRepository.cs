@@ -3,26 +3,33 @@ using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
-using School_Timetable.Models.Entities;
+using School_Timetable.Utilities;
+using School_Timetable.ViewModels;
+using System.Linq;
 
 namespace School_Timetable.Repository
 {
     public class ProfessorRepository : IProfessorRepository
     {
         private readonly AppDbContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ProfessorRepository(AppDbContext dbContext)
+        public ProfessorRepository(AppDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         //get list of all professors, in ascending order
         public ICollection<Professor> GetProfessors()
         {
+            string? currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+
             return _dbContext.Professors
+                .Where(p => p.AppUserId == currentUser.ToString())
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
-                .ToList();               
+                .ToList();        
         }
 
         //get one professor by id
@@ -118,7 +125,7 @@ namespace School_Timetable.Repository
 		}
 
 		//create a new professor
-		public async void AddProfessor(ProfessorViewModel viewModel)
+		public async void AddProfessor(CreateProfessorViewModel viewModel)
         {
             SchoolSubject subject = _dbContext.SchoolSubjects.Where(s => s.Id == viewModel.SchoolSubjectId).First();
 
@@ -128,7 +135,8 @@ namespace School_Timetable.Repository
                 LastName = viewModel.LastName,
                 AssignedHours = 0,
                 ProfessorSubject = subject,
-                SchoolSubjectId = viewModel.SchoolSubjectId
+                SchoolSubjectId = viewModel.SchoolSubjectId,
+                AppUserId = viewModel.AppUserId
             };
 
             await _dbContext.Professors.AddAsync(professor);
