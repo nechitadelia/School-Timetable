@@ -26,7 +26,7 @@ namespace School_Timetable.Controllers
         public IActionResult Index()
         {
             string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             return View(professorsCollections);
         }
@@ -49,7 +49,7 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult Create(CreateProfessorViewModel viewModel)
         {
-            
+            //getting a list of all subjects
             ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
 
             if (ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace School_Timetable.Controllers
         public IActionResult Assign()
         {
             string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             if (professorsCollections.Count != 0)
             {
@@ -82,7 +82,7 @@ namespace School_Timetable.Controllers
         public IActionResult UnAssignAll()
         {
             string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorCollectionsViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
             if (professorsCollections.Count != 0)
             {
@@ -99,13 +99,22 @@ namespace School_Timetable.Controllers
         {
             Professor professor = _schoolServices.GetProfessor(professorId);
 
-            return View(professor);
+            EditProfessorViewModel viewModel = new EditProfessorViewModel 
+            { 
+                Id = professorId,
+                FirstName = professor.FirstName,
+                LastName = professor.LastName,
+                ProfessorSubject = professor.ProfessorSubject,
+                AssignedHours = professor.AssignedHours
+            };
+
+            return View(viewModel);
         }
 
         // POST - edit a professor
         [HttpPost]
 		[Route("Edit/{professorId}")]
-		public IActionResult Edit(Professor viewModel)
+		public IActionResult Edit(EditProfessorViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

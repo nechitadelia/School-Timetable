@@ -144,7 +144,7 @@ namespace School_Timetable.Repository
 		}
 
 		//edit a professors's data
-		public void EditProfessor(Professor viewModel)
+		public void EditProfessor(EditProfessorViewModel viewModel)
 		{
             Professor professor = GetProfessor(viewModel.Id);
 

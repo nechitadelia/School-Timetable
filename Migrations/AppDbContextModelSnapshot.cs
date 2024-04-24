@@ -51,13 +51,13 @@ namespace School_Timetable.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eaf85d92-c0a9-4faf-9235-66c80c0b88ab",
+                            Id = "0e484a4f-f9c6-46c0-8bd3-005ed37ffabb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bf1f97f7-735d-4826-9eab-481bf3b892d4",
+                            Id = "66d901d1-82ec-4066-9860-67621dd1364a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -169,7 +169,7 @@ namespace School_Timetable.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.AppUser", b =>
+            modelBuilder.Entity("School_Timetable.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -177,9 +177,19 @@ namespace School_Timetable.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("County")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -211,6 +221,11 @@ namespace School_Timetable.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -234,7 +249,7 @@ namespace School_Timetable.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.ClassProfessor", b =>
+            modelBuilder.Entity("School_Timetable.Models.ClassProfessor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -262,7 +277,7 @@ namespace School_Timetable.Migrations
                     b.ToTable("ClassProfessors");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.Professor", b =>
+            modelBuilder.Entity("School_Timetable.Models.Professor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,7 +313,7 @@ namespace School_Timetable.Migrations
                     b.ToTable("Professors");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.SchoolClass", b =>
+            modelBuilder.Entity("School_Timetable.Models.SchoolClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -323,7 +338,7 @@ namespace School_Timetable.Migrations
                     b.ToTable("SchoolClasses");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.SchoolSubject", b =>
+            modelBuilder.Entity("School_Timetable.Models.SchoolSubject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -362,7 +377,7 @@ namespace School_Timetable.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", null)
+                    b.HasOne("School_Timetable.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -371,7 +386,7 @@ namespace School_Timetable.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", null)
+                    b.HasOne("School_Timetable.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,7 +401,7 @@ namespace School_Timetable.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", null)
+                    b.HasOne("School_Timetable.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -395,29 +410,29 @@ namespace School_Timetable.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", null)
+                    b.HasOne("School_Timetable.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.ClassProfessor", b =>
+            modelBuilder.Entity("School_Timetable.Models.ClassProfessor", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", "AppUser")
+                    b.HasOne("School_Timetable.Models.AppUser", "AppUser")
                         .WithMany("ClassProfessors")
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.Professor", b =>
+            modelBuilder.Entity("School_Timetable.Models.Professor", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", "AppUser")
+                    b.HasOne("School_Timetable.Models.AppUser", "AppUser")
                         .WithMany("Professors")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("School_Timetable.Models.Entities.SchoolSubject", "ProfessorSubject")
+                    b.HasOne("School_Timetable.Models.SchoolSubject", "ProfessorSubject")
                         .WithMany()
                         .HasForeignKey("SchoolSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -428,25 +443,25 @@ namespace School_Timetable.Migrations
                     b.Navigation("ProfessorSubject");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.SchoolClass", b =>
+            modelBuilder.Entity("School_Timetable.Models.SchoolClass", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", "AppUser")
+                    b.HasOne("School_Timetable.Models.AppUser", "AppUser")
                         .WithMany("SchoolClasses")
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.SchoolSubject", b =>
+            modelBuilder.Entity("School_Timetable.Models.SchoolSubject", b =>
                 {
-                    b.HasOne("School_Timetable.Models.Entities.AppUser", "AppUser")
+                    b.HasOne("School_Timetable.Models.AppUser", "AppUser")
                         .WithMany("SchoolSubjects")
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("School_Timetable.Models.Entities.AppUser", b =>
+            modelBuilder.Entity("School_Timetable.Models.AppUser", b =>
                 {
                     b.Navigation("ClassProfessors");
 

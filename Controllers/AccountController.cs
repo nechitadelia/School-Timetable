@@ -93,7 +93,10 @@ namespace School_Timetable.Controllers
 			var newUser = new AppUser()
 			{
 				Email = registerViewModel.EmailAddress,
-				UserName = registerViewModel.EmailAddress
+				UserName = registerViewModel.EmailAddress,
+				SchoolName = registerViewModel.SchoolName,
+				County = registerViewModel.County,
+				City = registerViewModel.City
 			};
 
 			var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);

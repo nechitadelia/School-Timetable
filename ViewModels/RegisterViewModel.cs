@@ -4,6 +4,15 @@ namespace School_Timetable.ViewModels
 {
 	public class RegisterViewModel
 	{
+        [Required(ErrorMessage = "School name is required")]
+        public string SchoolName { get; set; }
+
+		[Required(ErrorMessage = "County is required")]
+		public string County { get; set; }
+
+		[Required(ErrorMessage = "City is required")]
+		public string City { get; set; }
+
 		[Display(Name = "Email Address")]
 		[Required(ErrorMessage = "Email address is required")]
 		public string EmailAddress { get; set; }

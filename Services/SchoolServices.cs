@@ -187,14 +187,14 @@ namespace School_Timetable.Services
 		}
 
 		//get all class collections (classes, subjects, professors)
-		public ClassCollectionsViewModel GetClassCollections()
+		public SchoolClassCollectionsViewModel GetClassCollections()
 		{
 			Stack<SchoolClass> fifthGradeClasses = GetFifthGradeClasses();
 			Stack<SchoolClass> sixthGradeClasses = GetSixthGradeClasses();
             Stack<SchoolClass> seventhGradeClasses = GetSeventhGradeClasses();
             Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
 
-			ClassCollectionsViewModel classCollections = new ClassCollectionsViewModel() 
+			SchoolClassCollectionsViewModel classCollections = new SchoolClassCollectionsViewModel() 
 			{
                 fifthGradeClasses = fifthGradeClasses,
 				sixthGradeClasses = sixthGradeClasses,
@@ -216,15 +216,15 @@ namespace School_Timetable.Services
         }
 
 		//get a collection of all professors
-		public List<ProfessorCollectionsViewModel> GetProfessorCollections(string currentUserId)
+		public List<ProfessorViewModel> GetProfessorCollections(string currentUserId)
 		{
-            List<ProfessorCollectionsViewModel> professorCollections = new List<ProfessorCollectionsViewModel>();
+            List<ProfessorViewModel> professorCollections = new List<ProfessorViewModel>();
 
 			ICollection<Professor> allProfessors = GetAllProfessors();
 
 			foreach (Professor professor in allProfessors)
 			{
-				professorCollections.Add(new ProfessorCollectionsViewModel
+				professorCollections.Add(new ProfessorViewModel
 				{
 					Id = professor.Id,
 					FirstName = professor.FirstName,
@@ -238,6 +238,29 @@ namespace School_Timetable.Services
 
 			return professorCollections;
         }
+
+        //get a collection of all subjects
+        public List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId)
+		{
+			List<SchoolSubjectViewModel> subjectCollections = new List<SchoolSubjectViewModel>();
+
+			ICollection<SchoolSubject> allSubjects = GetAllSchoolSubjects();
+
+			foreach (SchoolSubject subject in allSubjects)
+			{
+				subjectCollections.Add(new SchoolSubjectViewModel
+				{
+					Id = subject.Id,
+					Name = subject.Name,
+					HoursPerWeek = subject.HoursPerWeek,
+					YearOfStudy = subject.YearOfStudy,
+					Professors = _subjectRepository.GetProfessorsOfASubject(subject.Id),
+					AppUserId = currentUserId
+				});
+			}
+
+			return subjectCollections;
+		}
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
@@ -294,9 +317,9 @@ namespace School_Timetable.Services
 		//-----------------------------------> UPDATE METHODS <-----------------------------------
 
 		//edit a professors's data
-		public void EditProfessor(Professor professor)
+		public void EditProfessor(EditProfessorViewModel viewModel)
 		{
-			_professorRepository.EditProfessor(professor);
+			_professorRepository.EditProfessor(viewModel);
 		}
 
 		//graduate all classes - change classes to the next school year
@@ -365,7 +388,7 @@ namespace School_Timetable.Services
         }
 
 		//delete a class from database
-		public void DeleteClass(CreateSchoolClassViewModel viewModel)
+		public void DeleteClass(DeleteSchoolClassViewModel viewModel)
 		{
 			//find out which class will be deleted, based on user input
 			SchoolClass schoolClass = _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);

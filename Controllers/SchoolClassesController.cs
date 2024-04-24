@@ -25,7 +25,7 @@ namespace School_Timetable.Controllers
         public IActionResult Index()
         {
             //getting a list of all classes
-            ClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+            SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
 
 			return View(classCollections);
         }
@@ -34,10 +34,12 @@ namespace School_Timetable.Controllers
         [Route("/SchoolClasses/Create")]
         public IActionResult Create()
         {
-            ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
-
             string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel { AppUserId = currentUserId };
+            CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel 
+            { 
+                AppUserId = currentUserId, 
+                AllAvailableLetters = _schoolServices.GetAllAvailableLetters()
+            };
             
             return View(viewModel);
         }
@@ -45,9 +47,6 @@ namespace School_Timetable.Controllers
         [HttpPost]
         public IActionResult Create(CreateSchoolClassViewModel viewModel)
         {
-            ViewData["allAvailableLetters"] = _schoolServices.GetAllAvailableLetters();
-
-            //add class to database
             _schoolServices.AddClass(viewModel);
 
             return RedirectToAction("Create");
@@ -58,13 +57,13 @@ namespace School_Timetable.Controllers
         public IActionResult GraduateClasses()
         {
             //getting a list of all classes
-            ClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+            SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
 
             return View(classCollections);
         }
 
         [HttpPost]
-        public IActionResult GraduateClasses(ClassCollectionsViewModel viewModel)
+        public IActionResult GraduateClasses(SchoolClassCollectionsViewModel viewModel)
         {
             _schoolServices.GraduateClasses();
             return RedirectToAction("Index");
@@ -74,16 +73,19 @@ namespace School_Timetable.Controllers
         [Route("/SchoolClasses/Delete")]
         public IActionResult Delete()
         {
-            ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
-            return View();
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            DeleteSchoolClassViewModel viewModel = new DeleteSchoolClassViewModel
+            {
+                AppUserId = currentUserId,
+                AllExistingLetters = _schoolServices.GetAllExistingLetters()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Delete(CreateSchoolClassViewModel viewModel)
+        public IActionResult Delete(DeleteSchoolClassViewModel viewModel)
         {
-            ViewData["allExistingLetters"] = _schoolServices.GetAllExistingLetters();
-
-            //delete class from database
             _schoolServices.DeleteClass(viewModel);
 
 			return RedirectToAction("Delete");

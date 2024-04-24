@@ -69,10 +69,13 @@ namespace School_Timetable.Interfaces
 		List<char> GetAllExistingLetters();
 
 		//get all class collections (classes, subjects, professors)
-		ClassCollectionsViewModel GetClassCollections();
+		SchoolClassCollectionsViewModel GetClassCollections();
 
 		//get a collection of all professors
-		List<ProfessorCollectionsViewModel> GetProfessorCollections(string currentUserId);
+		List<ProfessorViewModel> GetProfessorCollections(string currentUserId);
+
+		//get a collection of all subjects
+		List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId);
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
@@ -91,7 +94,7 @@ namespace School_Timetable.Interfaces
         //-----------------------------------> UPDATE METHODS <-----------------------------------
 
         //edit a professors's data
-        void EditProfessor(Professor professor);
+        void EditProfessor(EditProfessorViewModel viewModel);
 
         //graduate all classes - change classes to the next school year
         void GraduateClasses();
@@ -102,7 +105,7 @@ namespace School_Timetable.Interfaces
         void DeleteProfessor(Professor professor);
 
         //delete a class from database
-        void DeleteClass(CreateSchoolClassViewModel viewModel);
+        void DeleteClass(DeleteSchoolClassViewModel viewModel);
 
         //unassign all professors from all classes
         void UnAssignAllProfessorsFromClasses();

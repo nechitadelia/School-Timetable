@@ -1,11 +1,6 @@
 ﻿@using School_Timetable.ViewModels
-@using School_Timetable.Models
 
-@{
-    var professors = ViewData["professors"] as List<List<Professor>>;
-}
-
-@model List<SchoolSubject>
+@model List<SchoolSubjectViewModel>
 
 <div class="subjects-container">
     <h1>Subjects</h1>
@@ -18,10 +13,10 @@
                 </tr>
             </thead>
             <tbody>
-                @for(int i = 0; i < professors.Count; i++)
+                @for(int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        @if (professors[i] == null || professors[i].Count == 0)
+                        @if (Model[i].Professors == null || Model[i].Professors.Count == 0)
                         {
                             <td class="subject-name">@Model[i].Name</td>
                             <td class="text-danger">No professors</td>
@@ -31,9 +26,9 @@
                             <td class="subject-name">@Model[i].Name</td>
                             <td class="subject-professor">
                                 <ul>
-                                    @for (int j = 0; j < professors[i].Count; j++)
+                                    @for (int j = 0; j < Model[i].Professors.Count; j++)
                                     {
-                                        <li><span>@professors[i][j].LastName</span> @(" " + professors[i][j].FirstName)</li>
+                                        <li><span>@Model[i].Professors[j].LastName</span> @(" " + Model[i].Professors[j].FirstName)</li>
                                     }
                                 </ul>
                             </td>

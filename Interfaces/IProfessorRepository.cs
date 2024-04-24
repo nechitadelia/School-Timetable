@@ -40,7 +40,7 @@ namespace School_Timetable.Interfaces
 		void AddProfessor(CreateProfessorViewModel viewModel);
 
         //edit a professors's data
-        void EditProfessor(Professor viewModel);
+        void EditProfessor(EditProfessorViewModel viewModel);
 
 		//delete a professor from the database
 		void DeleteProfessor(Professor viewModel);
