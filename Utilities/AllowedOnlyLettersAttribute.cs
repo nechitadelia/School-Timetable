@@ -8,7 +8,7 @@ namespace School_Timetable.Utilities
 		{
 			if (value != null)
 			{
-				string name = value.ToString();
+				string name = value.ToString().Replace(" ", "");
 
 				if (name.All(Char.IsLetter))
 				{

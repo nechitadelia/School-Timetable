@@ -52,9 +52,8 @@ namespace School_Timetable.Repository
 		public bool CanAssignHours(int professorId)
 		{
             Professor professor = GetProfessor(professorId);
-			//SchoolSubject subject = await GetSubjectOfProfessor(professorId);
 
-			if ((professor.AssignedHours + professor.ProfessorSubject.HoursPerWeek) <= 20)
+			if ((professor.AssignedHours + professor.ProfessorSubject.HoursPerWeek) <= professor.MaxHours)
 			{
                 return true;
 			}
@@ -94,7 +93,7 @@ namespace School_Timetable.Repository
         public int GetUnassignedHours(int professorId)
         {
             Professor professor = GetProfessor(professorId);
-            int unassignedHours = 20 - professor.AssignedHours;
+            int unassignedHours = professor.MaxHours - professor.AssignedHours;
 
             return unassignedHours;
         }
@@ -134,6 +133,7 @@ namespace School_Timetable.Repository
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
                 AssignedHours = 0,
+                MaxHours = viewModel.MaxHours,
                 ProfessorSubject = subject,
                 SchoolSubjectId = viewModel.SchoolSubjectId,
                 AppUserId = viewModel.AppUserId

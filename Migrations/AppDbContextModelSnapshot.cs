@@ -51,13 +51,13 @@ namespace School_Timetable.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0e484a4f-f9c6-46c0-8bd3-005ed37ffabb",
+                            Id = "82f2ad71-affc-48ec-8ca6-bc6030bf6687",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "66d901d1-82ec-4066-9860-67621dd1364a",
+                            Id = "7a6a2689-d483-4a32-aca3-95266c321e8f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -293,13 +293,16 @@ namespace School_Timetable.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("MaxHours")
+                        .HasColumnType("int");
 
                     b.Property<int>("SchoolSubjectId")
                         .HasColumnType("int");

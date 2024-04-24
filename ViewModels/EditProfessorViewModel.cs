@@ -19,6 +19,7 @@ namespace School_Timetable.ViewModels
 		[MaxLength(50, ErrorMessage = "The name must have maximum 50 letters")]
 		[AllowedOnlyLetters(ErrorMessage = "The name must contain only letters")]
 		public string LastName { get; set; }
+		public int MaxHours { get; set; }
 		public SchoolSubject ProfessorSubject { get; set; }
 		public int AssignedHours { get; set; }
 	}

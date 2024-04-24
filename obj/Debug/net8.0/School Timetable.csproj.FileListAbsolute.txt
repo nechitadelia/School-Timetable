@@ -144,3 +144,10 @@ D:\Repo\School Timetable\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFr
 D:\Repo\School Timetable\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\Repo\School Timetable\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Repo\School Timetable\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.Mvc.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.Razor.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.Helpers.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\System.Web.WebPages.dll
+D:\Repo\School Timetable\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll

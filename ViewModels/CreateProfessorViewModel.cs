@@ -18,7 +18,11 @@ namespace School_Timetable.ViewModels
         [AllowedOnlyLetters(ErrorMessage = "The name must contain only letters")]
         public string LastName { get; set; }
 
-        public int SchoolSubjectId { get; set; }
+		[Required(ErrorMessage = "Working hours must be specified")]
+        [Range(0, 20, ErrorMessage = "Enter a number between 0 - 20")]
+		[AllowedOnlyInt(ErrorMessage = "You must enter an integer")]
+		public int MaxHours { get; set; }
+		public int SchoolSubjectId { get; set; }
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
     }
