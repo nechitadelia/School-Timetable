@@ -94,7 +94,7 @@ namespace School_Timetable.Controllers
 
         // GET - edit a professor
         [HttpGet]
-        [Route("Edit/{professorId}")]
+        [Route("/Professors/Edit/{professorId}")]
         public IActionResult Edit(int professorId)
         {
             Professor professor = _schoolServices.GetProfessor(professorId);
@@ -113,7 +113,7 @@ namespace School_Timetable.Controllers
 
         // POST - edit a professor
         [HttpPost]
-		[Route("Edit/{professorId}")]
+		[Route("/Professors/Edit/{professorId}")]
 		public IActionResult Edit(EditProfessorViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -126,7 +126,7 @@ namespace School_Timetable.Controllers
 
         // GET - delete a professor
         [HttpGet]
-        [Route("Delete/{professorId}")]
+        [Route("/Professors/Delete/{professorId}")]
         public IActionResult Delete(int professorId)
         {
             Professor professor = _schoolServices.GetProfessor(professorId);
@@ -137,7 +137,7 @@ namespace School_Timetable.Controllers
 
         // DELETE a professor
         [HttpPost]
-        [Route("Delete/{professorId}")]
+        [Route("/Professors/Delete/{professorId}")]
         public IActionResult Delete(Professor viewModel)
         {
             if (viewModel != null)

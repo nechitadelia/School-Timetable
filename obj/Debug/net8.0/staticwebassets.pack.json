@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\js\\CreateSchoolClass.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateSchoolSubject.js",
+      "PackagePath": "staticwebassets\\js\\CreateSchoolSubject.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteProfessor.js",
       "PackagePath": "staticwebassets\\js\\DeleteProfessor.js"
     },
@@ -49,12 +53,20 @@
       "PackagePath": "staticwebassets\\js\\DeleteSchoolClass.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
+      "PackagePath": "staticwebassets\\js\\DeleteSchoolSubject.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditProfessor.js",
       "PackagePath": "staticwebassets\\js\\EditProfessor.js"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
       "PackagePath": "staticwebassets\\js\\IndexProfessor.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\Login.js",
+      "PackagePath": "staticwebassets\\js\\Login.js"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",

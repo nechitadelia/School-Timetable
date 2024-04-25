@@ -29,6 +29,9 @@ namespace School_Timetable.Interfaces
 		//get list of all eighth grade classes
 		Stack<SchoolClass> GetEighthGradeClasses();
 
+		//get one subject by id
+		SchoolSubject GetSchoolSubject(int subjectId);
+
 		//get one professor by id
 		Professor GetProfessor(int professorId);
 
@@ -77,10 +80,13 @@ namespace School_Timetable.Interfaces
 		//get a collection of all subjects
 		List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId);
 
-        //-----------------------------------> CREATE METHODS <-----------------------------------
+		//-----------------------------------> CREATE METHODS <-----------------------------------
 
-        //adding a new professor to database
-        void AddProfessor(CreateProfessorViewModel viewModel);
+		//adding a new subject to database
+		void AddSubject(CreateSchoolSubjectViewModel viewModel);
+
+		//adding a new professor to database
+		void AddProfessor(CreateProfessorViewModel viewModel);
 
         //adding a new class to database
         void AddClass(CreateSchoolClassViewModel viewModel);
@@ -99,10 +105,13 @@ namespace School_Timetable.Interfaces
         //graduate all classes - change classes to the next school year
         void GraduateClasses();
 
-        //-----------------------------------> DELETE METHODS <-----------------------------------
+		//-----------------------------------> DELETE METHODS <-----------------------------------
 
-        //delete a professor from database
-        void DeleteProfessor(Professor professor);
+		//delete a subject from database
+		bool DeleteSchoolSubject(SchoolSubject subject);
+
+		//delete a professor from database
+		void DeleteProfessor(Professor professor);
 
         //delete a class from database
         void DeleteClass(DeleteSchoolClassViewModel viewModel);

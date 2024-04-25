@@ -274,7 +274,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("ClassProfessors");
+                    b.ToTable("ClassProfessors", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.Professor", b =>
@@ -313,7 +313,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("SchoolSubjectId");
 
-                    b.ToTable("Professors");
+                    b.ToTable("Professors", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.SchoolClass", b =>
@@ -338,7 +338,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("SchoolClasses");
+                    b.ToTable("SchoolClasses", (string)null);
                 });
 
             modelBuilder.Entity("School_Timetable.Models.SchoolSubject", b =>
@@ -366,7 +366,7 @@ namespace School_Timetable.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("SchoolSubjects");
+                    b.ToTable("SchoolSubjects", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

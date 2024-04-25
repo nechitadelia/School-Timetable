@@ -23,8 +23,8 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-		[Route("/Login")]
-		public IActionResult Login()
+        [Route("/Login")]
+        public IActionResult Login()
 		{
             //this is meant to save data that was typed in login,in case the user refreshes the page
 			LoginViewModel response = new LoginViewModel();
@@ -32,8 +32,8 @@ namespace School_Timetable.Controllers
 		}
 
         [HttpPost]
-		[Route("/Login")]
-		public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        [Route("/Login")]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace School_Timetable.Controllers
 			if(newUserResponse.Succeeded)
 			{
 				await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Login");
 			}
 
 			return View(registerViewModel);

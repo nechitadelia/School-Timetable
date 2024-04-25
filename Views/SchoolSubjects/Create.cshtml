@@ -1,0 +1,54 @@
+﻿@using School_Timetable.ViewModels
+
+@model CreateSchoolSubjectViewModel
+
+<div class="form-container">
+	<div class="back-button-container">
+		<a class="back-button" asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Back to list</a>
+	</div>
+
+	<h1>Add School Subject</h1>
+
+	<form method="post" id="createSubjectform">
+		<input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
+		<div class="mt-3">
+			<label for="Name" class="form-label">Subject Name</label>
+			<input type="text" class="form-control" asp-for="Name" id="Name" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+
+		<div>
+			<label for="HoursPerWeek" class="form-label">Hours/week</label>
+			<input type="text" class="form-control" asp-for="HoursPerWeek" id="HoursPerWeek" />
+			<span asp-validation-for="HoursPerWeek" class="text-danger"></span>
+		</div>
+
+		<div>
+			<p>Years of study</p>
+			<div>
+				<div>
+					<label for="FifthYearOfStudy" class="form-label">Fifth Grade</label>
+					<input type="checkbox" asp-for="FifthYearOfStudy" id="FifthYearOfStudy" />
+				</div>
+				<div>
+					<label for="SixthYearOfStudy" class="form-label">Sixth Grade</label>
+					<input type="checkbox" asp-for="SixthYearOfStudy" id="SixthYearOfStudy" />
+				</div>
+				<div>
+					<label for="SeventhYearOfStudy" class="form-label">Seventh Grade</label>
+					<input type="checkbox" asp-for="SeventhYearOfStudy" id="SeventhYearOfStudy" />
+				</div>
+				<div>
+					<label for="EighthYearOfStudy" class="form-label">Eighth Grade</label>
+					<input type="checkbox" asp-for="EighthYearOfStudy" id="EighthYearOfStudy" />
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="mt-3">
+		<button type="submit" class="create-button" id="createSubjectButton">Add School Subject</button>
+	</div>
+</div>
+
+<script src="~/js/CreateSchoolSubject.js" asp-append-version="true"></script>

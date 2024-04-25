@@ -16,9 +16,6 @@ namespace School_Timetable.Interfaces
 		//get the classes of one year, depending on the year of study as input
 		Stack<SchoolClass> GetClassesofOneYear(int yearOfStudy);
 
-		//get the subjects for one class depending on its year
-		List<SchoolSubject> GetClassSubjects(int yearOfStudy);
-
 		//get the last letter that exists in a year
 		char GetLastLetter(int yearOfStudy);
 

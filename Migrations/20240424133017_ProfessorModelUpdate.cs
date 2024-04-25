@@ -42,12 +42,12 @@ namespace School_Timetable.Migrations
                 oldType: "nvarchar(100)",
                 oldMaxLength: 100);
 
-            migrationBuilder.AddColumn<int>(
-                name: "MaxHours",
-                table: "Professors",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "MaxHours",
+            //    table: "Professors",
+            //    type: "int",
+            //    nullable: false,
+            //    defaultValue: 0);
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
@@ -72,9 +72,9 @@ namespace School_Timetable.Migrations
                 keyColumn: "Id",
                 keyValue: "82f2ad71-affc-48ec-8ca6-bc6030bf6687");
 
-            migrationBuilder.DropColumn(
-                name: "MaxHours",
-                table: "Professors");
+            //migrationBuilder.DropColumn(
+            //    name: "MaxHours",
+            //    table: "Professors");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",

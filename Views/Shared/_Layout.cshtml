@@ -21,9 +21,9 @@
         </a>
         <nav>
             <div class="nav-links">
-                <ul>
-                    @if (User.Identity.IsAuthenticated)
-                    {
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul>
                         <li class="link">
                             <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
                         </li>
@@ -36,18 +36,8 @@
                         <li class="link">
                             <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                         </li>
-                    }
-                    else
-                    {
-                        <li class="link">
-                            <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="link">
-                            <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-                    }
-
-                </ul>
+                    </ul>
+                }
             </div>
         </nav>
     </header>

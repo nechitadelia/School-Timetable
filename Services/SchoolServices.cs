@@ -67,6 +67,12 @@ namespace School_Timetable.Services
 			return _schoolClassRepository.GetClassesofOneYear(8);
 		}
 
+		//get one subject by id
+		public SchoolSubject GetSchoolSubject(int subjectId)
+		{
+			return _subjectRepository.GetSchoolSubject(subjectId);
+		}
+
 		//get one professor by id
 		public Professor GetProfessor(int professorId)
 		{
@@ -111,32 +117,32 @@ namespace School_Timetable.Services
         //get the list of all subjects for fifth grade
         public List<SchoolSubject> GetSubjectsForFifthGrade()
 		{
-			return _schoolClassRepository.GetClassSubjects(5);
+			return _subjectRepository.GetClassSubjects(5);
 		}
 
 		//get the list of all subjects for fifth grade
 		public List<SchoolSubject> GetSubjectsForSixthGrade()
 		{
-			return _schoolClassRepository.GetClassSubjects(6);
+			return _subjectRepository.GetClassSubjects(6);
 		}
 
 		//get the list of all subjects for fifth grade
 		public List<SchoolSubject> GetSubjectsForSeventhGrade()
 		{
-			return _schoolClassRepository.GetClassSubjects(7);
+			return _subjectRepository.GetClassSubjects(7);
 		}
 
 		//get the list of all subjects for fifth grade
 		public List<SchoolSubject> GetSubjectsForEighthGrade()
 		{
-			return _schoolClassRepository.GetClassSubjects(8);
+			return _subjectRepository.GetClassSubjects(8);
 		}
 
         //get a list of professors for one class
         public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass)
         {
             List<Professor> professors = new List<Professor>();
-			List<SchoolSubject> classSubjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy);
+			List<SchoolSubject> classSubjects = _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
 
             foreach (SchoolSubject sub in classSubjects)
             {
@@ -248,12 +254,32 @@ namespace School_Timetable.Services
 
 			foreach (SchoolSubject subject in allSubjects)
 			{
-				subjectCollections.Add(new SchoolSubjectViewModel
+				//check in which years of study is the subject taught
+				List<int> yearsOfStudy = new List<int>();
+				if (subject.FifthYearOfStudy == 'Y')
+				{
+					yearsOfStudy.Add(5);
+				}
+                if (subject.SixthYearOfStudy == 'Y')
+                {
+                    yearsOfStudy.Add(6);
+                }
+                if (subject.SeventhYearOfStudy == 'Y')
+                {
+                    yearsOfStudy.Add(7);
+                }
+                if (subject.EighthYearOfStudy == 'Y')
+                {
+                    yearsOfStudy.Add(8);
+                }
+
+                //add the subject to collection
+                subjectCollections.Add(new SchoolSubjectViewModel
 				{
 					Id = subject.Id,
 					Name = subject.Name,
 					HoursPerWeek = subject.HoursPerWeek,
-					YearOfStudy = subject.YearOfStudy,
+                    YearsOfStudy = yearsOfStudy,
 					Professors = _subjectRepository.GetProfessorsOfASubject(subject.Id),
 					AppUserId = currentUserId
 				});
@@ -264,6 +290,11 @@ namespace School_Timetable.Services
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
+		//adding a new subject to database
+		public void AddSubject(CreateSchoolSubjectViewModel viewModel)
+		{
+			_subjectRepository.AddSubject(viewModel);
+		}
         //adding a new professor to database
         public void AddProfessor(CreateProfessorViewModel viewModel)
 		{
@@ -295,7 +326,7 @@ namespace School_Timetable.Services
 
 			foreach (SchoolClass schoolClass in schoolClasses) //iterating through all the classes of a school
 			{
-				ICollection<SchoolSubject> classSubjects = _schoolClassRepository.GetClassSubjects(schoolClass.YearOfStudy);
+				ICollection<SchoolSubject> classSubjects = _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
 
 				foreach (SchoolSubject subject in classSubjects) //iterating through all the subjects of one class
 				{
@@ -354,6 +385,25 @@ namespace School_Timetable.Services
         }
 
 		//-----------------------------------> DELETE METHODS <-----------------------------------
+
+		//delete a subject from database
+		public bool DeleteSchoolSubject(SchoolSubject subject)
+		{
+			//get existing professors of the subject
+			ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
+
+			//check if there are existing professors connected to the subject
+			if (professors.Count != 0)
+			{
+				return false;
+			}
+			else
+			{
+				//delete subject from database only if it has no professors
+				_subjectRepository.DeleteSchoolSubject(subject);
+				return true;
+			}
+		}
 
 		//delete a professor from database
 		public void DeleteProfessor(Professor professor)

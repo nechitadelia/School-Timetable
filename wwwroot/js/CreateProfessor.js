@@ -1,11 +1,11 @@
 ﻿const form = document.getElementById("createProfessorform");
-const submit = document.getElementById("createProfessorButton");
+const submitProfessor = document.getElementById("createProfessorButton");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 let maxHours = document.getElementById("Hours");
 
 //showing an alert message when the form is submitted
-submit.addEventListener("click", () => {
+submitProfessor.addEventListener("click", () => {
     let firstNameValue = firstName.value;
     let lastNameValue = lastName.value;
     let maxHoursValue = maxHours.value;
@@ -42,7 +42,7 @@ function checkName(name) {
 }
 
 function checkMaxHours(hours) {
-    if (hours <= 0 || hours > 20 || typeof(hours) != "number") {
+    if (hours <= 1 || hours > 20 || typeof (hours) != "number") {
         return false;
     }
     else {

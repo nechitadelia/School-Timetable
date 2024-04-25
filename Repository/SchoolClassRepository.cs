@@ -55,36 +55,6 @@ namespace School_Timetable.Repository
             return new Stack<SchoolClass>(schoolClasses);
         }
 
-        //get the subjects for one class depending on its year
-        public List<SchoolSubject> GetClassSubjects(int yearOfStudy)
-        {
-            string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
-
-            switch (yearOfStudy)
-            {
-                case 5: return _dbContext.SchoolSubjects
-                                .Where(s => s.AppUserId == currentUserId.ToString() && s.YearOfStudy == 5)
-                                .Select(s => s)
-                                .ToList();
-                case 6: return _dbContext.SchoolSubjects
-                                .Where(s => s.AppUserId == currentUserId.ToString() && (s.YearOfStudy == 5 || s.YearOfStudy == 6))
-                                .OrderBy(s => s.Id)
-                                .Select(s => s)
-                                .ToList();
-                case 7: return _dbContext.SchoolSubjects
-                                .Where(s => s.AppUserId == currentUserId.ToString() && (s.YearOfStudy == 5 || s.YearOfStudy == 6 || s.YearOfStudy == 7))
-                                .OrderBy(s => s.Id)
-                                .Select(s => s)
-                                .ToList();
-                case 8: return _dbContext.SchoolSubjects
-                                .Where(s => s.AppUserId == currentUserId.ToString())
-                                .OrderBy(s => s.Id)
-                                .Select(s => s)
-                                .ToList();
-                default: return new List<SchoolSubject>();
-            }
-        }
-
         //get the last letter that exists in a year
         public char GetLastLetter(int yearOfStudy)
         {

@@ -96,6 +96,7 @@
 }
 
 .noexistingProfessors,
+.noexistingSubjects,
 .noProfessorsFound {
     color: #b7394b;
     text-align: center;

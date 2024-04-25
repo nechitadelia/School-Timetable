@@ -4,7 +4,7 @@
 
 @if (Model is null)
 {
-	<p>No professor was found with this Id</p>
+	<p>No professor was found</p>
 }
 else
 {
@@ -30,7 +30,7 @@ else
 
 			<div class="mt-3">
 				<label class="form-label">Subject</label>
-				<input type="text" class="form-control" asp-for="@Model.ProfessorSubject.Name" readonly />
+				<input type="text" class="form-control" asp-for="ProfessorSubject.Name" readonly />
 			</div>
 		</form>
 

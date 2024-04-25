@@ -7,13 +7,13 @@
 
 			<form method="post" asp-action="Login">
 				<div class="mb-3">
-					<label class="form-label" asp-for="@Model.EmailAddress">Email Address</label>
-					<input type="email" asp-for="@Model.EmailAddress" class="form-control" />
+					<label class="form-label" asp-for="EmailAddress">Email Address</label>
+					<input type="email" asp-for="EmailAddress" class="form-control" id="EmailAddress" />
 					<span asp-validation-for="@Model.EmailAddress" class="text-danger"></span>
 				</div>
 				<div class="mb-3">
-					<label class="form-label" asp-for="@Model.Password">Password</label>
-					<input type="password" asp-for="@Model.Password" class="form-control" />
+					<label class="form-label" asp-for="Password">Password</label>
+					<input type="password" asp-for="Password" class="form-control" id="Password" />
 					<span asp-validation-for="@Model.Password" class="text-danger"></span>
 				</div>
 				<div class="mb-3">
@@ -21,6 +21,23 @@
 					<a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
 				</div>
 			</form>
+
+			<div>
+				<p>View site as:</p>
+
+				<div>
+					<button id="admin-login">Admin</button>
+				</div>
+				<div>
+					<button id="user1-login">User 1</button>
+				</div>
+				<div>
+					<button id="user2-login">User 2</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
+
+<script src="~/js/Login.js" asp-append-version="true"></script>

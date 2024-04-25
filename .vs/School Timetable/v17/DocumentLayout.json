@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\professors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\professors\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\deleteschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\deleteschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\createprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\createprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\schoolsubjects\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\schoolsubjects\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CreateProfessor.js",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateProfessor.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\CreateProfessor.js",
-              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateProfessor.js",
-              "RelativeToolTip": "wwwroot\\js\\CreateProfessor.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAtAAAA",
+              "DocumentIndex": 0,
+              "Title": "DeleteSchoolSubject.js",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\DeleteSchoolSubject.js",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
+              "RelativeToolTip": "wwwroot\\js\\DeleteSchoolSubject.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-04-24T15:17:01.612Z",
+              "WhenOpened": "2024-04-25T11:41:54.496Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Professors\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Professors\\Edit.cshtml",
-              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Professors\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Professors\\Edit.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAAJAAAA",
+              "DocumentIndex": 1,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\SchoolSubjects\\Delete.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Delete.cshtml",
+              "RelativeToolTip": "Views\\SchoolSubjects\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T15:15:11.347Z",
+              "WhenOpened": "2024-04-25T11:40:32.413Z",
               "EditorCaption": ""
             }
           ]

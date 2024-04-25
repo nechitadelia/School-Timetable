@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EMkHjUN51UUzfoi6vEb4Wl9cmxwRW/uLMcH4J+NhwQE=",
+  "Hash": "L0RE0K7enLjXESCpXtCbB9NjZ/9qvun79V+8B+4tL0Q=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -226,6 +226,25 @@
       "OriginalItemSpec": "wwwroot\\js\\CreateSchoolClass.js"
     },
     {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\CreateSchoolSubject.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/CreateSchoolSubject.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\CreateSchoolSubject.js"
+    },
+    {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteProfessor.js",
       "SourceId": "School Timetable",
       "SourceType": "Discovered",
@@ -264,6 +283,25 @@
       "OriginalItemSpec": "wwwroot\\js\\DeleteSchoolClass.js"
     },
     {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/DeleteSchoolSubject.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\DeleteSchoolSubject.js"
+    },
+    {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditProfessor.js",
       "SourceId": "School Timetable",
       "SourceType": "Discovered",
@@ -300,6 +338,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\IndexProfessor.js"
+    },
+    {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\Login.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/Login.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Login.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",

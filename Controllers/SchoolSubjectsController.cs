@@ -24,7 +24,8 @@ namespace School_Timetable.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [HttpGet]
+		// GET - View all subjects
+		[HttpGet]
         [Route("/SchoolSubjects")]
         public IActionResult Index()
         {
@@ -34,6 +35,61 @@ namespace School_Timetable.Controllers
 			return View(subjects);
         }
 
+		// GET - create a subject
+		[HttpGet]
+        [Route("/SchoolSubject/Create")]
+        public IActionResult Create()
+        {
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            CreateSchoolSubjectViewModel viewModel = new CreateSchoolSubjectViewModel { AppUserId = currentUserId };
 
-    }
+            return View(viewModel);
+        }
+
+		// POST - create a subject
+		[HttpPost]
+        public IActionResult Create(CreateSchoolSubjectViewModel viewModel)
+        {
+			if (ModelState.IsValid)
+			{
+				//creating and saving the new subject
+				_schoolServices.AddSubject(viewModel);
+				return RedirectToAction("Index");
+			}
+
+			return View(viewModel);
+		}
+
+		// GET - delete a subject
+		[HttpGet]
+		[Route("/SchoolSubject/Delete/{subjectId}")]
+        public IActionResult Delete(int subjectId)
+        {
+            SchoolSubject subject = _schoolServices.GetSchoolSubject(subjectId);
+
+			return View(subject);
+		}
+
+		// DELETE - delete a subject
+		[HttpPost]
+		[Route("/SchoolSubject/Delete/{professorId}")]
+		public IActionResult Delete(SchoolSubject viewModel)
+		{
+			if (viewModel != null)
+			{
+				bool result = _schoolServices.DeleteSchoolSubject(viewModel);
+				if (result)
+				{
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					TempData["Error"] = "The subject has professors assigned to it. You need to delete those professors first.";
+					return View(viewModel);
+				}
+			}
+
+			return RedirectToAction("Index");
+		}
+	}
 }
