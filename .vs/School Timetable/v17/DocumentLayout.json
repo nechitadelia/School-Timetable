@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\deleteschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\deleteschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\indexschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\indexschoolsubject.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\schoolsubjects\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\schoolsubjects\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\schoolsubjects\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\schoolsubjects\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\js\\indexprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\js\\indexprofessor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DeleteSchoolSubject.js",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\DeleteSchoolSubject.js",
-              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteSchoolSubject.js",
-              "RelativeToolTip": "wwwroot\\js\\DeleteSchoolSubject.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAADAAAA",
+              "DocumentIndex": 2,
+              "Title": "IndexProfessor.js",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\IndexProfessor.js",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
+              "RelativeToolTip": "wwwroot\\js\\IndexProfessor.js",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAAwCsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-04-25T11:41:54.496Z",
+              "WhenOpened": "2024-04-26T10:26:39.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IndexSchoolSubject.js",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexSchoolSubject.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\IndexSchoolSubject.js",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexSchoolSubject.js",
+              "RelativeToolTip": "wwwroot\\js\\IndexSchoolSubject.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-04-26T10:23:00.705Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Delete.cshtml",
-              "RelativeDocumentMoniker": "Views\\SchoolSubjects\\Delete.cshtml",
-              "ToolTip": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Delete.cshtml",
-              "RelativeToolTip": "Views\\SchoolSubjects\\Delete.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\SchoolSubjects\\Index.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\SchoolSubjects\\Index.cshtml",
+              "RelativeToolTip": "Views\\SchoolSubjects\\Index.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADEAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-25T11:40:32.413Z",
+              "WhenOpened": "2024-04-26T10:19:28.57Z",
               "EditorCaption": ""
             }
           ]

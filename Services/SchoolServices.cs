@@ -192,8 +192,14 @@ namespace School_Timetable.Services
 			return existingLetters;
 		}
 
-		//get all class collections (classes, subjects, professors)
-		public SchoolClassCollectionsViewModel GetClassCollections()
+        //check if there are any subjects in database
+        public bool CheckExistingSubjects()
+		{
+			return _subjectRepository.CheckExistingSubjects();
+		}
+
+        //get all class collections (classes, subjects, professors)
+        public SchoolClassCollectionsViewModel GetClassCollections()
 		{
 			Stack<SchoolClass> fifthGradeClasses = GetFifthGradeClasses();
 			Stack<SchoolClass> sixthGradeClasses = GetSixthGradeClasses();
@@ -228,7 +234,7 @@ namespace School_Timetable.Services
 
 			ICollection<Professor> allProfessors = GetAllProfessors();
 
-			foreach (Professor professor in allProfessors)
+            foreach (Professor professor in allProfessors)
 			{
 				professorCollections.Add(new ProfessorViewModel
 				{
@@ -238,7 +244,7 @@ namespace School_Timetable.Services
 					ProfessorSubject = GetSubjectOfProfessor(professor.Id),
 					UnassignedHours = GetUnassignedHours(professor.Id),
 					ClassesOfProfessor = GetClassesOfAProfessor(professor),
-					AppUserId = currentUserId
+                    AppUserId = currentUserId
                 });
 			}
 

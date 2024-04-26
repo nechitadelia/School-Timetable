@@ -41,6 +41,17 @@ namespace School_Timetable.Repository
                 .First();
         }
 
+        //check if there are any subjects in database
+        public bool CheckExistingSubjects()
+        {
+            ICollection<SchoolSubject> schoolSubjects = GetSchoolSubjects();
+            if (schoolSubjects.Count == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         //get a list of professors for one subject
         public List<Professor> GetProfessorsOfASubject(int subjectId)
         {

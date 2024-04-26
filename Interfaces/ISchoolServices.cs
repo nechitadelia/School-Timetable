@@ -71,8 +71,11 @@ namespace School_Timetable.Interfaces
 		//get all the existing last letters for all school years
 		List<char> GetAllExistingLetters();
 
-		//get all class collections (classes, subjects, professors)
-		SchoolClassCollectionsViewModel GetClassCollections();
+		//check if there are any subjects in database
+		bool CheckExistingSubjects();
+
+        //get all class collections (classes, subjects, professors)
+        SchoolClassCollectionsViewModel GetClassCollections();
 
 		//get a collection of all professors
 		List<ProfessorViewModel> GetProfessorCollections(string currentUserId);

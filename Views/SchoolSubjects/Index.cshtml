@@ -45,11 +45,11 @@
 
                             @if (Model[i].Professors == null || Model[i].Professors.Count == 0)
                             {
-                                <td class="text-danger">No professors</td>
+                                <td class="text-danger existingProfessors-error">No professors</td>
                             }
                             else
                             {
-                                <td class="subject-professor">
+                                <td class="subject-professor existingProfessors-error">
                                     <ul>
                                         @for (int j = 0; j < Model[i].Professors.Count; j++)
                                         {
@@ -60,7 +60,14 @@
                             }
 
                             <td class="delete-button-table">
-                                @Html.ActionLink($"Delete", "Delete", new { subjectId = Model[i].Id }, new { @class = "delete-button delete-subject-button" })
+                                @if (Model[i].Professors == null || Model[i].Professors.Count == 0)
+                                {
+                                    @Html.ActionLink($"Delete", "Delete", new { subjectId = Model[i].Id }, new { @class = "delete-button delete-subject-button" })
+                                }
+                                else
+                                {
+                                    <button class="delete-button delete-subject-button">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
@@ -69,3 +76,5 @@
         </table>
     </div>
 </div>
+
+<script src="~/js/IndexSchoolSubject.js" asp-append-version="true"></script>

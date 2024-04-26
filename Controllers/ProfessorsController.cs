@@ -28,6 +28,10 @@ namespace School_Timetable.Controllers
             string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
             List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
+            //check if there are any subjects in database
+            bool checkSubjects = _schoolServices.CheckExistingSubjects();
+            ViewData["noSubjects"] = checkSubjects;
+
             return View(professorsCollections);
         }
 
@@ -36,13 +40,24 @@ namespace School_Timetable.Controllers
         [Route("/Professors/Create")]
         public IActionResult Create()
         {
-            //getting a list of all subjects
-            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
+			//getting a list of all subjects
+			ICollection<SchoolSubject> schoolSubjects = _schoolServices.GetAllSchoolSubjects();
 
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            CreateProfessorViewModel viewModel = new CreateProfessorViewModel { AppUserId = currentUserId };
+            //check if there are any subjects in database
+            bool checkSubjects = _schoolServices.CheckExistingSubjects();
 
-            return View(viewModel);
+            if (checkSubjects)
+            {
+                ViewData["schoolSubjects"] = schoolSubjects;
+                string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+                CreateProfessorViewModel viewModel = new CreateProfessorViewModel { AppUserId = currentUserId };
+
+                return View(viewModel);
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         // POST - create a professor

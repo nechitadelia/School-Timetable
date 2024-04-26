@@ -48,6 +48,7 @@ namespace School_Timetable.Controllers
 
 		// POST - create a subject
 		[HttpPost]
+        [Route("/SchoolSubject/Create")]
         public IActionResult Create(CreateSchoolSubjectViewModel viewModel)
         {
 			if (ModelState.IsValid)

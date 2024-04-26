@@ -49,3 +49,17 @@ searchInput.addEventListener("input", (e) => {
         noProfessors.classList.remove("hide");
     }
 });
+
+//display error alert if the user wants to add a teacher and there are no subjects in database
+let addProfessorButton = document.getElementById("add-professor");
+let noSubjectsError = document.querySelector(".noSubjects-error");
+
+addProfessorButton.addEventListener("click", () => {
+    if (noSubjectsError.innerHTML != "") {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You need to add at least one school subject before you can add a professor."
+        }); 
+    }
+});

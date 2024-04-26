@@ -13,8 +13,11 @@ namespace School_Timetable.Interfaces
 		//get one subject by id
 		SchoolSubject GetSchoolSubject(int subjectId);
 
-		//get a list of professors of one subject
-		List<Professor> GetProfessorsOfASubject(int subjectId);
+		//check if there are any subjects in database
+		bool CheckExistingSubjects();
+
+        //get a list of professors of one subject
+        List<Professor> GetProfessorsOfASubject(int subjectId);
 
 		//get the subjects for one class depending on its year
 		List<SchoolSubject> GetClassSubjects(int yearOfStudy);
