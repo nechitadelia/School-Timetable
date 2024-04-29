@@ -7,6 +7,9 @@ namespace School_Timetable.Interfaces
 {
     public interface IAppUserRepository
     {
+        //get all users
+        Task<List<AppUserViewModel>> GetAllUsers();
+
         //get one user by id
         AppUser GetUser();
 

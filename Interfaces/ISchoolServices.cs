@@ -83,8 +83,11 @@ namespace School_Timetable.Interfaces
 		//get a collection of all subjects
 		List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId);
 
-		//get one user by id
-		AppUser GetUser();
+		//get all users
+		Task<List<AppUserViewModel>> GetAllUsers();
+
+        //get one user by id
+        AppUser GetUser();
 
 		//get one user view model
 		AppUserViewModel GetUserViewModel();

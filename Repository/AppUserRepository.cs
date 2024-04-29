@@ -1,4 +1,5 @@
-﻿using School_Timetable.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
 using School_Timetable.Utilities;
@@ -15,6 +16,32 @@ namespace School_Timetable.Repository
         {
             _dbContext = dbContext;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        //get all users
+        public async Task<List<AppUserViewModel>> GetAllUsers()
+        {
+            List<AppUserViewModel> appUsersViewModel = new List<AppUserViewModel>();  
+            ICollection<AppUser> appUsers = await _dbContext.Users.OrderBy(u => u.County).ToListAsync();
+
+            foreach (AppUser user in appUsers)
+            {
+                if (user.Email != "admin@gmail.com")
+                {
+					AppUserViewModel viewModel = new AppUserViewModel
+					{
+						Id = user.Id,
+						SchoolName = user.SchoolName,
+						County = user.County,
+						City = user.City,
+						EmailAddress = user.Email
+					};
+
+					appUsersViewModel.Add(viewModel);
+				}
+            }
+
+            return appUsersViewModel;
         }
 
         //get one user by id

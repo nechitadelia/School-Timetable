@@ -187,6 +187,14 @@ namespace School_Timetable.Controllers
 			return View(viewModel);
         }
 
+        [HttpGet]
+        [Route("/AllUsers")]
+        public async Task<IActionResult> AllUsers()
+        {
+            List<AppUserViewModel> allUsers = await _schoolServices.GetAllUsers();
+            return View(allUsers);
+        }
+
         [HttpPost]
         [Route("/Account/Logout")]
         public async Task<IActionResult> Logout()

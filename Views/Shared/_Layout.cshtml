@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
         {
             <a asp-area="" asp-controller="Home" asp-action="Index">
                 <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
@@ -42,6 +42,33 @@
                                 </li>
                                 <li>
                                     <a asp-area="" asp-controller="Account" asp-action="Info">My account</a>
+                                </li>
+                                <li>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <button>Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
+            </a>
+            <nav>
+                <div class="nav-links">
+                    <ul>
+                        <li class="link">
+                            <a asp-area="" asp-controller="Account" asp-action="AllUsers">Users</a>
+                        </li>
+                        <li class="link">
+                            <ul>
+                                <li>
+                                    | <span>@User.Identity.Name</span>
                                 </li>
                                 <li>
                                     <form asp-area="" asp-controller="Account" asp-action="Logout">

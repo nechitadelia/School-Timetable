@@ -26,16 +26,18 @@ namespace School_Timetable.Controllers
         {
             AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
 
-            if (viewModel != null)
-            {
-                return View(viewModel);
-            }
-            else
-            {
-                return View();
-            }
-            
-        }
+            //if (viewModel != null)
+            //{
+            //    return View(viewModel);
+            //}
+            //else
+            //{
+            //    return View();
+            //}
+
+			return View(viewModel);
+
+		}
 
     }
 }

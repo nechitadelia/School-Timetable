@@ -296,8 +296,14 @@ namespace School_Timetable.Services
 			return subjectCollections;
 		}
 
-		//get one user by id
-		public AppUser GetUser()
+        //get all users
+        public async Task<List<AppUserViewModel>> GetAllUsers()
+		{
+			return await _appUserRepository.GetAllUsers();
+		}
+
+        //get one user by id
+        public AppUser GetUser()
 		{
 			return _appUserRepository.GetUser();
 		}
