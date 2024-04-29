@@ -5,7 +5,10 @@ using Microsoft.IdentityModel.Tokens;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
+using School_Timetable.Services;
+using School_Timetable.Utilities;
 using School_Timetable.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace School_Timetable.Controllers
 {
@@ -13,17 +16,18 @@ namespace School_Timetable.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly AppDbContext _dbContext;
+        private readonly ISchoolServices _schoolServices;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext dbContext)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ISchoolServices schoolServices, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _dbContext = dbContext;
+            _schoolServices = schoolServices;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
-        [Route("/Login")]
         public IActionResult Login()
 		{
             //this is meant to save data that was typed in login,in case the user refreshes the page
@@ -32,7 +36,6 @@ namespace School_Timetable.Controllers
 		}
 
         [HttpPost]
-        [Route("/Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
@@ -56,8 +59,6 @@ namespace School_Timetable.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                //user is found, password incorrect
-				return View(loginViewModel);
 			}
 			//user not found
 			return View(loginViewModel);
@@ -104,18 +105,94 @@ namespace School_Timetable.Controllers
 			if(newUserResponse.Succeeded)
 			{
 				await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-				return RedirectToAction("Login");
+				return RedirectToAction("Index", "Home");
 			}
 
 			return View(registerViewModel);
 		}
 
-		[HttpPost]
-        [Route("/Logout")]
+		[HttpGet]
+        [Route("/Info")]
+        public async Task<IActionResult> Info()
+		{
+            AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
+            return View(viewModel);
+		}
+
+        [HttpGet]
+        [Route("/Info/Edit")]
+        public async Task<IActionResult> Edit()
+        {
+            AppUser currentUser = _schoolServices.GetUser();
+
+			EditAppUserViewModel viewModel = new EditAppUserViewModel
+			{
+				Id = currentUser.Id,
+				SchoolName = currentUser.SchoolName,
+                County = currentUser.County,
+                City = currentUser.City
+			};
+
+			return View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("/Info/Edit")]
+        public IActionResult Edit(EditAppUserViewModel viewModel)
+		{
+            if (ModelState.IsValid)
+            {
+                _schoolServices.EditUser(viewModel);
+                return RedirectToAction("Info");
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        [Route("/Info/Edit/ChangePassword")]
+        public IActionResult ChangePassword()
+        {
+            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            ChangePasswordUserViewModel viewModel = new ChangePasswordUserViewModel { Id = currentUserId };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("/Info/Edit/ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordUserViewModel viewModel)
+        {
+			if (ModelState.IsValid)
+            {
+				AppUser currentUser = _schoolServices.GetUser();
+
+                var result = await _userManager.ChangePasswordAsync(currentUser, viewModel.CurrentPassword, viewModel.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    TempData["Message"] = "Password changed successfully!";
+                    return RedirectToAction("Info");
+				}
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+			}
+
+			TempData["Error"] = "Password error";
+			return View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("/Account/Logout")]
         public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Login");
 		}
 	}
 }

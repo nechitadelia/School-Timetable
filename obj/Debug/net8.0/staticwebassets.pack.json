@@ -61,6 +61,10 @@
       "PackagePath": "staticwebassets\\js\\EditProfessor.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditUserInfo.js",
+      "PackagePath": "staticwebassets\\js\\EditUserInfo.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
       "PackagePath": "staticwebassets\\js\\IndexProfessor.js"
     },

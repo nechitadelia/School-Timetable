@@ -83,10 +83,16 @@ namespace School_Timetable.Interfaces
 		//get a collection of all subjects
 		List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId);
 
-		//-----------------------------------> CREATE METHODS <-----------------------------------
+		//get one user by id
+		AppUser GetUser();
 
-		//adding a new subject to database
-		void AddSubject(CreateSchoolSubjectViewModel viewModel);
+		//get one user view model
+		AppUserViewModel GetUserViewModel();
+
+        //-----------------------------------> CREATE METHODS <-----------------------------------
+
+        //adding a new subject to database
+        void AddSubject(CreateSchoolSubjectViewModel viewModel);
 
 		//adding a new professor to database
 		void AddProfessor(CreateProfessorViewModel viewModel);
@@ -105,13 +111,17 @@ namespace School_Timetable.Interfaces
         //edit a professors's data
         void EditProfessor(EditProfessorViewModel viewModel);
 
+		//edit a user data
+		void EditUser(EditAppUserViewModel viewModel);
+
         //graduate all classes - change classes to the next school year
         void GraduateClasses();
 
-		//-----------------------------------> DELETE METHODS <-----------------------------------
 
-		//delete a subject from database
-		bool DeleteSchoolSubject(SchoolSubject subject);
+        //-----------------------------------> DELETE METHODS <-----------------------------------
+
+        //delete a subject from database
+        bool DeleteSchoolSubject(SchoolSubject subject);
 
 		//delete a professor from database
 		void DeleteProfessor(Professor professor);

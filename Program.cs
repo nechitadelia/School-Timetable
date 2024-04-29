@@ -47,6 +47,7 @@ namespace School_Timetable
             builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
             builder.Services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
             builder.Services.AddScoped<IClassProfessorRepository, ClassProfessorRepository>();
+            builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
             builder.Services.AddScoped<ISchoolServices, SchoolServices>();
 
             var app = builder.Build();
@@ -70,7 +71,7 @@ namespace School_Timetable
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
         }

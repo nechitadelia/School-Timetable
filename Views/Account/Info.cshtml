@@ -1,0 +1,53 @@
+﻿@using School_Timetable.ViewModels
+
+@model AppUserViewModel
+
+<div class="info-container">
+	<div class="form-container">
+        @if (TempData["Message"] != null)
+        {
+            <div class="col-md-12 alert alert-success">
+                <span>@TempData["Message"]</span>
+            </div>
+        }
+
+		<h1>My Account</h1>
+
+        <input type="hidden" asp-for="Id" value="@Model.Id" readonly />
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th class="first-column">Account info</th>
+                    <th class="last-column">
+                        <a asp-area="" asp-controller="Account" asp-action="Edit" class="btn btn-primary">Edit</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>School Name</td>
+                    <td>@Model.SchoolName</td>
+                </tr>
+				<tr>
+					<td>County</td>
+					<td>@Model.County</td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td>@Model.City</td>
+				</tr>
+                <tr>
+                    <td>Email address</td>
+                    <td>@Model.EmailAddress</td>
+                </tr>
+				<tr>
+					<td>Password</td>
+					<td>
+                        <a asp-area="" asp-controller="Account" asp-action="ChangePassword" class="btn btn-primary">Change password</a>
+                    </td>
+				</tr>
+            </tbody>
+        </table>
+	</div>
+</div>

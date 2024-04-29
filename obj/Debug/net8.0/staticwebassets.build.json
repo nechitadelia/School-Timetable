@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "c3YWkd+8k8hdpK6ii3jmLnBvxuXKQZK5iEejf9JedXs=",
+  "Hash": "f2Ic1DLUjyg2SN/2kXOtUKQFCGYqeAsGyya0mbC66eg=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -319,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\EditProfessor.js"
+    },
+    {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditUserInfo.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/EditUserInfo.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\EditUserInfo.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,13 +18,13 @@
 </head>
 <body>
     <header>
-        <a asp-area="" asp-controller="Home" asp-action="Index">
-            <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
-        </a>
-        <nav>
-            <div class="nav-links">
-                @if (User.Identity.IsAuthenticated)
-                {
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
+            </a>
+            <nav>
+                <div class="nav-links">
                     <ul>
                         <li class="link">
                             <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
@@ -34,12 +36,24 @@
                             <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
                         </li>
                         <li class="link">
-                            <a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            <ul>
+                                <li>
+                                    | <span>@User.Identity.Name</span>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Account" asp-action="Info">My account</a>
+                                </li>
+                                <li>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <button>Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-                }
-            </div>
-        </nav>
+                </div>
+            </nav>
+        }
     </header>
     <main role="main" class="pb-3">
         @RenderBody()

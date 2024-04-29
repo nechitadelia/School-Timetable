@@ -14,14 +14,16 @@ namespace School_Timetable.Services
 		private readonly ISchoolClassRepository _schoolClassRepository;
 		private readonly ISubjectRepository _subjectRepository;
 		private readonly IClassProfessorRepository _classProfessorRepository;
+        private readonly IAppUserRepository _appUserRepository;
 
-		public SchoolServices(IProfessorRepository professorRepository, ISchoolClassRepository schoolClassRepository, ISubjectRepository subjectRepository, IClassProfessorRepository classProfessorRepository)
+        public SchoolServices(IProfessorRepository professorRepository, ISchoolClassRepository schoolClassRepository, ISubjectRepository subjectRepository, IClassProfessorRepository classProfessorRepository, IAppUserRepository appUserRepository)
 		{
 			_professorRepository = professorRepository;
 			_schoolClassRepository = schoolClassRepository;
 			_subjectRepository = subjectRepository;
 			_classProfessorRepository = classProfessorRepository;
-		}
+            _appUserRepository = appUserRepository;
+        }
 
 		//-----------------------------------> READ METHODS <-----------------------------------
 
@@ -294,10 +296,22 @@ namespace School_Timetable.Services
 			return subjectCollections;
 		}
 
+		//get one user by id
+		public AppUser GetUser()
+		{
+			return _appUserRepository.GetUser();
+		}
+
+		//get one user view model
+		public AppUserViewModel GetUserViewModel()
+		{
+			return _appUserRepository.GetUserViewModel();
+        }
+
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
-		//adding a new subject to database
-		public void AddSubject(CreateSchoolSubjectViewModel viewModel)
+        //adding a new subject to database
+        public void AddSubject(CreateSchoolSubjectViewModel viewModel)
 		{
 			_subjectRepository.AddSubject(viewModel);
 		}
@@ -359,8 +373,14 @@ namespace School_Timetable.Services
 			_professorRepository.EditProfessor(viewModel);
 		}
 
-		//graduate all classes - change classes to the next school year
-		public void GraduateClasses()
+		//edit a user data
+		public void EditUser(EditAppUserViewModel viewModel)
+		{
+			_appUserRepository.EditUser(viewModel);
+		}
+
+        //graduate all classes - change classes to the next school year
+        public void GraduateClasses()
 		{
             //unassign eighth grade classes from connections
             Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
@@ -390,10 +410,10 @@ namespace School_Timetable.Services
             _schoolClassRepository.GraduateClasses();
         }
 
-		//-----------------------------------> DELETE METHODS <-----------------------------------
+        //-----------------------------------> DELETE METHODS <-----------------------------------
 
-		//delete a subject from database
-		public bool DeleteSchoolSubject(SchoolSubject subject)
+        //delete a subject from database
+        public bool DeleteSchoolSubject(SchoolSubject subject)
 		{
 			//get existing professors of the subject
 			ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
