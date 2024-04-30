@@ -10,14 +10,20 @@ namespace School_Timetable.Interfaces
         //get all users
         Task<List<AppUserViewModel>> GetAllUsers();
 
-        //get one user by id
+        //get one user
         AppUser GetUser();
 
-		//get one app user view model
-		AppUserViewModel GetUserViewModel();
+        //get one user by id
+        AppUser GetUser(string id);
+
+        //get one app user view model
+        AppUserViewModel GetUserViewModel();
 
         //edit a user data
         void EditUser(EditAppUserViewModel viewModel);
+
+        //delete a user from database
+        void DeleteUser(AppUserViewModel viewModel);
 
         //save changes to database
         void Save();

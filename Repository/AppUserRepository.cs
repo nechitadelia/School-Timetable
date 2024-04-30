@@ -44,11 +44,17 @@ namespace School_Timetable.Repository
             return appUsersViewModel;
         }
 
-        //get one user by id
+        //get one user
         public AppUser GetUser()
         {
 			string? currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
 			return _dbContext.Users.Where(u => u.Id == currentUserId).First();
+        }
+
+        //get one user by id
+        public AppUser GetUser(string id)
+        {
+            return _dbContext.Users.Where(u => u.Id == id).First();
         }
 
         //get one app user view model
@@ -56,16 +62,21 @@ namespace School_Timetable.Repository
         {
             AppUser user = GetUser();
 
-			AppUserViewModel viewModel = new AppUserViewModel
+            if (user != null)
             {
-                Id = user.Id,
-                SchoolName = user.SchoolName,
-                County = user.County,
-                City = user.City,
-                EmailAddress = user.Email
-            };
+                AppUserViewModel viewModel = new AppUserViewModel
+                {
+                    Id = user.Id,
+                    SchoolName = user.SchoolName,
+                    County = user.County,
+                    City = user.City,
+                    EmailAddress = user.Email
+                };
 
-            return viewModel;
+                return viewModel;
+            }
+
+            return new AppUserViewModel();
         }
 
         //edit a user data
@@ -82,6 +93,15 @@ namespace School_Timetable.Repository
             }
         }
 
+        //delete a user from database
+        public void DeleteUser(AppUserViewModel viewModel)
+        {
+            AppUser user = GetUser(viewModel.Id);
+
+            _dbContext.Users.Remove(user);
+            Save();
+        }
+        
         //save changes to database
         public void Save()
         {

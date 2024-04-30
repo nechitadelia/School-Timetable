@@ -49,7 +49,7 @@
                                 <td>@Model[i].City</td>
                                 <td>@Model[i].EmailAddress</td>
                                 <td class="delete-button-table">
-                                    @Html.ActionLink($"Delete", "Delete", new { userId = Model[i].Id }, new { @class = "delete-button delete-user-button" })
+                                    @Html.ActionLink($"Delete", "DeleteUser", new { userId = Model[i].Id }, new { @class = "delete-button delete-user-button" })
                                 </td>
                             </tr>
                         }

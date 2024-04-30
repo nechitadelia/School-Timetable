@@ -21,22 +21,17 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-        [Route("/Home")]
         public IActionResult Index()
         {
-            AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
-
-            //if (viewModel != null)
-            //{
-            //    return View(viewModel);
-            //}
-            //else
-            //{
-            //    return View();
-            //}
-
-			return View(viewModel);
-
+            if (User.Identity.IsAuthenticated)
+            {
+                AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
+                return View(viewModel);
+            }
+            else
+            {
+                return View();
+            }
 		}
 
     }

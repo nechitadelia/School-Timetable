@@ -89,8 +89,11 @@ namespace School_Timetable.Interfaces
         //get one user by id
         AppUser GetUser();
 
-		//get one user view model
-		AppUserViewModel GetUserViewModel();
+		//get one user by id
+		AppUser GetUser(string id);
+
+        //get one user view model
+        AppUserViewModel GetUserViewModel();
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
@@ -121,7 +124,10 @@ namespace School_Timetable.Interfaces
         void GraduateClasses();
 
 
-        //-----------------------------------> DELETE METHODS <-----------------------------------
+		//-----------------------------------> DELETE METHODS <-----------------------------------
+
+		//delete a user from database
+		void DeleteUser(AppUserViewModel viewModel);
 
         //delete a subject from database
         bool DeleteSchoolSubject(SchoolSubject subject);

@@ -14,73 +14,81 @@
     <link rel="stylesheet" href="~/css/schoolSubjects.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/schoolClasses.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/professor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/loginRegister.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/accountInfo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/allUsers.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
-        {
-            <a asp-area="" asp-controller="Home" asp-action="Index">
-                <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
-            </a>
-            <nav>
-                <div class="nav-links">
-                    <ul>
+        <a asp-area="" asp-controller="Home" asp-action="Index">
+            <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
+        </a>
+        <nav>
+            <div>
+                <ul class="nav-links">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
                         <li class="link">
-                            <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
+                            <a asp-area="" asp-controller="Account" asp-action="Login" id="loginButton">Log in</a>
                         </li>
-                        <li class="link">
-                            <a asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
-                        </li>
-                        <li class="link">
-                            <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
-                        </li>
-                        <li class="link">
-                            <ul>
-                                <li>
-                                    | <span>@User.Identity.Name</span>
-                                </li>
-                                <li>
-                                    <a asp-area="" asp-controller="Account" asp-action="Info">My account</a>
-                                </li>
-                                <li>
-                                    <form asp-area="" asp-controller="Account" asp-action="Logout">
-                                        <button>Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        }
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-        {
-            <a asp-area="" asp-controller="Home" asp-action="Index">
-                <img class="logo" src="~/src/SchoolLogo.png" alt="logo" />
-            </a>
-            <nav>
-                <div class="nav-links">
-                    <ul>
-                        <li class="link">
-                            <a asp-area="" asp-controller="Account" asp-action="AllUsers">Users</a>
-                        </li>
-                        <li class="link">
-                            <ul>
-                                <li>
-                                    | <span>@User.Identity.Name</span>
-                                </li>
-                                <li>
-                                    <form asp-area="" asp-controller="Account" asp-action="Logout">
-                                        <button>Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        }
+                    }
+                    else
+                    {
+                        if (User.IsInRole("User"))
+                        {
+                            <li class="link">
+                                <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
+                            </li>
+                            <li class="link">
+                                <a asp-area="" asp-controller="Professors" asp-action="Index">Professors</a>
+                            </li>
+                            <li class="link">
+                                <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
+                            </li>
+                            <li class="link link-courses">
+                                <a class="userNavbar"><b>|</b><span>@User.Identity.Name</span></a>
+                                <ul class="dropdown-settings">
+                                    <li>
+                                        <a asp-area="" asp-controller="Account" asp-action="Info" class="accountInfo">Account Info</a>
+                                    </li>
+                                    <li>
+                                        <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                            <button>Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="link">
+                                <a asp-area="" asp-controller="Account" asp-action="AllUsers">All Users</a>
+                            </li>
+                            <li class="link link-courses">
+                                <a class="userNavbar"><b>|</b><span>@User.Identity.Name</span></a>
+                                <ul class="dropdown-settings">
+                                    <li>
+                                        <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                            <button>Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        } 
+                    }
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="burger">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
+                }
+            </div>
+        </nav>
     </header>
     <main role="main" class="pb-3">
         @RenderBody()
@@ -91,6 +99,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/navbar.js" asp-append-version="true" defer></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

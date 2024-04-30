@@ -5,12 +5,14 @@
 <div class="subjects-container">
     <h1>Subjects</h1>
 
-    <div class="subjects-buttons-container">
-        <a class="create-button" asp-area="" asp-controller="SchoolSubjects" asp-action="Create">Add School Subject</a>
-    </div>
+    <form method="post">
+        <div class="subjects-buttons-container">
+            <a class="create-button" asp-area="" asp-controller="SchoolSubjects" asp-action="Create">Add School Subject</a>
+        </div>
+    </form>
 
     <div class="table-container">
-        <table class="subjects-table">
+        <table class="list-table">
             <thead>
                 <tr>
                     <th class="first-column">Subject name</th>

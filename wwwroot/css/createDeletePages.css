@@ -63,7 +63,12 @@
 #deleteClassform,
 #createProfessorform,
 #editProfessorform,
-#deleteProfessorform {
+#deleteProfessorform,
+#createSubjectform,
+#deleteSubjectform,
+#editUserform,
+#editPasswordform,
+#deleteUserform {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,7 +80,12 @@
 #deleteClassform div,
 #createProfessorform div,
 #editProfessorform div,
-#deleteProfessorform div {
+#deleteProfessorform div,
+#createSubjectform div,
+#deleteSubjectform div,
+#editUserform div,
+#editPasswordform div,
+#deleteUserform div {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -98,7 +108,11 @@
 #deleteClassButton,
 #createProfessorButton,
 #editProfessorButton,
-#deleteProfessorButton {
+#deleteProfessorButton,
+#createSubjectButton,
+#deleteSubjectButton,
+#editUserButton,
+#deleteUserButton {
     width: 150px;
     border-radius: 70px;
     padding: 10px;
@@ -106,6 +120,10 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#createSubjectButton {
+    width: 200px;
 }
 
 .back-button-container {
@@ -140,7 +158,8 @@
     margin-right: -25px;
 }
 
-.delete-professor-button {
+.delete-professor-button,
+.delete-subject-button {
     border-radius: 70px;
     padding: 7px 20px;
     border: none;

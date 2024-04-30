@@ -27,15 +27,19 @@ namespace School_Timetable.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // GET - Login a user
         [HttpGet]
+        [Route("/Login")]
         public IActionResult Login()
 		{
-            //this is meant to save data that was typed in login,in case the user refreshes the page
+            //this is meant to save data that was typed in login, in case the user refreshes the page
 			LoginViewModel response = new LoginViewModel();
             return View(response);
 		}
 
+        // POST - Login a user
         [HttpPost]
+        [Route("/Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
@@ -64,6 +68,7 @@ namespace School_Timetable.Controllers
 			return View(loginViewModel);
         }
 
+        // GET - Register a new user
 		[HttpGet]
 		[Route("/Register")]
 		public IActionResult Register()
@@ -73,6 +78,7 @@ namespace School_Timetable.Controllers
 			return View(response);
 		}
 
+        // POST - Register a new user
 		[HttpPost]
         [Route("/Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
@@ -105,12 +111,13 @@ namespace School_Timetable.Controllers
 			if(newUserResponse.Succeeded)
 			{
 				await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Login");
 			}
 
 			return View(registerViewModel);
 		}
 
+        //GET - View a user's info
 		[HttpGet]
         [Route("/Info")]
         public async Task<IActionResult> Info()
@@ -119,6 +126,7 @@ namespace School_Timetable.Controllers
             return View(viewModel);
 		}
 
+        // GET - Edit a user's info
         [HttpGet]
         [Route("/Info/Edit")]
         public async Task<IActionResult> Edit()
@@ -136,6 +144,7 @@ namespace School_Timetable.Controllers
 			return View(viewModel);
         }
 
+        // POST - Edit a user's info
         [HttpPost]
         [Route("/Info/Edit")]
         public IActionResult Edit(EditAppUserViewModel viewModel)
@@ -149,6 +158,7 @@ namespace School_Timetable.Controllers
             return View(viewModel);
         }
 
+        // GET - Change user password
         [HttpGet]
         [Route("/Info/Edit/ChangePassword")]
         public IActionResult ChangePassword()
@@ -159,6 +169,7 @@ namespace School_Timetable.Controllers
             return View(viewModel);
         }
 
+        // POST - Change user password
         [HttpPost]
         [Route("/Info/Edit/ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordUserViewModel viewModel)
@@ -187,6 +198,7 @@ namespace School_Timetable.Controllers
 			return View(viewModel);
         }
 
+        // GET - View all users
         [HttpGet]
         [Route("/AllUsers")]
         public async Task<IActionResult> AllUsers()
@@ -195,12 +207,45 @@ namespace School_Timetable.Controllers
             return View(allUsers);
         }
 
+        // GET - Delete a user
+        [HttpGet]
+        [Route("/Account/DeleteUser/{userId}")]
+        public IActionResult DeleteUser(string userId)
+        {
+            AppUser user = _schoolServices.GetUser(userId);
+
+			AppUserViewModel viewModel = new AppUserViewModel
+            {
+                Id = user.Id,
+				SchoolName = user.SchoolName,
+				County = user.County,
+				City = user.City,
+                EmailAddress = user.Email
+			};
+
+			return View(viewModel);
+        }
+
+        // POST - Delete a user
+        [HttpPost]
+        [Route("/Account/DeleteUser/{userId}")]
+        public IActionResult DeleteUser(AppUserViewModel viewModel)
+        {
+            if (viewModel != null)
+            {
+                _schoolServices.DeleteUser(viewModel);
+            }
+
+            return RedirectToAction("AllUsers");
+        }
+
+        // POST - Logout a user
         [HttpPost]
         [Route("/Account/Logout")]
         public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
-			return RedirectToAction("Login");
+			return RedirectToAction("Index","Home");
 		}
 	}
 }

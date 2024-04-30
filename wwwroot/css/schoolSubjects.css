@@ -1,5 +1,27 @@
 ﻿.subjects-container {
-    padding-bottom: 100px;
+    margin-bottom: 100px;
+    width: 100%;
+}
+
+.subjects-container form {
+    width: 100%; 
+}
+
+.subjects-buttons-container {
+    width: 80%;
+    max-width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.subjects-buttons-container a {
+    border-radius: 70px;
+    padding: 10px 30px;
 }
 
 .table-container {
@@ -9,7 +31,7 @@
     align-items: center;
 }
 
-.subjects-table {
+.list-table {
     width: 80%;
     max-width: 1000px;
     background-color: #fff;
@@ -18,11 +40,11 @@
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
 }
 
-.subjects-table thead {
+.list-table thead {
     background-color: #a3bac8;
 }
 
-.subjects-table thead th {
+.list-table thead th {
     color: #00426d;
     padding: 17px 10px 17px 30px;
     font-size: 1em;
@@ -34,11 +56,11 @@
     width: 25%;
 }
 
-.subjects-table tbody tr:nth-of-type(even) {
+.list-table tbody tr:nth-of-type(even) {
     background-color: #f4f6f8;
 }
 
-.subjects-table tbody td {
+.list-table tbody td {
     padding: 15px 10px 15px 30px;
 }
 
@@ -52,16 +74,25 @@
     color: #6e7082;
 }
 
-.subjects-table tbody ul {
+.list-table tbody ul {
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
 }
 
-.subjects-table tbody ul li {
+.list-table tbody ul li {
     padding: 2px 0;
 }
 
-.subjects-table span {
+.list-table span {
     font-weight: 700;
+}
+
+.noexistingSubjects {
+    color: #b7394b;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #ffcdd2;
+    border-right: 2px solid #ffcdd2;
 }

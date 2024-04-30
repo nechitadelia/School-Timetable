@@ -1,0 +1,116 @@
+﻿.login-container,
+.register-container {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.login-container h1,
+.register-container h1 {
+    margin-top: 0;
+}
+
+.register-container .alert {
+    width: 70%;
+    max-width: 500px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 25px;
+}
+
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-bottom: 50px;
+}
+
+.login-container form div,
+.register-container form div {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    max-width: 500px;
+}
+
+.login-container form div span,
+.register-container form div span {
+    margin-bottom: 7px;
+    font-size: 0.9rem;
+}
+
+#login,
+#register-submit {
+    width: 150px;
+    border-radius: 70px;
+    padding: 10px;
+    border: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+#login {
+    background-color: #00426d;
+}
+
+#login:hover {
+    background-color: #fc9131;
+    color: #00426d;
+}
+
+.login-container .view-as {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ecd4be;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.login-container .view-as p {
+    color: #00426d;
+    font-weight: 500;
+}
+
+.login-container .view-as div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.login-container .view-as div button {
+    margin: 10px;
+    padding: 7px 25px;
+    border: none;
+    border-radius: 70px;
+    color: #fff;
+    background-color: #4c6870;
+    font-weight: 500;
+    transition: 300ms;
+}
+
+.login-container .view-as div button:hover,
+.login-container .view-as div button:active {
+    background-color: #00426d;
+}
+
+/*responsive settings*/
+
+@media screen and (max-width:900px) {
+    .login-container .view-as div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

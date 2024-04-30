@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\School Timetable.bundle.scp.css"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\accountInfo.css",
+      "PackagePath": "staticwebassets\\css\\accountInfo.css"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\allUsers.css",
+      "PackagePath": "staticwebassets\\css\\allUsers.css"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\createDeletePages.css",
       "PackagePath": "staticwebassets\\css\\createDeletePages.css"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\home.css",
       "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\loginRegister.css",
+      "PackagePath": "staticwebassets\\css\\loginRegister.css"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css",
@@ -57,6 +69,10 @@
       "PackagePath": "staticwebassets\\js\\DeleteSchoolSubject.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\DeleteUser.js",
+      "PackagePath": "staticwebassets\\js\\DeleteUser.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\EditProfessor.js",
       "PackagePath": "staticwebassets\\js\\EditProfessor.js"
     },
@@ -79,6 +95,10 @@
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",
       "PackagePath": "staticwebassets\\js\\SchoolClasses.js"
+    },
+    {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\navbar.js",
+      "PackagePath": "staticwebassets\\js\\navbar.js"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\lib\\bootstrap\\LICENSE",

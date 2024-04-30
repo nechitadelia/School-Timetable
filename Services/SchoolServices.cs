@@ -302,14 +302,20 @@ namespace School_Timetable.Services
 			return await _appUserRepository.GetAllUsers();
 		}
 
-        //get one user by id
+        //get one user
         public AppUser GetUser()
 		{
 			return _appUserRepository.GetUser();
 		}
 
-		//get one user view model
-		public AppUserViewModel GetUserViewModel()
+        //get one user by id
+        public AppUser GetUser(string id)
+        {
+            return _appUserRepository.GetUser(id);
+        }
+
+        //get one user view model
+        public AppUserViewModel GetUserViewModel()
 		{
 			return _appUserRepository.GetUserViewModel();
         }
@@ -417,6 +423,12 @@ namespace School_Timetable.Services
         }
 
         //-----------------------------------> DELETE METHODS <-----------------------------------
+
+        //delete a user from database
+        public void DeleteUser(AppUserViewModel viewModel)
+		{
+			_appUserRepository.DeleteUser(viewModel);
+		}
 
         //delete a subject from database
         public bool DeleteSchoolSubject(SchoolSubject subject)

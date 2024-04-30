@@ -20,6 +20,7 @@ namespace School_Timetable.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // GET - View all classes
         [HttpGet]
         [Route("/SchoolClasses")]
         public IActionResult Index()
@@ -30,6 +31,7 @@ namespace School_Timetable.Controllers
 			return View(classCollections);
         }
 
+        // GET - Create a class
         [HttpGet]
         [Route("/SchoolClasses/Create")]
         public IActionResult Create()
@@ -44,6 +46,7 @@ namespace School_Timetable.Controllers
             return View(viewModel);
         }
 
+        // POST - Create a class
         [HttpPost]
         public IActionResult Create(CreateSchoolClassViewModel viewModel)
         {
@@ -52,6 +55,7 @@ namespace School_Timetable.Controllers
             return RedirectToAction("Create");
         }
 
+        // GET - Graduate all classes
         [HttpGet]
         [Route("/SchoolClasses/GraduateClasses")]
         public IActionResult GraduateClasses()
@@ -62,6 +66,7 @@ namespace School_Timetable.Controllers
             return View(classCollections);
         }
 
+        // POST - Graduate all classes
         [HttpPost]
         public IActionResult GraduateClasses(SchoolClassCollectionsViewModel viewModel)
         {
@@ -69,6 +74,7 @@ namespace School_Timetable.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET - Delete one class
         [HttpGet]
         [Route("/SchoolClasses/Delete")]
         public IActionResult Delete()
@@ -83,6 +89,7 @@ namespace School_Timetable.Controllers
             return View(viewModel);
         }
 
+        // GET - Delete one class
         [HttpPost]
         public IActionResult Delete(DeleteSchoolClassViewModel viewModel)
         {
