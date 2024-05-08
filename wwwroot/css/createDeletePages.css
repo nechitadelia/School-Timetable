@@ -81,7 +81,7 @@
 #createProfessorform div,
 #editProfessorform div,
 #deleteProfessorform div,
-#createSubjectform div,
+#createSubjectform .addSubject-div,
 #deleteSubjectform div,
 #editUserform div,
 #editPasswordform div,

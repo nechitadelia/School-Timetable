@@ -23,18 +23,3 @@ editButton.addEventListener("click", () => {
         form.submit();
     }
 });
-
-function checkName(name) {
-    if (name == "") {
-        return false;
-    }
-    else if (name.length <= 1) {
-        return false;
-    }
-    else if (!(/^[a-zA-Z]+$/.test(name))) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}

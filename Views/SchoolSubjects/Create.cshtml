@@ -11,36 +11,36 @@
 
 	<form method="post" id="createSubjectform">
 		<input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
-		<div class="mt-3">
+		<div class="mt-3 addSubject-div">
 			<label for="Name" class="form-label">Subject Name</label>
 			<input type="text" class="form-control" asp-for="Name" id="Name" />
 			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 
-		<div class="mt-3">
+		<div class="mt-3 addSubject-div">
 			<label for="HoursPerWeek" class="form-label">Hours/week</label>
 			<input type="text" class="form-control" asp-for="HoursPerWeek" id="HoursPerWeek" />
 			<span asp-validation-for="HoursPerWeek" class="text-danger"></span>
 		</div>
 
-		<div class="mt-3">
+		<div class="mt-3 addSubject-div yearsOfStudy-wrapper">
 			<p>Years of study</p>
-			<div>
-				<div>
-					<label for="FifthYearOfStudy" class="form-label">Fifth Grade</label>
+			<div class="all-check-wrapper">
+				<div class="check-wrapper">
 					<input type="checkbox" asp-for="FifthYearOfStudy" id="FifthYearOfStudy" />
+					<label for="FifthYearOfStudy" class="form-label">Fifth Grade</label>
 				</div>
-				<div>
-					<label for="SixthYearOfStudy" class="form-label">Sixth Grade</label>
+				<div class="check-wrapper">
 					<input type="checkbox" asp-for="SixthYearOfStudy" id="SixthYearOfStudy" />
+					<label for="SixthYearOfStudy" class="form-label">Sixth Grade</label>
 				</div>
-				<div>
-					<label for="SeventhYearOfStudy" class="form-label">Seventh Grade</label>
+				<div class="check-wrapper">
 					<input type="checkbox" asp-for="SeventhYearOfStudy" id="SeventhYearOfStudy" />
+					<label for="SeventhYearOfStudy" class="form-label">Seventh Grade</label>
 				</div>
-				<div>
-					<label for="EighthYearOfStudy" class="form-label">Eighth Grade</label>
+				<div class="check-wrapper">
 					<input type="checkbox" asp-for="EighthYearOfStudy" id="EighthYearOfStudy" />
+					<label for="EighthYearOfStudy" class="form-label">Eighth Grade</label>
 				</div>
 			</div>
 		</div>

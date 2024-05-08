@@ -11,7 +11,7 @@ admin.addEventListener("click", () => {
 
 user1.addEventListener("click", () => {
     email.value = "user1@gmail.com";
-    password.value = "Password123#";
+    password.value = "Password1234#";
 });
 
 user2.addEventListener("click", () => {

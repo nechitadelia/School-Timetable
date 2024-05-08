@@ -1,11 +1,11 @@
 ﻿const form = document.getElementById("createProfessorform");
-const submitProfessor = document.getElementById("createProfessorButton");
+const createButton = document.getElementById("createProfessorButton");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
-let maxHours = document.getElementById("Hours");
+let maxHours = document.getElementById("MaxHours");
 
-//showing an alert message when the form is submitted
-submitProfessor.addEventListener("click", () => {
+//showing an alert message when the form is submitted - create professor
+createButton.addEventListener("click", () => {
     let firstNameValue = firstName.value;
     let lastNameValue = lastName.value;
     let maxHoursValue = maxHours.value;
@@ -16,8 +16,8 @@ submitProfessor.addEventListener("click", () => {
         }, 1700);
 
         Swal.fire({
-            title: "Good job!",
-            text: "Success! Professor " + firstNameValue + " " + lastNameValue + " has been added!",
+            title: "Success!",
+            text: "Professor " + firstNameValue + " " + lastNameValue + " has been added!",
             icon: "success",
         });
     }
@@ -25,27 +25,3 @@ submitProfessor.addEventListener("click", () => {
         form.submit();
     }
 });
-
-function checkName(name) {
-    if (name == "") {
-        return false;
-    }
-    else if (name.length <= 1) {
-        return false;
-    }
-    else if (!(/^[a-zA-Z]+$/.test(name))) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-function checkMaxHours(hours) {
-    if (hours <= 1 || hours > 20 || typeof (hours) != "number") {
-        return false;
-    }
-    else {
-        return true;
-    }
-}

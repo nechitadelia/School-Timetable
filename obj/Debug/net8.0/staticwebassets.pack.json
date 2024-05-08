@@ -97,6 +97,10 @@
       "PackagePath": "staticwebassets\\js\\SchoolClasses.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\helperFunctions.js",
+      "PackagePath": "staticwebassets\\js\\helperFunctions.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\navbar.js",
       "PackagePath": "staticwebassets\\js\\navbar.js"
     },

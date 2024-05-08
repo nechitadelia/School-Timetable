@@ -43,8 +43,3 @@ submit.addEventListener("click", () => {
 
 //changing the class letter depending on user input for school year
 yearOfStudy.addEventListener('change', changeLetter);
-
-function changeLetter() {
-    let yearValue = yearOfStudy.value;
-    classLetter.value = yearValue;
-}
