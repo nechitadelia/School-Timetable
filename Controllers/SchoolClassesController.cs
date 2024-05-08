@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
@@ -25,77 +26,133 @@ namespace School_Timetable.Controllers
         [Route("/SchoolClasses")]
         public IActionResult Index()
         {
-            //getting a list of all classes
-            SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				//getting a list of all classes
+				SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
 
-			return View(classCollections);
-        }
+				return View(classCollections);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Create a class
         [HttpGet]
         [Route("/SchoolClasses/Create")]
         public IActionResult Create()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel 
-            { 
-                AppUserId = currentUserId, 
-                AllAvailableLetters = _schoolServices.GetAllAvailableLetters()
-            };
-            
-            return View(viewModel);
-        }
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel
+				{
+					AppUserId = currentUserId,
+					AllAvailableLetters = _schoolServices.GetAllAvailableLetters()
+				};
+
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Create a class
         [HttpPost]
         public IActionResult Create(CreateSchoolClassViewModel viewModel)
         {
-            _schoolServices.AddClass(viewModel);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				_schoolServices.AddClass(viewModel);
 
-            return RedirectToAction("Create");
-        }
+				return RedirectToAction("Create");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Graduate all classes
         [HttpGet]
         [Route("/SchoolClasses/GraduateClasses")]
         public IActionResult GraduateClasses()
         {
-            //getting a list of all classes
-            SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				//getting a list of all classes
+				SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
 
-            return View(classCollections);
-        }
+				return View(classCollections);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Graduate all classes
         [HttpPost]
         public IActionResult GraduateClasses(SchoolClassCollectionsViewModel viewModel)
         {
-            _schoolServices.GraduateClasses();
-            return RedirectToAction("Index");
-        }
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				_schoolServices.GraduateClasses();
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Delete one class
         [HttpGet]
         [Route("/SchoolClasses/Delete")]
         public IActionResult Delete()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            DeleteSchoolClassViewModel viewModel = new DeleteSchoolClassViewModel
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                AppUserId = currentUserId,
-                AllExistingLetters = _schoolServices.GetAllExistingLetters()
-            };
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				DeleteSchoolClassViewModel viewModel = new DeleteSchoolClassViewModel
+				{
+					AppUserId = currentUserId,
+					AllExistingLetters = _schoolServices.GetAllExistingLetters()
+				};
 
-            return View(viewModel);
-        }
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Delete one class
         [HttpPost]
         public IActionResult Delete(DeleteSchoolClassViewModel viewModel)
         {
-            _schoolServices.DeleteClass(viewModel);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				_schoolServices.DeleteClass(viewModel);
 
-			return RedirectToAction("Delete");
+				return RedirectToAction("Delete");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
 		}
 	}
 }

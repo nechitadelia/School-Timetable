@@ -122,8 +122,16 @@ namespace School_Timetable.Controllers
         [Route("/Info")]
         public async Task<IActionResult> Info()
 		{
-            AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
-            return View(viewModel);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
 		}
 
         // GET - Edit a user's info
@@ -131,113 +139,169 @@ namespace School_Timetable.Controllers
         [Route("/Info/Edit")]
         public async Task<IActionResult> Edit()
         {
-            AppUser currentUser = _schoolServices.GetUser();
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				AppUser currentUser = _schoolServices.GetUser();
 
-			EditAppUserViewModel viewModel = new EditAppUserViewModel
+				EditAppUserViewModel viewModel = new EditAppUserViewModel
+				{
+					Id = currentUser.Id,
+					SchoolName = currentUser.SchoolName,
+					County = currentUser.County,
+					City = currentUser.City
+				};
+
+				return View(viewModel);
+			}
+			else
 			{
-				Id = currentUser.Id,
-				SchoolName = currentUser.SchoolName,
-                County = currentUser.County,
-                City = currentUser.City
-			};
-
-			return View(viewModel);
-        }
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Edit a user's info
         [HttpPost]
         [Route("/Info/Edit")]
         public IActionResult Edit(EditAppUserViewModel viewModel)
 		{
-            if (ModelState.IsValid)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                _schoolServices.EditUser(viewModel);
-                return RedirectToAction("Info");
-            }
+				if (ModelState.IsValid)
+				{
+					_schoolServices.EditUser(viewModel);
+					return RedirectToAction("Info");
+				}
 
-            return View(viewModel);
-        }
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Change user password
         [HttpGet]
         [Route("/Info/Edit/ChangePassword")]
         public IActionResult ChangePassword()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            ChangePasswordUserViewModel viewModel = new ChangePasswordUserViewModel { Id = currentUserId };
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				ChangePasswordUserViewModel viewModel = new ChangePasswordUserViewModel { Id = currentUserId };
 
-            return View(viewModel);
-        }
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Change user password
         [HttpPost]
         [Route("/Info/Edit/ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordUserViewModel viewModel)
         {
-			if (ModelState.IsValid)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				AppUser currentUser = _schoolServices.GetUser();
+				if (ModelState.IsValid)
+				{
+					AppUser currentUser = _schoolServices.GetUser();
 
-                var result = await _userManager.ChangePasswordAsync(currentUser, viewModel.CurrentPassword, viewModel.NewPassword);
+					var result = await _userManager.ChangePasswordAsync(currentUser, viewModel.CurrentPassword, viewModel.NewPassword);
 
-                if (result.Succeeded)
-                {
-                    TempData["Message"] = "Password changed successfully!";
-                    return RedirectToAction("Info");
+					if (result.Succeeded)
+					{
+						TempData["Message"] = "Password changed successfully!";
+						return RedirectToAction("Info");
+					}
+					else
+					{
+						foreach (IdentityError error in result.Errors)
+						{
+							ModelState.AddModelError("", error.Description);
+						}
+					}
 				}
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-			}
 
-			TempData["Error"] = "Password error";
-			return View(viewModel);
-        }
+				TempData["Error"] = "Password error";
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - View all users
         [HttpGet]
         [Route("/AllUsers")]
         public async Task<IActionResult> AllUsers()
         {
-            List<AppUserViewModel> allUsers = await _schoolServices.GetAllUsers();
-            return View(allUsers);
-        }
+            if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+				List<AppUserViewModel> allUsers = await _schoolServices.GetAllUsers();
+				return View(allUsers);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - Delete a user
         [HttpGet]
         [Route("/Account/DeleteUser/{userId}")]
         public IActionResult DeleteUser(string userId)
         {
-            AppUser user = _schoolServices.GetUser(userId);
-
-			AppUserViewModel viewModel = new AppUserViewModel
+            if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                Id = user.Id,
-				SchoolName = user.SchoolName,
-				County = user.County,
-				City = user.City,
-                EmailAddress = user.Email
-			};
+				AppUser user = _schoolServices.GetUser(userId);
 
-			return View(viewModel);
-        }
+				AppUserViewModel viewModel = new AppUserViewModel
+				{
+					Id = user.Id,
+					SchoolName = user.SchoolName,
+					County = user.County,
+					City = user.City,
+					EmailAddress = user.Email
+				};
+
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Delete a user
         [HttpPost]
         [Route("/Account/DeleteUser/{userId}")]
         public IActionResult DeleteUser(AppUserViewModel viewModel)
         {
-            if (viewModel != null)
+            if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                _schoolServices.DeleteUser(viewModel);
-            }
+				if (viewModel != null)
+				{
+					_schoolServices.DeleteUser(viewModel);
+				}
 
-            return RedirectToAction("AllUsers");
-        }
+				return RedirectToAction("AllUsers");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - Logout a user
         [HttpPost]

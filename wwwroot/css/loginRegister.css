@@ -9,7 +9,8 @@
     margin-top: 0;
 }
 
-.register-container .alert {
+.register-container .alert,
+.login-container .alert {
     width: 70%;
     max-width: 500px;
     position: relative;

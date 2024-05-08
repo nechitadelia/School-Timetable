@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
@@ -18,21 +19,29 @@ namespace School_Timetable.Controllers
         {
             _schoolServices = schoolServices;
             _httpContextAccessor = httpContextAccessor;
-        }
+		}
 
         // GET - View all professors
         [HttpGet]
         [Route("/Professors")]
         public IActionResult Index()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
-            //check if there are any subjects in database
-            bool checkSubjects = _schoolServices.CheckExistingSubjects();
-            ViewData["noSubjects"] = checkSubjects;
+				//check if there are any subjects in database
+				bool checkSubjects = _schoolServices.CheckExistingSubjects();
+				ViewData["noSubjects"] = checkSubjects;
 
-            return View(professorsCollections);
+				return View(professorsCollections);
+			}
+            else
+            {
+                TempData["Error"] = "You must log in to continue";
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         // GET - create a professor
@@ -40,114 +49,171 @@ namespace School_Timetable.Controllers
         [Route("/Professors/Create")]
         public IActionResult Create()
         {
-			//getting a list of all subjects
-			ICollection<SchoolSubject> schoolSubjects = _schoolServices.GetAllSchoolSubjects();
-
-            //check if there are any subjects in database
-            bool checkSubjects = _schoolServices.CheckExistingSubjects();
-
-            if (checkSubjects)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                ViewData["schoolSubjects"] = schoolSubjects;
-                string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-                CreateProfessorViewModel viewModel = new CreateProfessorViewModel { AppUserId = currentUserId };
+				//getting a list of all subjects
+				ICollection<SchoolSubject> schoolSubjects = _schoolServices.GetAllSchoolSubjects();
 
-                return View(viewModel);
-            }
-            else
-            {
-                return View("Index");
-            }
-        }
+				//check if there are any subjects in database
+				bool checkSubjects = _schoolServices.CheckExistingSubjects();
+
+				if (checkSubjects)
+				{
+					ViewData["schoolSubjects"] = schoolSubjects;
+					string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+					CreateProfessorViewModel viewModel = new CreateProfessorViewModel { AppUserId = currentUserId };
+
+					return View(viewModel);
+				}
+				else
+				{
+					return View("Index");
+				}
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - create a professor
         [HttpPost]
         public IActionResult Create(CreateProfessorViewModel viewModel)
         {
-            //getting a list of all subjects
-            ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
-
-            if (ModelState.IsValid)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				//creating and saving the new professor
-				_schoolServices.AddProfessor(viewModel);
-                return RedirectToAction("Index");
-            }
+				//getting a list of all subjects
+				ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
 
-            return View(viewModel);
-        }
+				if (ModelState.IsValid)
+				{
+					//creating and saving the new professor
+					_schoolServices.AddProfessor(viewModel);
+					return RedirectToAction("Index");
+				}
+
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - assign professors to all classes
         [HttpPost]
         public IActionResult Assign()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
-
-            if (professorsCollections.Count != 0)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                _schoolServices.AssignAllProfessorsToAllClasses();
-            }
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
-            return RedirectToAction("Index");
-        }
+				if (professorsCollections.Count != 0)
+				{
+					_schoolServices.AssignAllProfessorsToAllClasses();
+				}
+
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - unassign professors from all classes
         [HttpPost]
         public IActionResult UnAssignAll()
         {
-            string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
-
-            if (professorsCollections.Count != 0)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                _schoolServices.UnAssignAllProfessorsFromClasses();
-            }
+				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
 
-            return RedirectToAction("Index");
-        }
+				if (professorsCollections.Count != 0)
+				{
+					_schoolServices.UnAssignAllProfessorsFromClasses();
+				}
+
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - edit a professor
         [HttpGet]
+		[Authorize]
         [Route("/Professors/Edit/{professorId}")]
         public IActionResult Edit(int professorId)
         {
-            Professor professor = _schoolServices.GetProfessor(professorId);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				Professor professor = _schoolServices.GetProfessor(professorId);
 
-            EditProfessorViewModel viewModel = new EditProfessorViewModel 
-            { 
-                Id = professorId,
-                FirstName = professor.FirstName,
-                LastName = professor.LastName,
-                ProfessorSubject = professor.ProfessorSubject,
-                AssignedHours = professor.AssignedHours
-            };
+				EditProfessorViewModel viewModel = new EditProfessorViewModel
+				{
+					Id = professorId,
+					FirstName = professor.FirstName,
+					LastName = professor.LastName,
+					ProfessorSubject = professor.ProfessorSubject,
+					AssignedHours = professor.AssignedHours
+				};
 
-            return View(viewModel);
-        }
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // POST - edit a professor
         [HttpPost]
 		[Route("/Professors/Edit/{professorId}")]
 		public IActionResult Edit(EditProfessorViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-                _schoolServices.EditProfessor(viewModel);
-                return RedirectToAction("Index");
-            }
-            return View(viewModel);
-        }
+				if (ModelState.IsValid)
+				{
+					_schoolServices.EditProfessor(viewModel);
+					return RedirectToAction("Index");
+				}
+				return View(viewModel);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
         // GET - delete a professor
         [HttpGet]
         [Route("/Professors/Delete/{professorId}")]
         public IActionResult Delete(int professorId)
         {
-            Professor professor = _schoolServices.GetProfessor(professorId);
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+				Professor professor = _schoolServices.GetProfessor(professorId);
 
-            return View(professor);
-        }
+				return View(professor);
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
 
         // DELETE a professor
@@ -155,12 +221,20 @@ namespace School_Timetable.Controllers
         [Route("/Professors/Delete/{professorId}")]
         public IActionResult Delete(Professor viewModel)
         {
-            if (viewModel != null)
+            if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				_schoolServices.DeleteProfessor(viewModel);
-			}
+				if (viewModel != null)
+				{
+					_schoolServices.DeleteProfessor(viewModel);
+				}
 
-            return RedirectToAction("Index");
-        }
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				TempData["Error"] = "You must log in to continue";
+				return RedirectToAction("Login", "Account");
+			}
+		}
     }
 }

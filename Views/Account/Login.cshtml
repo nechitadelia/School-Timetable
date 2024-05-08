@@ -7,6 +7,13 @@
 
 	<h1>Log in to your account</h1>
 
+	@if (TempData["Error"] != null)
+	{
+		<div class="alert alert-danger">
+			<span>@TempData["Error"]</span>
+		</div>
+	}
+
 	<form method="post" asp-action="Login">
 		<div class="mt-3">
 			<label class="form-label" asp-for="EmailAddress">Email Address</label>
