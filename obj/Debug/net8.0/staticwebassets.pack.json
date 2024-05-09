@@ -81,6 +81,10 @@
       "PackagePath": "staticwebassets\\js\\EditUserInfo.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\HelperFunctions.js",
+      "PackagePath": "staticwebassets\\js\\HelperFunctions.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
       "PackagePath": "staticwebassets\\js\\IndexProfessor.js"
     },
@@ -89,20 +93,20 @@
       "PackagePath": "staticwebassets\\js\\IndexSchoolSubject.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexUsers.js",
+      "PackagePath": "staticwebassets\\js\\IndexUsers.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\Login.js",
       "PackagePath": "staticwebassets\\js\\Login.js"
     },
     {
+      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\Navbar.js",
+      "PackagePath": "staticwebassets\\js\\Navbar.js"
+    },
+    {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",
       "PackagePath": "staticwebassets\\js\\SchoolClasses.js"
-    },
-    {
-      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\helperFunctions.js",
-      "PackagePath": "staticwebassets\\js\\helperFunctions.js"
-    },
-    {
-      "Id": "D:\\Repo\\School Timetable\\wwwroot\\js\\navbar.js",
-      "PackagePath": "staticwebassets\\js\\navbar.js"
     },
     {
       "Id": "D:\\Repo\\School Timetable\\wwwroot\\lib\\bootstrap\\LICENSE",

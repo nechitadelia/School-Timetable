@@ -14,10 +14,10 @@ function ColorHours(item) {
 
 //searchbar for professors
 let allProfessors = document.querySelectorAll(".professor-entity");
-let searchInput = document.querySelector("[data-search]");
+let searchInputProfessors = document.querySelector("[data-professors]");
 let noProfessors = document.querySelector(".noProfessorsFound");
 
-searchInput.addEventListener("input", (e) => {
+searchInputProfessors.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
     let checkResults = false;
 

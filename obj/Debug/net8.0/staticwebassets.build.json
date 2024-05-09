@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tvwQNSL9VLFqwEewQw2tT2nqZiVGdaxAKzUsqF/lZW4=",
+  "Hash": "sWse43Bo56HJM0Cbt71uJf/xdpK3urlaydfPrB01HUI=",
   "Source": "School Timetable",
   "BasePath": "_content/School Timetable",
   "Mode": "Default",
@@ -416,12 +416,12 @@
       "OriginalItemSpec": "wwwroot\\js\\EditUserInfo.js"
     },
     {
-      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\helperFunctions.js",
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\HelperFunctions.js",
       "SourceId": "School Timetable",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
       "BasePath": "_content/School Timetable",
-      "RelativePath": "js/helperFunctions.js",
+      "RelativePath": "js/HelperFunctions.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -432,7 +432,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\helperFunctions.js"
+      "OriginalItemSpec": "wwwroot\\js\\HelperFunctions.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexProfessor.js",
@@ -473,6 +473,25 @@
       "OriginalItemSpec": "wwwroot\\js\\IndexSchoolSubject.js"
     },
     {
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\IndexUsers.js",
+      "SourceId": "School Timetable",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
+      "BasePath": "_content/School Timetable",
+      "RelativePath": "js/IndexUsers.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\IndexUsers.js"
+    },
+    {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\Login.js",
       "SourceId": "School Timetable",
       "SourceType": "Discovered",
@@ -492,12 +511,12 @@
       "OriginalItemSpec": "wwwroot\\js\\Login.js"
     },
     {
-      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\navbar.js",
+      "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\Navbar.js",
       "SourceId": "School Timetable",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Repo\\School Timetable\\wwwroot\\",
       "BasePath": "_content/School Timetable",
-      "RelativePath": "js/navbar.js",
+      "RelativePath": "js/Navbar.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -508,7 +527,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\navbar.js"
+      "OriginalItemSpec": "wwwroot\\js\\Navbar.js"
     },
     {
       "Identity": "D:\\Repo\\School Timetable\\wwwroot\\js\\SchoolClasses.js",

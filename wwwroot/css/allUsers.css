@@ -8,3 +8,13 @@
 .delete-button-user {
     margin-bottom: 100px;
 }
+
+.noexistingUsers,
+.noUsersFound {
+    color: #b7394b;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #ffcdd2;
+    border-right: 2px solid #ffcdd2;
+}
