@@ -23,18 +23,3 @@ function checkMaxHours(hours) {
         return true;
     }
 }
-
-function checkHoursPerWeek(hours) {
-    let hoursNumber = Number(hours);
-    if (typeof(hoursNumber) != "number" || !Number.isInteger(hoursNumber)) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-function changeLetter() {
-    let yearValue = yearOfStudy.value;
-    classLetter.value = yearValue;
-}

@@ -1,4 +1,8 @@
-﻿.delete-user-button {
+﻿.users-container {
+    margin-bottom: 100px;
+}
+
+.delete-user-button {
     border-radius: 70px;
     padding: 7px 20px;
     border: none;

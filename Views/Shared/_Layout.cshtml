@@ -29,7 +29,7 @@
                 <ul class="nav-links">
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <li class="link">
+                        <li class="link" id="login-link">
                             <a asp-area="" asp-controller="Account" asp-action="Login" id="loginButton">Log in</a>
                         </li>
                     }
@@ -79,14 +79,11 @@
                         } 
                     }
                 </ul>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="burger">
-                        <div class="line1"></div>
-                        <div class="line2"></div>
-                        <div class="line3"></div>
-                    </div>
-                }
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
             </div>
         </nav>
     </header>

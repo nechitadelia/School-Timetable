@@ -8,7 +8,7 @@ createButton.addEventListener("click", () => {
     let subjectNameValue = subjectName.value;
     let hoursPerWeekValue = hoursPerWeek.value;
 
-    if (checkName(subjectNameValue)) {
+    if (checkName(subjectNameValue) && checkMaxHours(hoursPerWeekValue)) {
         setTimeout(() => {
             form.submit();
         }, 1700);

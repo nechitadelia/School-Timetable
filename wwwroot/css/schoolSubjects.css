@@ -7,6 +7,10 @@
     width: 100%; 
 }
 
+.index-subjects-title {
+    margin-top: 150px !important;
+}
+
 .subjects-buttons-container {
     width: 80%;
     max-width: 1000px;

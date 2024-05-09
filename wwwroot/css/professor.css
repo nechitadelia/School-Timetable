@@ -1,6 +1,7 @@
 ﻿
 .professors-container {
     width: 100%;
+    margin-bottom: 100px;
 }
 
 .professors-container form {
@@ -37,7 +38,7 @@
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
-    margin: 30px 0 100px 0;
+    margin-top: 30px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -64,13 +65,13 @@
 }
 
 .unassigned-hours {
-    width: 17%;
     font-weight: 500;
+    width: 17%;
 }
+
 .professors-table tbody .professors-classes-list {
     padding-left: 0;
     padding-bottom: 0;
-    width: 15%;
 }
 
 .professors-classes-list ul li {
@@ -84,9 +85,15 @@
     margin-right: 5px;
 }
 
-.edit-button-table,
-.delete-button-table {
-    width: 5%;
+.edit-buttons-table {
+    width: 20%;
+}
+
+.edit-buttons-table div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form-container input {
@@ -194,4 +201,78 @@
 /* professor edit page */
 .save-delete-buttons-professor div {
     margin: 0 20px;
+}
+
+@media screen and (max-width:1100px) {
+    .edit-buttons-table div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+    }
+
+    .edit-buttons-table div a {
+        margin: 5px 0;
+    }
+
+    .edit-professor-button,
+    .delete-professor-button {
+        min-width: 90px;
+    }
+}
+
+@media screen and (max-width:860px) {
+    .professors-buttons-container {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: -30px;
+        margin-bottom: 15px;
+    }
+
+    .professors-buttons-container a,
+    .professors-buttons-container button {
+        min-width: 330px;
+        margin: 7px;
+    }
+}
+
+@media screen and (max-width:730px) {
+    .secondary-column {
+        display: none;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .professors-table {
+        width: 100%;
+        margin: 0;
+    }
+
+    .edit-professor-button,
+    .delete-professor-button {
+        min-width: 60px;
+        padding: 5px 10px;
+        margin-right: 10px;
+    }
+
+    .professors-table thead th {
+        padding: 15px 10px;
+    }
+
+    .professors-table tbody td {
+        padding: 10px;
+    }
+
+    .professors-classes-list ul {
+        padding-left: 5px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

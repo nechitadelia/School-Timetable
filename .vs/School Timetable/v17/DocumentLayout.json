@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\css\\professor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\css\\professor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\professors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|d:\\repo\\school timetable\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39450688-FA40-4AD5-91BD-06936C251920}|School Timetable.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Professors\\Index.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Professors\\Index.cshtml",
+              "RelativeToolTip": "Views\\Professors\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T14:05:18.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "professor.css",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\professor.css",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\css\\professor.css",
+              "RelativeToolTip": "wwwroot\\css\\professor.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOIAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-09T13:55:52.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Repo\\School Timetable\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACMAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-09T13:06:10.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "site.css",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "D:\\Repo\\School Timetable\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AQIAABkBAAAAAAAAAAAYwDEBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-05-09T12:49:07.643Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

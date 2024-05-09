@@ -1,18 +1,17 @@
 ﻿.homepage-container {
     width: 100vw;
+    margin-top: 100px;
     height: calc(100vh - 150px);
     overflow: hidden;
     background-image: url('../src/background1.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    margin-bottom: 0;
-    margin-top: 0;
 }
 
 .homepage-headings {
     position: relative;
-    top: 40%;
+    top: 50%;
     transform: translateY(-100%);
     text-align: center;
     width: 100%;
@@ -22,6 +21,19 @@
     padding: 70px 0;
     font-weight: 500;
     font-size: 4em;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.homepage-headings #title-authenticatedUser {
+    padding: 70px 0;
+    font-weight: 500;
+    font-size: 4em;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .homepage-headings h2 {
@@ -62,4 +74,37 @@
 
 #title-authenticatedUser span {
     display: block;
+}
+
+@media only screen and (max-width: 1200px) {
+    .homepage-headings {
+        top: 40%;
+    }
+
+    .homepage-headings h1,
+    .homepage-headings #title-authenticatedUser {
+        padding: 15px 0;
+        font-size: 3.5em;
+    }
+
+    .homepage-headings h2 {
+        font-size: 1.2em;
+        font-weight: 200;
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .homepage-headings h1,
+    .homepage-headings #title-authenticatedUser {
+        padding: 15px 0;
+        font-size: 2em;
+        width: 90%;
+    }
+
+    .homepage-headings h2 {
+        font-size: 1em;
+        font-weight: 200;
+        width: 70%;
+    }
 }

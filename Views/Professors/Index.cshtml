@@ -55,10 +55,9 @@
                 <tr>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Subject</th>
-                    <th>Unassigned hours</th>
+                    <th class="secondary-column">Subject</th>
+                    <th class="secondary-column">Unassigned hours</th>
                     <th>Classes</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -66,13 +65,13 @@
                 @if (Model.Count == 0)
                 {
                     <tr>
-                        <td colspan="7" class="noexistingProfessors">No existing professors</td>
+                        <td colspan="6" class="noexistingProfessors">No existing professors</td>
                     </tr>
                 }
                 else
                 {
                     <tr>
-                        <td colspan="7" class="noProfessorsFound hide">No professors found</td>
+                        <td colspan="6" class="noProfessorsFound hide">No professors found</td>
                     </tr>
 
                     for (int i = 0; i < Model.Count; i++)
@@ -80,8 +79,8 @@
                         <tr class="professor-entity">
                             <td class="professor-lastName">@Model[i].LastName</td>
                             <td class="professor-firstName">@Model[i].FirstName</td>
-                            <td>@Model[i].ProfessorSubject.Name</td>
-                            <td class="unassigned-hours">@Model[i].UnassignedHours h</td>
+                            <td class="secondary-column">@Model[i].ProfessorSubject.Name</td>
+                            <td class="unassigned-hours secondary-column">@Model[i].UnassignedHours h</td>
                             @if (Model[i].ClassesOfProfessor.Count > 0)
                             {
                                 <td class="professors-classes-list">
@@ -100,11 +99,11 @@
                             {
                                 <td class="text-danger">No classes</td>
                             }
-                            <td class="edit-button-table">
-                                @Html.ActionLink($"Edit", "Edit", new { professorId = Model[i].Id }, new { @class = "edit-button edit-professor-button" })
-                            </td>
-                            <td class="delete-button-table">
-                                @Html.ActionLink($"Delete", "Delete", new { professorId = Model[i].Id }, new { @class = "delete-button delete-professor-button" })
+                            <td class="edit-buttons-table">
+                                <div>
+                                    @Html.ActionLink($"Edit", "Edit", new { professorId = Model[i].Id }, new { @class = "edit-button edit-professor-button" })
+                                    @Html.ActionLink($"Delete", "Delete", new { professorId = Model[i].Id }, new { @class = "delete-button delete-professor-button" })
+                                </div>
                             </td>
                         </tr>
                     }

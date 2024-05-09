@@ -34,6 +34,10 @@ h1 {
     color: #002248;
 }
 
+.form-container {
+    margin-bottom: 100px;
+}
+
 /*navbar settings*/
 header {
     display: flex;
@@ -299,15 +303,6 @@ footer .socialMedia-icons a:hover {
     display: none;
 }
 
-.burger div {
-    width: 25px;
-    height: 2px;
-    background-color: #fff;
-    margin: 5px;
-    transition: all 0.3s ease;
-    z-index: 100;
-}
-
 @media screen and (max-width:900px) {
     header {
         padding: 0 30px;
@@ -349,6 +344,15 @@ footer .socialMedia-icons a:hover {
     .burger {
         display: block;
         cursor: pointer;
+        z-index: 100;
+    }
+
+    .burger div {
+        width: 25px;
+        height: 2px;
+        background-color: #fff;
+        margin: 5px;
+        transition: all 0.3s ease;
         z-index: 100;
     }
 
