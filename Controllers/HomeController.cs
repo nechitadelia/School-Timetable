@@ -21,11 +21,11 @@ namespace School_Timetable.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
+                AppUserViewModel viewModel = await _schoolServices.GetUserViewModel();
                 return View(viewModel);
             }
             else

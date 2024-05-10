@@ -124,7 +124,7 @@ namespace School_Timetable.Controllers
 		{
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				AppUserViewModel viewModel = _schoolServices.GetUserViewModel();
+				AppUserViewModel viewModel = await _schoolServices.GetUserViewModel();
 				return View(viewModel);
 			}
 			else
@@ -141,7 +141,7 @@ namespace School_Timetable.Controllers
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				AppUser currentUser = _schoolServices.GetUser();
+				AppUser currentUser = await _schoolServices.GetUser();
 
 				EditAppUserViewModel viewModel = new EditAppUserViewModel
 				{
@@ -163,13 +163,13 @@ namespace School_Timetable.Controllers
         // POST - Edit a user's info
         [HttpPost]
         [Route("/Info/Edit")]
-        public IActionResult Edit(EditAppUserViewModel viewModel)
+        public async Task<IActionResult> Edit(EditAppUserViewModel viewModel)
 		{
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				if (ModelState.IsValid)
 				{
-					_schoolServices.EditUser(viewModel);
+					await _schoolServices.EditUser(viewModel);
 					return RedirectToAction("Info");
 				}
 
@@ -210,7 +210,7 @@ namespace School_Timetable.Controllers
             {
 				if (ModelState.IsValid)
 				{
-					AppUser currentUser = _schoolServices.GetUser();
+					AppUser currentUser = await _schoolServices.GetUser();
 
 					var result = await _userManager.ChangePasswordAsync(currentUser, viewModel.CurrentPassword, viewModel.NewPassword);
 
@@ -258,11 +258,11 @@ namespace School_Timetable.Controllers
         // GET - Delete a user
         [HttpGet]
         [Route("/Account/DeleteUser/{userId}")]
-        public IActionResult DeleteUser(string userId)
+        public async Task<IActionResult> DeleteUser(string userId)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-				AppUser user = _schoolServices.GetUser(userId);
+				AppUser user = await _schoolServices.GetUser(userId);
 
 				AppUserViewModel viewModel = new AppUserViewModel
 				{
@@ -285,13 +285,13 @@ namespace School_Timetable.Controllers
         // POST - Delete a user
         [HttpPost]
         [Route("/Account/DeleteUser/{userId}")]
-        public IActionResult DeleteUser(AppUserViewModel viewModel)
+        public async Task<IActionResult> DeleteUser(AppUserViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
 				if (viewModel != null)
 				{
-					_schoolServices.DeleteUser(viewModel);
+					await _schoolServices.DeleteUser(viewModel);
 				}
 
 				return RedirectToAction("AllUsers");

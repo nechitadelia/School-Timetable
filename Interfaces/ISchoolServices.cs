@@ -87,13 +87,13 @@ namespace School_Timetable.Interfaces
 		Task<List<AppUserViewModel>> GetAllUsers();
 
         //get one user by id
-        AppUser GetUser();
+        Task<AppUser> GetUser();
 
-		//get one user by id
-		AppUser GetUser(string id);
+        //get one user by id
+        Task<AppUser> GetUser(string id);
 
         //get one user view model
-        AppUserViewModel GetUserViewModel();
+        Task<AppUserViewModel> GetUserViewModel();
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
@@ -118,7 +118,7 @@ namespace School_Timetable.Interfaces
         void EditProfessor(EditProfessorViewModel viewModel);
 
 		//edit a user data
-		void EditUser(EditAppUserViewModel viewModel);
+		Task EditUser(EditAppUserViewModel viewModel);
 
         //graduate all classes - change classes to the next school year
         void GraduateClasses();
@@ -127,7 +127,7 @@ namespace School_Timetable.Interfaces
 		//-----------------------------------> DELETE METHODS <-----------------------------------
 
 		//delete a user from database
-		void DeleteUser(AppUserViewModel viewModel);
+		Task DeleteUser(AppUserViewModel viewModel);
 
         //delete a subject from database
         bool DeleteSchoolSubject(SchoolSubject subject);

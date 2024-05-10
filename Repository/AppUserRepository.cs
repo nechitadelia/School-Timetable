@@ -45,22 +45,22 @@ namespace School_Timetable.Repository
         }
 
         //get one user
-        public AppUser GetUser()
+        public async Task<AppUser> GetUser()
         {
 			string? currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-			return _dbContext.Users.Where(u => u.Id == currentUserId).First();
+			return await _dbContext.Users.Where(u => u.Id == currentUserId).FirstAsync();
         }
 
         //get one user by id
-        public AppUser GetUser(string id)
+        public async Task<AppUser> GetUser(string id)
         {
-            return _dbContext.Users.Where(u => u.Id == id).First();
+            return await _dbContext.Users.Where(u => u.Id == id).FirstAsync();
         }
 
         //get one app user view model
-        public AppUserViewModel GetUserViewModel()
+        public async Task<AppUserViewModel> GetUserViewModel()
         {
-            AppUser user = GetUser();
+            AppUser user = await GetUser();
 
             if (user != null)
             {
@@ -80,9 +80,9 @@ namespace School_Timetable.Repository
         }
 
         //edit a user data
-        public void EditUser(EditAppUserViewModel viewModel)
+        public async Task EditUser(EditAppUserViewModel viewModel)
         {
-            AppUser user = GetUser();
+            AppUser user = await GetUser();
 
 			if (user != null)
             {
@@ -94,18 +94,19 @@ namespace School_Timetable.Repository
         }
 
         //delete a user from database
-        public void DeleteUser(AppUserViewModel viewModel)
+        public async Task DeleteUser(AppUserViewModel viewModel)
         {
-            AppUser user = GetUser(viewModel.Id);
+            AppUser user = await GetUser(viewModel.Id);
 
             _dbContext.Users.Remove(user);
             Save();
         }
         
         //save changes to database
-        public void Save()
+        public bool Save()
         {
-            _dbContext.SaveChanges();
+            int saved = _dbContext.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

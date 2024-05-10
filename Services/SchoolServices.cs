@@ -303,21 +303,21 @@ namespace School_Timetable.Services
 		}
 
         //get one user
-        public AppUser GetUser()
+        public async Task<AppUser> GetUser()
 		{
-			return _appUserRepository.GetUser();
+			return await _appUserRepository.GetUser();
 		}
 
         //get one user by id
-        public AppUser GetUser(string id)
+        public async Task<AppUser> GetUser(string id)
         {
-            return _appUserRepository.GetUser(id);
+            return await _appUserRepository.GetUser(id);
         }
 
         //get one user view model
-        public AppUserViewModel GetUserViewModel()
+        public async Task<AppUserViewModel> GetUserViewModel()
 		{
-			return _appUserRepository.GetUserViewModel();
+			return await _appUserRepository.GetUserViewModel();
         }
 
         //-----------------------------------> CREATE METHODS <-----------------------------------
@@ -386,9 +386,9 @@ namespace School_Timetable.Services
 		}
 
 		//edit a user data
-		public void EditUser(EditAppUserViewModel viewModel)
+		public async Task EditUser(EditAppUserViewModel viewModel)
 		{
-			_appUserRepository.EditUser(viewModel);
+			await _appUserRepository.EditUser(viewModel);
 		}
 
         //graduate all classes - change classes to the next school year
@@ -425,9 +425,9 @@ namespace School_Timetable.Services
         //-----------------------------------> DELETE METHODS <-----------------------------------
 
         //delete a user from database
-        public void DeleteUser(AppUserViewModel viewModel)
+        public async Task DeleteUser(AppUserViewModel viewModel)
 		{
-			_appUserRepository.DeleteUser(viewModel);
+			await _appUserRepository.DeleteUser(viewModel);
 		}
 
         //delete a subject from database
