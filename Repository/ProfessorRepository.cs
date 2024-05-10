@@ -21,37 +21,37 @@ namespace School_Timetable.Repository
         }
 
         //get list of all professors, in ascending order
-        public ICollection<Professor> GetProfessors()
+        public async Task<ICollection<Professor>> GetProfessors()
         {
             string? currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.Professors
+            return await _dbContext.Professors
                 .Where(p => p.AppUserId == currentUser.ToString())
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
-                .ToList();        
+                .ToListAsync();        
         }
 
         //get one professor by id
-        public Professor GetProfessor(int professorId)
+        public async Task<Professor> GetProfessor(int professorId)
         {
-            return _dbContext.Professors
+            return await _dbContext.Professors
                 .Where(p => p.Id == professorId)
                 .Include(p => p.ProfessorSubject)
-                .First();
+                .FirstAsync();
         }
 
         //get a professor's subject by his/her id
-        public SchoolSubject GetSubjectOfProfessor(int professorId)
+        public async Task<SchoolSubject> GetSubjectOfProfessor(int professorId)
         {
-            Professor professor = GetProfessor(professorId);
+            Professor professor = await GetProfessor(professorId);
             return professor.ProfessorSubject;
         }
 
 		//check if you can assign hours to a professor
-		public bool CanAssignHours(int professorId)
+		public async Task<bool> CanAssignHours(int professorId)
 		{
-            Professor professor = GetProfessor(professorId);
+            Professor professor = await GetProfessor(professorId);
 
 			if ((professor.AssignedHours + professor.ProfessorSubject.HoursPerWeek) <= professor.MaxHours)
 			{
@@ -64,10 +64,10 @@ namespace School_Timetable.Repository
 		}
 
         //check if a professor was already assigned to a class
-        public bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
+        public async Task<bool> CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
         {
             //check if there is already a professor for the same class and subject
-            bool result = _dbContext.ClassProfessors.Any(c => c.SchoolClassId == schoolClass.Id && c.SubjectName == schoolSubject.Name);
+            bool result = await _dbContext.ClassProfessors.AnyAsync(c => c.SchoolClassId == schoolClass.Id && c.SubjectName == schoolSubject.Name);
             
             if (result)
             {
@@ -77,12 +77,12 @@ namespace School_Timetable.Repository
         }
 
 		//assign hours to a professor
-		public void AssignHours(int professorId)
+		public async Task AssignHours(int professorId)
         {
-            Professor professor = GetProfessor(professorId);
-			SchoolSubject subject = GetSubjectOfProfessor(professorId);
+            Professor professor = await GetProfessor(professorId);
+			SchoolSubject subject = await GetSubjectOfProfessor(professorId);
 
-			if (CanAssignHours(professorId))
+			if (await CanAssignHours(professorId))
             {
 				professor.AssignedHours += subject.HoursPerWeek;
                 Save();
@@ -90,9 +90,9 @@ namespace School_Timetable.Repository
         }
 
         //get a professor's unassigned hours
-        public int GetUnassignedHours(int professorId)
+        public async Task<int> GetUnassignedHours(int professorId)
         {
-            Professor professor = GetProfessor(professorId);
+            Professor professor = await GetProfessor(professorId);
             int unassignedHours = professor.MaxHours - professor.AssignedHours;
 
             return unassignedHours;
@@ -106,9 +106,9 @@ namespace School_Timetable.Repository
 		}
 
 		//unassign all hours from all professors
-		public void UnassignAllHoursFromEveryone()
+		public async Task UnassignAllHoursFromEveryone()
         {
-            ICollection<Professor> professors = GetProfessors();
+            ICollection<Professor> professors = await GetProfessors();
 
             foreach (Professor p in professors)
             {
@@ -119,14 +119,13 @@ namespace School_Timetable.Repository
         //unassign hours from a professor (when a class is deleted)
         public void UnassignHoursFromProfessor(Professor professor)
         {
-            //int subjectHours = GetSubjectOfProfessor(professor.Id).HoursPerWeek;
 			professor.AssignedHours -= professor.ProfessorSubject.HoursPerWeek;
 		}
 
 		//create a new professor
-		public async void AddProfessor(CreateProfessorViewModel viewModel)
+		public async Task AddProfessor(CreateProfessorViewModel viewModel)
         {
-            SchoolSubject subject = _dbContext.SchoolSubjects.Where(s => s.Id == viewModel.SchoolSubjectId).First();
+            SchoolSubject subject = await _dbContext.SchoolSubjects.Where(s => s.Id == viewModel.SchoolSubjectId).FirstAsync();
 
             Professor professor = new Professor
             {
@@ -144,9 +143,9 @@ namespace School_Timetable.Repository
 		}
 
 		//edit a professors's data
-		public void EditProfessor(EditProfessorViewModel viewModel)
+		public async Task EditProfessor(EditProfessorViewModel viewModel)
 		{
-            Professor professor = GetProfessor(viewModel.Id);
+            Professor professor = await GetProfessor(viewModel.Id);
 
             if (professor != null)
 			{
@@ -158,18 +157,19 @@ namespace School_Timetable.Repository
 		}
 
 		//delete a professor from the database
-		public void DeleteProfessor(Professor viewModel)
+		public async Task DeleteProfessor(Professor viewModel)
         {
-			Professor professor = GetProfessor(viewModel.Id);
+			Professor professor = await GetProfessor(viewModel.Id);
 
 			_dbContext.Professors.Remove(professor);
 			Save();
 		}
 
 		//save changes to database
-		public void Save()
+		public bool Save()
         {
-            _dbContext.SaveChanges();
+            int saved = _dbContext.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

@@ -24,15 +24,15 @@ namespace School_Timetable.Controllers
         // GET - View all professors
         [HttpGet]
         [Route("/Professors")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+				List<ProfessorViewModel> professorsCollections = await _schoolServices.GetProfessorCollections(currentUserId);
 
 				//check if there are any subjects in database
-				bool checkSubjects = _schoolServices.CheckExistingSubjects();
+				bool checkSubjects = await _schoolServices.CheckExistingSubjects();
 				ViewData["noSubjects"] = checkSubjects;
 
 				return View(professorsCollections);
@@ -47,15 +47,15 @@ namespace School_Timetable.Controllers
         // GET - create a professor
         [HttpGet]
         [Route("/Professors/Create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				//getting a list of all subjects
-				ICollection<SchoolSubject> schoolSubjects = _schoolServices.GetAllSchoolSubjects();
+				ICollection<SchoolSubject> schoolSubjects = await _schoolServices.GetAllSchoolSubjects();
 
 				//check if there are any subjects in database
-				bool checkSubjects = _schoolServices.CheckExistingSubjects();
+				bool checkSubjects = await _schoolServices.CheckExistingSubjects();
 
 				if (checkSubjects)
 				{
@@ -79,17 +79,17 @@ namespace School_Timetable.Controllers
 
         // POST - create a professor
         [HttpPost]
-        public IActionResult Create(CreateProfessorViewModel viewModel)
+        public async Task<IActionResult> Create(CreateProfessorViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				//getting a list of all subjects
-				ViewData["schoolSubjects"] = _schoolServices.GetAllSchoolSubjects();
+				ViewData["schoolSubjects"] = await _schoolServices.GetAllSchoolSubjects();
 
 				if (ModelState.IsValid)
 				{
 					//creating and saving the new professor
-					_schoolServices.AddProfessor(viewModel);
+					await _schoolServices.AddProfessor(viewModel);
 					return RedirectToAction("Index");
 				}
 
@@ -104,16 +104,16 @@ namespace School_Timetable.Controllers
 
         // POST - assign professors to all classes
         [HttpPost]
-        public IActionResult Assign()
+        public async Task<IActionResult> Assign()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+				List<ProfessorViewModel> professorsCollections = await _schoolServices.GetProfessorCollections(currentUserId);
 
 				if (professorsCollections.Count != 0)
 				{
-					_schoolServices.AssignAllProfessorsToAllClasses();
+					await _schoolServices.AssignAllProfessorsToAllClasses();
 				}
 
 				return RedirectToAction("Index");
@@ -127,16 +127,16 @@ namespace School_Timetable.Controllers
 
         // POST - unassign professors from all classes
         [HttpPost]
-        public IActionResult UnAssignAll()
+        public async Task<IActionResult> UnAssignAll()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-				List<ProfessorViewModel> professorsCollections = _schoolServices.GetProfessorCollections(currentUserId);
+				List<ProfessorViewModel> professorsCollections = await _schoolServices.GetProfessorCollections(currentUserId);
 
 				if (professorsCollections.Count != 0)
 				{
-					_schoolServices.UnAssignAllProfessorsFromClasses();
+					await _schoolServices.UnAssignAllProfessorsFromClasses();
 				}
 
 				return RedirectToAction("Index");
@@ -152,11 +152,11 @@ namespace School_Timetable.Controllers
         [HttpGet]
 		[Authorize]
         [Route("/Professors/Edit/{professorId}")]
-        public IActionResult Edit(int professorId)
+        public async Task<IActionResult> Edit(int professorId)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				Professor professor = _schoolServices.GetProfessor(professorId);
+				Professor professor = await _schoolServices.GetProfessor(professorId);
 
 				EditProfessorViewModel viewModel = new EditProfessorViewModel
 				{
@@ -179,13 +179,13 @@ namespace School_Timetable.Controllers
         // POST - edit a professor
         [HttpPost]
 		[Route("/Professors/Edit/{professorId}")]
-		public IActionResult Edit(EditProfessorViewModel viewModel)
+		public async Task<IActionResult> Edit(EditProfessorViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				if (ModelState.IsValid)
 				{
-					_schoolServices.EditProfessor(viewModel);
+					await _schoolServices.EditProfessor(viewModel);
 					return RedirectToAction("Index");
 				}
 				return View(viewModel);
@@ -200,11 +200,11 @@ namespace School_Timetable.Controllers
         // GET - delete a professor
         [HttpGet]
         [Route("/Professors/Delete/{professorId}")]
-        public IActionResult Delete(int professorId)
+        public async Task<IActionResult> Delete(int professorId)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				Professor professor = _schoolServices.GetProfessor(professorId);
+				Professor professor = await _schoolServices.GetProfessor(professorId);
 
 				return View(professor);
 			}
@@ -219,13 +219,13 @@ namespace School_Timetable.Controllers
         // DELETE a professor
         [HttpPost]
         [Route("/Professors/Delete/{professorId}")]
-        public IActionResult Delete(Professor viewModel)
+        public async Task<IActionResult> Delete(Professor viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				if (viewModel != null)
 				{
-					_schoolServices.DeleteProfessor(viewModel);
+					await _schoolServices.DeleteProfessor(viewModel);
 				}
 
 				return RedirectToAction("Index");

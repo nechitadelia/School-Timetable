@@ -24,12 +24,12 @@ namespace School_Timetable.Controllers
         // GET - View all classes
         [HttpGet]
         [Route("/SchoolClasses")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				//getting a list of all classes
-				SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+				SchoolClassCollectionsViewModel classCollections = await _schoolServices.GetClassCollections();
 
 				return View(classCollections);
 			}
@@ -43,7 +43,7 @@ namespace School_Timetable.Controllers
         // GET - Create a class
         [HttpGet]
         [Route("/SchoolClasses/Create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
@@ -51,7 +51,7 @@ namespace School_Timetable.Controllers
 				CreateSchoolClassViewModel viewModel = new CreateSchoolClassViewModel
 				{
 					AppUserId = currentUserId,
-					AllAvailableLetters = _schoolServices.GetAllAvailableLetters()
+					AllAvailableLetters = await _schoolServices.GetAllAvailableLetters()
 				};
 
 				return View(viewModel);
@@ -65,11 +65,11 @@ namespace School_Timetable.Controllers
 
         // POST - Create a class
         [HttpPost]
-        public IActionResult Create(CreateSchoolClassViewModel viewModel)
+        public async Task<IActionResult> Create(CreateSchoolClassViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				_schoolServices.AddClass(viewModel);
+				await _schoolServices.AddClass(viewModel);
 
 				return RedirectToAction("Create");
 			}
@@ -83,12 +83,12 @@ namespace School_Timetable.Controllers
         // GET - Graduate all classes
         [HttpGet]
         [Route("/SchoolClasses/GraduateClasses")]
-        public IActionResult GraduateClasses()
+        public async Task<IActionResult> GraduateClasses()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
 				//getting a list of all classes
-				SchoolClassCollectionsViewModel classCollections = _schoolServices.GetClassCollections();
+				SchoolClassCollectionsViewModel classCollections = await _schoolServices.GetClassCollections();
 
 				return View(classCollections);
 			}
@@ -101,11 +101,11 @@ namespace School_Timetable.Controllers
 
         // POST - Graduate all classes
         [HttpPost]
-        public IActionResult GraduateClasses(SchoolClassCollectionsViewModel viewModel)
+        public async Task<IActionResult> GraduateClasses(SchoolClassCollectionsViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				_schoolServices.GraduateClasses();
+				await _schoolServices.GraduateClasses();
 				return RedirectToAction("Index");
 			}
 			else
@@ -118,7 +118,7 @@ namespace School_Timetable.Controllers
         // GET - Delete one class
         [HttpGet]
         [Route("/SchoolClasses/Delete")]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
@@ -126,7 +126,7 @@ namespace School_Timetable.Controllers
 				DeleteSchoolClassViewModel viewModel = new DeleteSchoolClassViewModel
 				{
 					AppUserId = currentUserId,
-					AllExistingLetters = _schoolServices.GetAllExistingLetters()
+					AllExistingLetters = await _schoolServices.GetAllExistingLetters()
 				};
 
 				return View(viewModel);
@@ -140,11 +140,11 @@ namespace School_Timetable.Controllers
 
         // GET - Delete one class
         [HttpPost]
-        public IActionResult Delete(DeleteSchoolClassViewModel viewModel)
+        public async Task<IActionResult> Delete(DeleteSchoolClassViewModel viewModel)
         {
             if(User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
-				_schoolServices.DeleteClass(viewModel);
+				await _schoolServices.DeleteClass(viewModel);
 
 				return RedirectToAction("Delete");
 			}

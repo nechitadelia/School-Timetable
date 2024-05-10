@@ -27,12 +27,12 @@ namespace School_Timetable.Controllers
 		// GET - View all subjects
 		[HttpGet]
         [Route("/SchoolSubjects")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 			if(User.Identity.IsAuthenticated && User.IsInRole("User"))
 			{
 				string currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-				List<SchoolSubjectViewModel> subjects = _schoolServices.GetSubjectsCollections(currentUserId);
+				List<SchoolSubjectViewModel> subjects = await _schoolServices.GetSubjectsCollections(currentUserId);
 
 				return View(subjects);
 			}
@@ -65,14 +65,14 @@ namespace School_Timetable.Controllers
 		// POST - create a subject
 		[HttpPost]
         [Route("/SchoolSubject/Create")]
-        public IActionResult Create(CreateSchoolSubjectViewModel viewModel)
+        public async Task<IActionResult> Create(CreateSchoolSubjectViewModel viewModel)
         {
 			if(User.Identity.IsAuthenticated && User.IsInRole("User"))
 			{
 				if (ModelState.IsValid)
 				{
 					//creating and saving the new subject
-					_schoolServices.AddSubject(viewModel);
+					await _schoolServices.AddSubject(viewModel);
 					return RedirectToAction("Index");
 				}
 
@@ -88,11 +88,11 @@ namespace School_Timetable.Controllers
 		// GET - delete a subject
 		[HttpGet]
 		[Route("/SchoolSubject/Delete/{subjectId}")]
-        public IActionResult Delete(int subjectId)
+        public async Task<IActionResult> Delete(int subjectId)
         {
 			if(User.Identity.IsAuthenticated && User.IsInRole("User"))
 			{
-				SchoolSubject subject = _schoolServices.GetSchoolSubject(subjectId);
+				SchoolSubject subject = await _schoolServices.GetSchoolSubject(subjectId);
 
 				return View(subject);
 			}
@@ -106,13 +106,13 @@ namespace School_Timetable.Controllers
 		// DELETE - delete a subject
 		[HttpPost]
 		[Route("/SchoolSubject/Delete/{professorId}")]
-		public IActionResult Delete(SchoolSubject viewModel)
+		public async Task<IActionResult> Delete(SchoolSubject viewModel)
 		{
 			if(User.Identity.IsAuthenticated && User.IsInRole("User"))
 			{
 				if (viewModel != null)
 				{
-					bool result = _schoolServices.DeleteSchoolSubject(viewModel);
+					bool result = await _schoolServices.DeleteSchoolSubject(viewModel);
 					if (result)
 					{
 						return RedirectToAction("Index");

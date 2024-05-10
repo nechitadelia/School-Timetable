@@ -21,30 +21,30 @@ namespace School_Timetable.Repository
         }
 
         //get list of all subjects
-        public ICollection<SchoolSubject> GetSchoolSubjects()
+        public async Task<ICollection<SchoolSubject>> GetSchoolSubjects()
         {
             var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.SchoolSubjects
+            return await _dbContext.SchoolSubjects
                 .Where(s => s.AppUserId == currentUser.ToString())
                 .OrderBy(s => s.Id)
-                .ToList();
+                .ToListAsync();
         }
 
         //get one subject by id
-        public SchoolSubject GetSchoolSubject(int subjectId)
+        public async Task<SchoolSubject> GetSchoolSubject(int subjectId)
         {
             var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.SchoolSubjects
+            return await _dbContext.SchoolSubjects
                 .Where(s => s.AppUserId == currentUser.ToString() && s.Id == subjectId)
-                .First();
+                .FirstAsync();
         }
 
         //check if there are any subjects in database
-        public bool CheckExistingSubjects()
+        public async Task<bool> CheckExistingSubjects()
         {
-            ICollection<SchoolSubject> schoolSubjects = GetSchoolSubjects();
+            ICollection<SchoolSubject> schoolSubjects = await GetSchoolSubjects();
             if (schoolSubjects.Count == 0)
             {
                 return false;
@@ -53,45 +53,45 @@ namespace School_Timetable.Repository
         }
 
         //get a list of professors for one subject
-        public List<Professor> GetProfessorsOfASubject(int subjectId)
+        public async Task<List<Professor>> GetProfessorsOfASubject(int subjectId)
         {
             var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.Professors
+            return await _dbContext.Professors
                 .Where(p => p.AppUserId == currentUser.ToString() && p.SchoolSubjectId == subjectId)
-                .ToList();
+                .ToListAsync();
         }
 
         //get the subjects for one class depending on its year
-        public List<SchoolSubject> GetClassSubjects(int yearOfStudy)
+        public async Task<List<SchoolSubject>> GetClassSubjects(int yearOfStudy)
         {
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
             switch (yearOfStudy)
             {
                 case 5:
-                    return _dbContext.SchoolSubjects
+                    return await _dbContext.SchoolSubjects
                                 .Where(s => s.AppUserId == currentUserId.ToString() && s.FifthYearOfStudy == 'Y')
                                 .Select(s => s)
-                                .ToList();
+                                .ToListAsync();
                 case 6:
-                    return _dbContext.SchoolSubjects
+                    return await _dbContext.SchoolSubjects
                                 .Where(s => s.AppUserId == currentUserId.ToString() && s.SixthYearOfStudy == 'Y')
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
-                                .ToList();
+                                .ToListAsync();
                 case 7:
-                    return _dbContext.SchoolSubjects
+                    return await _dbContext.SchoolSubjects
                                 .Where(s => s.AppUserId == currentUserId.ToString() && s.SeventhYearOfStudy == 'Y')
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
-                                .ToList();
+                                .ToListAsync();
                 case 8:
-                    return _dbContext.SchoolSubjects
+                    return await _dbContext.SchoolSubjects
                                 .Where(s => s.AppUserId == currentUserId.ToString() && s.EighthYearOfStudy == 'Y')
                                 .OrderBy(s => s.Id)
                                 .Select(s => s)
-                                .ToList();
+                                .ToListAsync();
                 default: return new List<SchoolSubject>();
             }
         }
@@ -107,7 +107,7 @@ namespace School_Timetable.Repository
 		}
 
 		//adding a new subject to database
-		public async void AddSubject(CreateSchoolSubjectViewModel viewModel)
+		public async Task AddSubject(CreateSchoolSubjectViewModel viewModel)
         {
             SchoolSubject subject = new SchoolSubject
             {
@@ -125,18 +125,19 @@ namespace School_Timetable.Repository
         }
 
         //delete a subject from database
-        public void DeleteSchoolSubject(SchoolSubject viewModel)
+        public async Task DeleteSchoolSubject(SchoolSubject viewModel)
         {
-			SchoolSubject subject = GetSchoolSubject(viewModel.Id);
+			SchoolSubject subject = await GetSchoolSubject(viewModel.Id);
 
 			_dbContext.SchoolSubjects.Remove(subject);
 			Save();
 		}
 
 		//save changes to database
-		public void Save()
+		public bool Save()
 		{
-			_dbContext.SaveChanges();
+			int saved = _dbContext.SaveChanges();
+            return saved > 0 ? true : false;
 		}
 	}
 }

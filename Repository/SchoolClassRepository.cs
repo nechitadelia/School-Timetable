@@ -20,45 +20,45 @@ namespace School_Timetable.Repository
         }
 
         //get the last class from one year of study
-        public SchoolClass GetLastClassFromOneYear(int yearOfStudy)
+        public async Task<SchoolClass> GetLastClassFromOneYear(int yearOfStudy)
         {
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.SchoolClasses
+            return await _dbContext.SchoolClasses
                 .Where(c => c.AppUserId == currentUserId.ToString() && c.YearOfStudy == yearOfStudy)
                 .OrderBy(c => c.ClassLetter)
-                .Last();
+                .LastAsync();
         }
 
         //get list of all classes, in order
-        public ICollection<SchoolClass> GetAllClasses()
+        public async Task<ICollection<SchoolClass>> GetAllClasses()
         {
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            return _dbContext.SchoolClasses
+            return await _dbContext.SchoolClasses
                 .Where(c => c.AppUserId == currentUserId.ToString())
                 .OrderBy(c => c.YearOfStudy)
                 .ThenBy(c => c.ClassLetter)
-                .ToList();
+                .ToListAsync();
         }
 
         //get the classes of one year, depending on the year of study as input
-        public Stack<SchoolClass> GetClassesofOneYear(int yearOfStudy)
+        public async Task<Stack<SchoolClass>> GetClassesofOneYear(int yearOfStudy)
         {
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            ICollection<SchoolClass> schoolClasses = _dbContext.SchoolClasses
+            ICollection<SchoolClass> schoolClasses = await _dbContext.SchoolClasses
                 .Where(c => c.AppUserId == currentUserId.ToString() && c.YearOfStudy == yearOfStudy)
                 .OrderBy(c => c.ClassLetter)
-                .ToList();
+                .ToListAsync();
             
             return new Stack<SchoolClass>(schoolClasses);
         }
 
         //get the last letter that exists in a year
-        public char GetLastLetter(int yearOfStudy)
+        public async Task<char> GetLastLetter(int yearOfStudy)
         {
-            Stack<SchoolClass> schoolClasses = GetClassesofOneYear(yearOfStudy);
+            Stack<SchoolClass> schoolClasses = await GetClassesofOneYear(yearOfStudy);
             if (schoolClasses.Count == 0)
             {
                 return '/';
@@ -70,11 +70,11 @@ namespace School_Timetable.Repository
 		}
 
         //get the next available letter for a new class
-        public char GetAvailableLetter(int yearOfStudy)
+        public async Task<char> GetAvailableLetter(int yearOfStudy)
         {
             string letters = "ABCDEFGHIJKLMNOPRSTUVXYZ";
 
-            char lastletter = GetLastLetter(yearOfStudy);
+            char lastletter = await GetLastLetter(yearOfStudy);
             if (lastletter == '/')
             {
                 return letters[0];
@@ -87,20 +87,20 @@ namespace School_Timetable.Repository
         }
 
         //graduate all classes - change classes to the next school year
-        public void GraduateClasses()
+        public async Task GraduateClasses()
         {
             //get all the eighth grade classes and delete them
-            Stack<SchoolClass> eighthGradeClasses = GetClassesofOneYear(8);
+            Stack<SchoolClass> eighthGradeClasses = await GetClassesofOneYear(8);
             if (eighthGradeClasses.Count > 0)
             {
                 foreach (SchoolClass schoolClass in eighthGradeClasses)
                 {
-                    DeleteClass(schoolClass);
+                    await DeleteClass(schoolClass);
                 }
             }
 
             //get the remaining classes (5-7) and increment the year of study
-            ICollection<SchoolClass> allClasses = GetAllClasses();
+            ICollection<SchoolClass> allClasses = await GetAllClasses();
             if (allClasses.Count > 0)
             {
                 for (int i = allClasses.Count - 1; i >= 0; i--)
@@ -112,12 +112,12 @@ namespace School_Timetable.Repository
         }
 
         //add new class to database
-        public void AddClass(CreateSchoolClassViewModel viewModel)
+        public async Task AddClass(CreateSchoolClassViewModel viewModel)
         {
 			SchoolClass newClass = new SchoolClass
             {
                 YearOfStudy = viewModel.YearOfStudy,
-                ClassLetter = GetAvailableLetter(viewModel.YearOfStudy),
+                ClassLetter = await GetAvailableLetter(viewModel.YearOfStudy),
                 AppUserId = viewModel.AppUserId
             };
 
@@ -126,14 +126,14 @@ namespace School_Timetable.Repository
 		}
 
         //delete a class from the database
-        public void DeleteClass(SchoolClass schoolClass)
+        public async Task DeleteClass(SchoolClass schoolClass)
         {
-            char lastLetter = GetLastLetter(schoolClass.YearOfStudy);
+            char lastLetter = await GetLastLetter(schoolClass.YearOfStudy);
 
             if (lastLetter != '/') 
             {
-                SchoolClass existingClass = _dbContext.SchoolClasses
-                    .First(c => c.YearOfStudy == schoolClass.YearOfStudy && c.ClassLetter == lastLetter);
+                SchoolClass existingClass = await _dbContext.SchoolClasses
+                    .FirstAsync(c => c.YearOfStudy == schoolClass.YearOfStudy && c.ClassLetter == lastLetter);
 
                 _dbContext.SchoolClasses.Remove(existingClass);
                 Save();
@@ -141,9 +141,10 @@ namespace School_Timetable.Repository
 		}
 
 		//save changes to database
-		public void Save()
+		public bool Save()
 		{
-			_dbContext.SaveChanges();
+			int saved = _dbContext.SaveChanges();
+            return saved > 0 ? true : false;
 		}
 	}
 }

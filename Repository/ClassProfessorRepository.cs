@@ -19,14 +19,15 @@ namespace School_Timetable.Repository
         }
 
 		//assign one professor to one class
-		public async void AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
+		public async Task AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
 		{
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
             //searching the name of the subject based on the id
-            string subjectName = _dbContext.SchoolSubjects
+            SchoolSubject subject = await _dbContext.SchoolSubjects
 				.Where(s => s.Id == professor.SchoolSubjectId)
-				.First().Name;
+				.FirstAsync();
+			string subjectName = subject.Name;
 
 			//creating a new connection between a class and a professor
 			ClassProfessor classProfessor = new ClassProfessor
@@ -42,28 +43,29 @@ namespace School_Timetable.Repository
 		}
 
 		//check if a connection exists in the ClassProfessor table
-		public bool ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject)
+		public async Task<bool> ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject)
 		{
-			return _dbContext.ClassProfessors
-				.Any(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name);
+			return await _dbContext.ClassProfessors
+				.AnyAsync(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name);
 		}
 
-        public bool ConnectionExists(Professor professor)
+        public async Task<bool> ConnectionExists(Professor professor)
         {
-            return _dbContext.ClassProfessors
-                .Any(p => p.ProfessorId == professor.Id);
+            return await _dbContext.ClassProfessors
+                .AnyAsync(p => p.ProfessorId == professor.Id);
         }
 
         //get the professor of one subject of a class
-        public Professor GetProfessorOfASubjectOfOneClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
+        public async Task<Professor> GetProfessorOfASubjectOfOneClass(SchoolClass schoolClass, SchoolSubject schoolSubject)
 		{
-			if (ConnectionExists(schoolClass, schoolSubject))
+			if (await ConnectionExists(schoolClass, schoolSubject))
 			{
-				int professorId = _dbContext.ClassProfessors
-				.Where(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name)
-				.First().ProfessorId;
+				ClassProfessor professor = await _dbContext.ClassProfessors
+					.Where(s => s.SchoolClassId == schoolClass.Id && s.SubjectName == schoolSubject.Name)
+					.FirstAsync();
+				int professorId = professor.ProfessorId;
 
-				return _dbContext.Professors.Where(p => p.Id == professorId).First();
+				return await _dbContext.Professors.Where(p => p.Id == professorId).FirstAsync();
 			}
 			else
 			{
@@ -72,15 +74,15 @@ namespace School_Timetable.Repository
 		}
 
         //get all the class ids for one professor
-        public ICollection<int> GetClassIds(Professor professor)
+        public async Task<ICollection<int>> GetClassIds(Professor professor)
         {
-            if (ConnectionExists(professor))
+            if (await ConnectionExists(professor))
             {
                 //saving all the ids of the classes that a professor has
-                return _dbContext.ClassProfessors
+                return await _dbContext.ClassProfessors
 				.Where(p => p.ProfessorId == professor.Id)
 				.Select(s => s.SchoolClassId)
-				.ToList();
+				.ToListAsync();
 			}
             else
             {
@@ -89,17 +91,17 @@ namespace School_Timetable.Repository
         }
 
         //get the list of classes for one professor
-        public List<SchoolClass> GetClassesOfAProfessor(Professor professor)
+        public async Task<List<SchoolClass>> GetClassesOfAProfessor(Professor professor)
 		{
             List<SchoolClass> schoolClasses = new List<SchoolClass>();
-            ICollection<int> schoolClassesIds = GetClassIds(professor);
+            ICollection<int> schoolClassesIds = await GetClassIds(professor);
 
             //creating the list of School Classes based in the collection of ids
 			if (schoolClassesIds != null)
 			{
                 foreach (int id in schoolClassesIds)
                 {
-                    SchoolClass s = _dbContext.SchoolClasses.Where(c => c.Id == id).First();
+                    SchoolClass s = await _dbContext.SchoolClasses.Where(c => c.Id == id).FirstAsync();
                     schoolClasses.Add(s);
                 }
 
@@ -121,34 +123,35 @@ namespace School_Timetable.Repository
         }
 
 		//unassign a professor from all classes
-		public void UnassignAProfessorFromAllClasses(Professor professor)
+		public async Task UnassignAProfessorFromAllClasses(Professor professor)
 		{
-			ICollection<ClassProfessor> cp = _dbContext.ClassProfessors.Where(p => p.ProfessorId == professor.Id).ToList();
+			ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors.Where(p => p.ProfessorId == professor.Id).ToListAsync();
 			DeleteClassProfessor(cp);
 		}
 
 		//unassign all professors from all classes
-		public void UnassignAllProfessorsFromAllClasses()
+		public async Task UnassignAllProfessorsFromAllClasses()
 		{
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            ICollection<ClassProfessor> cp = _dbContext.ClassProfessors
+            ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors
 				.Where(cp => cp.AppUserId == currentUserId)
-				.ToList();
+				.ToListAsync();
 			DeleteClassProfessor(cp);
         }
 
 		//delete a class from ClassProfessor table
-		public void UnassignAClass(SchoolClass schoolClass)
+		public async Task UnassignAClass(SchoolClass schoolClass)
 		{
-			ICollection<ClassProfessor> cp = _dbContext.ClassProfessors.Where(c => c.SchoolClassId == schoolClass.Id).ToList();
+			ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors.Where(c => c.SchoolClassId == schoolClass.Id).ToListAsync();
 			DeleteClassProfessor(cp);
 		}
 
 		//save changes to database
-		public void Save()
+		public bool Save()
 		{
-			_dbContext.SaveChanges();
+			int saved = _dbContext.SaveChanges();
+			return saved > 0 ? true : false;
 		}
 	}
 }

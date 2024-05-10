@@ -7,45 +7,45 @@ namespace School_Timetable.Interfaces
     public interface IProfessorRepository
     {
 		//get list of all professors, in ascending order
-		ICollection<Professor> GetProfessors();
+		Task<ICollection<Professor>> GetProfessors();
 
 		//get one professor by id
-		Professor GetProfessor(int professorId);
+		Task<Professor> GetProfessor(int professorId);
 
-		//get a professor's subject by his/her id
-		SchoolSubject GetSubjectOfProfessor(int professorId);
+        //get a professor's subject by his/her id
+        Task<SchoolSubject> GetSubjectOfProfessor(int professorId);
 
 		//check if you can assign hours to a professor
-		bool CanAssignHours(int professorId);
+		Task<bool> CanAssignHours(int professorId);
 
 		//check if a professor was already assigned to a class
-		bool CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
+		Task<bool> CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
 
         //assign hours to a professor
-        void AssignHours(int professorId);
+        Task AssignHours(int professorId);
 
 		//get a professor's unassigned hours
-		int GetUnassignedHours(int professorId);
+		Task<int> GetUnassignedHours(int professorId);
 
         //unassign all hours from a professor
         void UnassignAllHoursFromProfessor(Professor professor);
 
         //unassign all hours from all professors
-        void UnassignAllHoursFromEveryone();
+        Task UnassignAllHoursFromEveryone();
 
         //unassign hours from a professor (when a class is deleted)
         void UnassignHoursFromProfessor(Professor professor);
 
 		//create a new professor
-		void AddProfessor(CreateProfessorViewModel viewModel);
+		Task AddProfessor(CreateProfessorViewModel viewModel);
 
         //edit a professors's data
-        void EditProfessor(EditProfessorViewModel viewModel);
+        Task EditProfessor(EditProfessorViewModel viewModel);
 
 		//delete a professor from the database
-		void DeleteProfessor(Professor viewModel);
+		Task DeleteProfessor(Professor viewModel);
 
         //save changes to database
-        void Save();
+        bool Save();
     }
 }

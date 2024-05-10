@@ -9,79 +9,79 @@ namespace School_Timetable.Interfaces
 		//-----------------------------------> READ METHODS <-----------------------------------
 
 		//getting a list of all classes from the repository
-		ICollection<SchoolClass> GetAllClasses();
+		Task<ICollection<SchoolClass>> GetAllClasses();
 
         //getting a list of all professors from the repository
-        ICollection<Professor> GetAllProfessors();
+        Task<ICollection<Professor>> GetAllProfessors();
 
 		//getting a list of all subjects from the repository
-		ICollection<SchoolSubject> GetAllSchoolSubjects();
+		Task<ICollection<SchoolSubject>> GetAllSchoolSubjects();
 
-		//get list of all fifth grade classes
-		Stack<SchoolClass> GetFifthGradeClasses();
+        //get list of all fifth grade classes
+        Task<Stack<SchoolClass>> GetFifthGradeClasses();
 
-		//get list of all sixth grade classes
-		Stack<SchoolClass> GetSixthGradeClasses();
+        //get list of all sixth grade classes
+        Task<Stack<SchoolClass>> GetSixthGradeClasses();
 
-		//get list of all seventh grade classes
-		Stack<SchoolClass> GetSeventhGradeClasses();
+        //get list of all seventh grade classes
+        Task<Stack<SchoolClass>> GetSeventhGradeClasses();
 
-		//get list of all eighth grade classes
-		Stack<SchoolClass> GetEighthGradeClasses();
+        //get list of all eighth grade classes
+        Task<Stack<SchoolClass>> GetEighthGradeClasses();
 
 		//get one subject by id
-		SchoolSubject GetSchoolSubject(int subjectId);
+		Task<SchoolSubject> GetSchoolSubject(int subjectId);
 
-		//get one professor by id
-		Professor GetProfessor(int professorId);
+        //get one professor by id
+        Task<Professor> GetProfessor(int professorId);
 
-		//get a professor's unassigned hours
-		int GetUnassignedHours(int professorId);
+        //get a professor's unassigned hours
+        Task<int> GetUnassignedHours(int professorId);
 
-		//get a professor's subject by his/her id
-		SchoolSubject GetSubjectOfProfessor(int professorId);
+        //get a professor's subject by his/her id
+        Task<SchoolSubject> GetSubjectOfProfessor(int professorId);
 
-		//get the list of classes for one professor
-		List<SchoolClass> GetClassesOfAProfessor(Professor professor);
+        //get the list of classes for one professor
+        Task<List<SchoolClass>> GetClassesOfAProfessor(Professor professor);
 
 		//get a list of all professors for each school subject  - for Subjects View
-		List<List<Professor>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects);
+		Task<List<List<Professor>>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects);
+
+        //getting the list of all subjects for fifth grade
+        Task<List<SchoolSubject>> GetSubjectsForFifthGrade();
 
 		//getting the list of all subjects for fifth grade
-		List<SchoolSubject> GetSubjectsForFifthGrade();
+		Task<List<SchoolSubject>> GetSubjectsForSixthGrade();
 
 		//getting the list of all subjects for fifth grade
-		List<SchoolSubject> GetSubjectsForSixthGrade();
+		Task<List<SchoolSubject>> GetSubjectsForSeventhGrade();
 
 		//getting the list of all subjects for fifth grade
-		List<SchoolSubject> GetSubjectsForSeventhGrade();
+		Task<List<SchoolSubject>> GetSubjectsForEighthGrade();
 
-		//getting the list of all subjects for fifth grade
-		List<SchoolSubject> GetSubjectsForEighthGrade();
+        //get a list of professors for one class
+        Task<List<Professor>> GetProfessorsOfAClass(SchoolClass schoolClass);
 
-		//get a list of professors for one class
-		List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass);
+        //get the list of all professors for one year of study
+        Task<List<List<Professor>>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses);
 
-		//get the list of all professors for one year of study
-		List<List<Professor>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses);
+        //get all the available letters for all school years
+        Task<List<char>> GetAllAvailableLetters();
 
-		//get all the available letters for all school years
-		List<char> GetAllAvailableLetters();
+        //get all the existing last letters for all school years
+        Task<List<char>> GetAllExistingLetters();
 
-		//get all the existing last letters for all school years
-		List<char> GetAllExistingLetters();
-
-		//check if there are any subjects in database
-		bool CheckExistingSubjects();
+        //check if there are any subjects in database
+        Task<bool> CheckExistingSubjects();
 
         //get all class collections (classes, subjects, professors)
-        SchoolClassCollectionsViewModel GetClassCollections();
+        Task<SchoolClassCollectionsViewModel> GetClassCollections();
 
-		//get a collection of all professors
-		List<ProfessorViewModel> GetProfessorCollections(string currentUserId);
+        //get a collection of all professors
+        Task<List<ProfessorViewModel>> GetProfessorCollections(string currentUserId);
 
-		//get a collection of all subjects
-		List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId);
+        //get a collection of all subjects
+        Task<List<SchoolSubjectViewModel>> GetSubjectsCollections(string currentUserId);
 
 		//get all users
 		Task<List<AppUserViewModel>> GetAllUsers();
@@ -98,30 +98,30 @@ namespace School_Timetable.Interfaces
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new subject to database
-        void AddSubject(CreateSchoolSubjectViewModel viewModel);
+        Task AddSubject(CreateSchoolSubjectViewModel viewModel);
 
 		//adding a new professor to database
-		void AddProfessor(CreateProfessorViewModel viewModel);
+		Task AddProfessor(CreateProfessorViewModel viewModel);
 
         //adding a new class to database
-        void AddClass(CreateSchoolClassViewModel viewModel);
+        Task AddClass(CreateSchoolClassViewModel viewModel);
 
         //assign one professor to one class
-        void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
+        Task AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
 
         //assign all professors to all classes
-        void AssignAllProfessorsToAllClasses();
+        Task AssignAllProfessorsToAllClasses();
 
         //-----------------------------------> UPDATE METHODS <-----------------------------------
 
         //edit a professors's data
-        void EditProfessor(EditProfessorViewModel viewModel);
+        Task EditProfessor(EditProfessorViewModel viewModel);
 
 		//edit a user data
 		Task EditUser(EditAppUserViewModel viewModel);
 
         //graduate all classes - change classes to the next school year
-        void GraduateClasses();
+        Task GraduateClasses();
 
 
 		//-----------------------------------> DELETE METHODS <-----------------------------------
@@ -130,16 +130,16 @@ namespace School_Timetable.Interfaces
 		Task DeleteUser(AppUserViewModel viewModel);
 
         //delete a subject from database
-        bool DeleteSchoolSubject(SchoolSubject subject);
+        Task<bool> DeleteSchoolSubject(SchoolSubject subject);
 
 		//delete a professor from database
-		void DeleteProfessor(Professor professor);
+		Task DeleteProfessor(Professor professor);
 
         //delete a class from database
-        void DeleteClass(DeleteSchoolClassViewModel viewModel);
+        Task DeleteClass(DeleteSchoolClassViewModel viewModel);
 
         //unassign all professors from all classes
-        void UnAssignAllProfessorsFromClasses();
+        Task UnAssignAllProfessorsFromClasses();
 
     }
 }

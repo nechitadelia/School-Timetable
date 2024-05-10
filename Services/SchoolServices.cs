@@ -28,85 +28,85 @@ namespace School_Timetable.Services
 		//-----------------------------------> READ METHODS <-----------------------------------
 
 		//getting a list of all classes from the repository
-		public ICollection<SchoolClass> GetAllClasses()
+		public async Task<ICollection<SchoolClass>> GetAllClasses()
 		{
-			return _schoolClassRepository.GetAllClasses();
+			return await _schoolClassRepository.GetAllClasses();
 		}
 
 		//getting a list of all professors from the repository
-		public ICollection<Professor> GetAllProfessors()
+		public async Task<ICollection<Professor>> GetAllProfessors()
 		{
-			return _professorRepository.GetProfessors();
+			return await _professorRepository.GetProfessors();
 		}
 
 		//getting a list of all subjects from the repository
-		public ICollection<SchoolSubject> GetAllSchoolSubjects()
+		public async Task<ICollection<SchoolSubject>> GetAllSchoolSubjects()
 		{
-			return _subjectRepository.GetSchoolSubjects();
+			return await _subjectRepository.GetSchoolSubjects();
 		}
 
 		//get list of all fifth grade classes
-		public Stack<SchoolClass> GetFifthGradeClasses()
+		public async Task<Stack<SchoolClass>> GetFifthGradeClasses()
 		{
-			return _schoolClassRepository.GetClassesofOneYear(5);
+			return await _schoolClassRepository.GetClassesofOneYear(5);
 		}
 
 		//get list of all sixth grade classes
-		public Stack<SchoolClass> GetSixthGradeClasses()
+		public async Task<Stack<SchoolClass>> GetSixthGradeClasses()
 		{
-			return _schoolClassRepository.GetClassesofOneYear(6);
+			return await _schoolClassRepository.GetClassesofOneYear(6);
 		}
 
 		//get list of all seventh grade classes
-		public Stack<SchoolClass> GetSeventhGradeClasses()
+		public async Task<Stack<SchoolClass>> GetSeventhGradeClasses()
 		{
-			return _schoolClassRepository.GetClassesofOneYear(7);
+			return await _schoolClassRepository.GetClassesofOneYear(7);
 		}
 
 		//get list of all eighth grade classes
-		public Stack<SchoolClass> GetEighthGradeClasses()
+		public async Task<Stack<SchoolClass>> GetEighthGradeClasses()
 		{
-			return _schoolClassRepository.GetClassesofOneYear(8);
+			return await _schoolClassRepository.GetClassesofOneYear(8);
 		}
 
 		//get one subject by id
-		public SchoolSubject GetSchoolSubject(int subjectId)
+		public async Task<SchoolSubject> GetSchoolSubject(int subjectId)
 		{
-			return _subjectRepository.GetSchoolSubject(subjectId);
+			return await _subjectRepository.GetSchoolSubject(subjectId);
 		}
 
 		//get one professor by id
-		public Professor GetProfessor(int professorId)
+		public async Task<Professor> GetProfessor(int professorId)
 		{
-			return _professorRepository.GetProfessor(professorId);
+			return await _professorRepository.GetProfessor(professorId);
 		}
 
         //get a professor's unassigned hours
-        public int GetUnassignedHours(int professorId)
+        public async Task<int> GetUnassignedHours(int professorId)
         {
-			return _professorRepository.GetUnassignedHours(professorId);
+			return await _professorRepository.GetUnassignedHours(professorId);
         }
 
 		//get a professor's subject by his/her id
-		public SchoolSubject GetSubjectOfProfessor(int professorId)
+		public async Task<SchoolSubject> GetSubjectOfProfessor(int professorId)
 		{
-			return _professorRepository.GetSubjectOfProfessor(professorId);
+			return await _professorRepository.GetSubjectOfProfessor(professorId);
 		}
 
         //get the list of classes for one professor
-        public List<SchoolClass> GetClassesOfAProfessor(Professor professor)
+        public async Task<List<SchoolClass>> GetClassesOfAProfessor(Professor professor)
         {
-			return _classProfessorRepository.GetClassesOfAProfessor(professor);
+			return await _classProfessorRepository.GetClassesOfAProfessor(professor);
         }
 
         //get a list of all professors for each school subject - for Subjects View
-        public List<List<Professor>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects)
+        public async Task<List<List<Professor>>> GetProfessorsForSubjects(ICollection<SchoolSubject> subjects)
 		{
 			List<List<Professor>> professors = new List<List<Professor>>();
 
 			foreach (SchoolSubject sub in subjects)
 			{
-				List<Professor> prof = _subjectRepository.GetProfessorsOfASubject(sub.Id);
+				List<Professor> prof = await _subjectRepository.GetProfessorsOfASubject(sub.Id);
                 prof = prof.OrderBy(p => p.LastName)
                     .ThenBy(p => p.FirstName)
                     .ToList();
@@ -117,38 +117,38 @@ namespace School_Timetable.Services
 		}
 
         //get the list of all subjects for fifth grade
-        public List<SchoolSubject> GetSubjectsForFifthGrade()
+        public async Task<List<SchoolSubject>> GetSubjectsForFifthGrade()
 		{
-			return _subjectRepository.GetClassSubjects(5);
+			return await _subjectRepository.GetClassSubjects(5);
 		}
 
 		//get the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForSixthGrade()
+		public async Task<List<SchoolSubject>> GetSubjectsForSixthGrade()
 		{
-			return _subjectRepository.GetClassSubjects(6);
+			return await _subjectRepository.GetClassSubjects(6);
 		}
 
 		//get the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForSeventhGrade()
+		public async Task<List<SchoolSubject>> GetSubjectsForSeventhGrade()
 		{
-			return _subjectRepository.GetClassSubjects(7);
+			return await _subjectRepository.GetClassSubjects(7);
 		}
 
 		//get the list of all subjects for fifth grade
-		public List<SchoolSubject> GetSubjectsForEighthGrade()
+		public async Task<List<SchoolSubject>> GetSubjectsForEighthGrade()
 		{
-			return _subjectRepository.GetClassSubjects(8);
+			return await _subjectRepository.GetClassSubjects(8);
 		}
 
         //get a list of professors for one class
-        public List<Professor> GetProfessorsOfAClass(SchoolClass schoolClass)
+        public async Task<List<Professor>> GetProfessorsOfAClass(SchoolClass schoolClass)
         {
             List<Professor> professors = new List<Professor>();
-			List<SchoolSubject> classSubjects = _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
+			List<SchoolSubject> classSubjects = await _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
 
             foreach (SchoolSubject sub in classSubjects)
             {
-                Professor prof = _classProfessorRepository.GetProfessorOfASubjectOfOneClass(schoolClass, sub);
+                Professor prof = await _classProfessorRepository.GetProfessorOfASubjectOfOneClass(schoolClass, sub);
                 professors.Add(prof);
             }
 
@@ -156,57 +156,57 @@ namespace School_Timetable.Services
         }
 
         //get the list of all professors for one year of study
-        public List<List<Professor>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses)
+        public async Task<List<List<Professor>>> GetProfessorsForOneYearOfStudy(Stack<SchoolClass> schoolClasses)
 		{
 			List<List<Professor>> classesProfessors = new List<List<Professor>>();
 
 			foreach (SchoolClass schoolClass in schoolClasses)
 			{
-				classesProfessors.Add(GetProfessorsOfAClass(schoolClass)); //get the list of all professors of one class
+				classesProfessors.Add(await GetProfessorsOfAClass(schoolClass)); //get the list of all professors of one class
 			}
 
 			return classesProfessors;
 		}
 
 		//get all the available letters for all school years
-		public List<char> GetAllAvailableLetters()
+		public async Task<List<char>> GetAllAvailableLetters()
 		{
 			List<char> availableLetters = new List<char>();
 
 			for (int year = 5; year <= 8; year++)
 			{
-				availableLetters.Add(_schoolClassRepository.GetAvailableLetter(year));
+				availableLetters.Add(await _schoolClassRepository.GetAvailableLetter(year));
 			}
 
 			return availableLetters;
 		}
 
 		//get all the existing last letters for all school years
-		public List<char> GetAllExistingLetters()
+		public async Task<List<char>> GetAllExistingLetters()
 		{
 			List<char> existingLetters = new List<char>();
 
 			for (int year = 5; year <= 8; year++)
 			{
-				existingLetters.Add(_schoolClassRepository.GetLastLetter(year));
+				existingLetters.Add(await _schoolClassRepository.GetLastLetter(year));
 			}
 
 			return existingLetters;
 		}
 
         //check if there are any subjects in database
-        public bool CheckExistingSubjects()
+        public async Task<bool> CheckExistingSubjects()
 		{
-			return _subjectRepository.CheckExistingSubjects();
+			return await _subjectRepository.CheckExistingSubjects();
 		}
 
         //get all class collections (classes, subjects, professors)
-        public SchoolClassCollectionsViewModel GetClassCollections()
+        public async Task<SchoolClassCollectionsViewModel> GetClassCollections()
 		{
-			Stack<SchoolClass> fifthGradeClasses = GetFifthGradeClasses();
-			Stack<SchoolClass> sixthGradeClasses = GetSixthGradeClasses();
-            Stack<SchoolClass> seventhGradeClasses = GetSeventhGradeClasses();
-            Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
+			Stack<SchoolClass> fifthGradeClasses = await GetFifthGradeClasses();
+			Stack<SchoolClass> sixthGradeClasses = await GetSixthGradeClasses();
+            Stack<SchoolClass> seventhGradeClasses = await GetSeventhGradeClasses();
+            Stack<SchoolClass> eighthGradeClasses = await GetEighthGradeClasses();
 
 			SchoolClassCollectionsViewModel classCollections = new SchoolClassCollectionsViewModel() 
 			{
@@ -215,26 +215,26 @@ namespace School_Timetable.Services
 				seventhGradeClasses = seventhGradeClasses,
 				eighthGradeClasses = eighthGradeClasses,
 
-                fifthGradeSubjects = GetSubjectsForFifthGrade(),
-				sixthGradeSubjects = GetSubjectsForSixthGrade(),
-				seventhGradeSubjects = GetSubjectsForSeventhGrade(),
-				eighthGradeSubjects = GetSubjectsForEighthGrade(),
+                fifthGradeSubjects = await GetSubjectsForFifthGrade(),
+				sixthGradeSubjects = await GetSubjectsForSixthGrade(),
+				seventhGradeSubjects = await GetSubjectsForSeventhGrade(),
+				eighthGradeSubjects = await GetSubjectsForEighthGrade(),
 
-                fifthGradeProfessors = GetProfessorsForOneYearOfStudy(fifthGradeClasses),
-				sixthGradeProfessors = GetProfessorsForOneYearOfStudy(sixthGradeClasses),
-				seventhGradeProfessors = GetProfessorsForOneYearOfStudy(seventhGradeClasses),
-				eighthGradeProfessors = GetProfessorsForOneYearOfStudy(eighthGradeClasses)
+                fifthGradeProfessors = await GetProfessorsForOneYearOfStudy(fifthGradeClasses),
+				sixthGradeProfessors = await GetProfessorsForOneYearOfStudy(sixthGradeClasses),
+				seventhGradeProfessors = await GetProfessorsForOneYearOfStudy(seventhGradeClasses),
+				eighthGradeProfessors = await GetProfessorsForOneYearOfStudy(eighthGradeClasses)
             };
 
 			return classCollections;
         }
 
 		//get a collection of all professors
-		public List<ProfessorViewModel> GetProfessorCollections(string currentUserId)
+		public async Task<List<ProfessorViewModel>> GetProfessorCollections(string currentUserId)
 		{
             List<ProfessorViewModel> professorCollections = new List<ProfessorViewModel>();
 
-			ICollection<Professor> allProfessors = GetAllProfessors();
+			ICollection<Professor> allProfessors = await GetAllProfessors();
 
             foreach (Professor professor in allProfessors)
 			{
@@ -243,9 +243,9 @@ namespace School_Timetable.Services
 					Id = professor.Id,
 					FirstName = professor.FirstName,
 					LastName = professor.LastName,
-					ProfessorSubject = GetSubjectOfProfessor(professor.Id),
-					UnassignedHours = GetUnassignedHours(professor.Id),
-					ClassesOfProfessor = GetClassesOfAProfessor(professor),
+					ProfessorSubject = await GetSubjectOfProfessor(professor.Id),
+					UnassignedHours = await GetUnassignedHours(professor.Id),
+					ClassesOfProfessor = await GetClassesOfAProfessor(professor),
                     AppUserId = currentUserId
                 });
 			}
@@ -254,11 +254,11 @@ namespace School_Timetable.Services
         }
 
         //get a collection of all subjects
-        public List<SchoolSubjectViewModel> GetSubjectsCollections(string currentUserId)
+        public async Task<List<SchoolSubjectViewModel>> GetSubjectsCollections(string currentUserId)
 		{
 			List<SchoolSubjectViewModel> subjectCollections = new List<SchoolSubjectViewModel>();
 
-			ICollection<SchoolSubject> allSubjects = GetAllSchoolSubjects();
+			ICollection<SchoolSubject> allSubjects = await GetAllSchoolSubjects();
 
 			foreach (SchoolSubject subject in allSubjects)
 			{
@@ -288,7 +288,7 @@ namespace School_Timetable.Services
 					Name = subject.Name,
 					HoursPerWeek = subject.HoursPerWeek,
                     YearsOfStudy = yearsOfStudy,
-					Professors = _subjectRepository.GetProfessorsOfASubject(subject.Id),
+					Professors = await _subjectRepository.GetProfessorsOfASubject(subject.Id),
 					AppUserId = currentUserId
 				});
 			}
@@ -323,46 +323,46 @@ namespace School_Timetable.Services
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new subject to database
-        public void AddSubject(CreateSchoolSubjectViewModel viewModel)
+        public async Task AddSubject(CreateSchoolSubjectViewModel viewModel)
 		{
-			_subjectRepository.AddSubject(viewModel);
+			await _subjectRepository.AddSubject(viewModel);
 		}
         //adding a new professor to database
-        public void AddProfessor(CreateProfessorViewModel viewModel)
+        public async Task AddProfessor(CreateProfessorViewModel viewModel)
 		{
-            _professorRepository.AddProfessor(viewModel);
+            await _professorRepository.AddProfessor(viewModel);
 		}
 
 		//adding a new class to database
-		public void AddClass(CreateSchoolClassViewModel viewModel)
+		public async Task AddClass(CreateSchoolClassViewModel viewModel)
 		{
-			_schoolClassRepository.AddClass(viewModel);
+			await _schoolClassRepository.AddClass(viewModel);
 		}
 
 		//assign one professor to one class
-		public void AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
+		public async Task AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
 		{
             SchoolSubject professorSubject = professor.ProfessorSubject;
 
-            if (_professorRepository.CanAssignHours(professor.Id) && _professorRepository.CanAssignClass(schoolClass, professorSubject))
+            if (await _professorRepository.CanAssignHours(professor.Id) && await _professorRepository.CanAssignClass(schoolClass, professorSubject))
             {
-                _classProfessorRepository.AddProfessorToAClass(schoolClass, professor); //assigning a professor to one class subject
-                _professorRepository.AssignHours(professor.Id);
+                await _classProfessorRepository.AddProfessorToAClass(schoolClass, professor); //assigning a professor to one class subject
+                await _professorRepository.AssignHours(professor.Id);
             }
         }
 
 		//assign all professors to all classes
-		public void AssignAllProfessorsToAllClasses()
+		public async Task AssignAllProfessorsToAllClasses()
 		{
-			ICollection<SchoolClass> schoolClasses = GetAllClasses();
+			ICollection<SchoolClass> schoolClasses = await GetAllClasses();
 
 			foreach (SchoolClass schoolClass in schoolClasses) //iterating through all the classes of a school
 			{
-				ICollection<SchoolSubject> classSubjects = _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
+				ICollection<SchoolSubject> classSubjects = await _subjectRepository.GetClassSubjects(schoolClass.YearOfStudy);
 
 				foreach (SchoolSubject subject in classSubjects) //iterating through all the subjects of one class
 				{
-					ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
+					ICollection<Professor> professors = await _subjectRepository.GetProfessorsOfASubject(subject.Id);
 					professors = professors.OrderBy(p => p.Id)
 						.ToList();
 
@@ -370,7 +370,7 @@ namespace School_Timetable.Services
 					{
 						foreach (Professor p in professors) //iterating through all the professors of one subject
 						{
-                            AssignOneProfessorToOneClass(schoolClass, p);
+                            await AssignOneProfessorToOneClass(schoolClass, p);
                         }
 					}
 				}
@@ -380,9 +380,9 @@ namespace School_Timetable.Services
 		//-----------------------------------> UPDATE METHODS <-----------------------------------
 
 		//edit a professors's data
-		public void EditProfessor(EditProfessorViewModel viewModel)
+		public async Task EditProfessor(EditProfessorViewModel viewModel)
 		{
-			_professorRepository.EditProfessor(viewModel);
+			await _professorRepository.EditProfessor(viewModel);
 		}
 
 		//edit a user data
@@ -392,15 +392,15 @@ namespace School_Timetable.Services
 		}
 
         //graduate all classes - change classes to the next school year
-        public void GraduateClasses()
+        public async Task GraduateClasses()
 		{
             //unassign eighth grade classes from connections
-            Stack<SchoolClass> eighthGradeClasses = GetEighthGradeClasses();
+            Stack<SchoolClass> eighthGradeClasses = await GetEighthGradeClasses();
 
 			foreach (SchoolClass schoolClass in eighthGradeClasses)
 			{
                 //get the list of professors for the class that will be deleted
-                List<Professor> professors = GetProfessorsOfAClass(schoolClass);
+                List<Professor> professors = await GetProfessorsOfAClass(schoolClass);
 
                 //unassign hours from all professors who were teaching that class
                 foreach (Professor p in professors)
@@ -412,14 +412,14 @@ namespace School_Timetable.Services
                 }
 
                 //unassign class from connections
-                _classProfessorRepository.UnassignAClass(schoolClass);
+                await _classProfessorRepository.UnassignAClass(schoolClass);
 
                 //delete the class from database
-                _schoolClassRepository.DeleteClass(schoolClass);
+                await _schoolClassRepository.DeleteClass(schoolClass);
             }
 
 			//graduate the rest of the classes (5-7)
-            _schoolClassRepository.GraduateClasses();
+            await _schoolClassRepository.GraduateClasses();
         }
 
         //-----------------------------------> DELETE METHODS <-----------------------------------
@@ -431,10 +431,10 @@ namespace School_Timetable.Services
 		}
 
         //delete a subject from database
-        public bool DeleteSchoolSubject(SchoolSubject subject)
+        public async Task<bool> DeleteSchoolSubject(SchoolSubject subject)
 		{
 			//get existing professors of the subject
-			ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(subject.Id);
+			ICollection<Professor> professors = await _subjectRepository.GetProfessorsOfASubject(subject.Id);
 
 			//check if there are existing professors connected to the subject
 			if (professors.Count != 0)
@@ -444,26 +444,26 @@ namespace School_Timetable.Services
 			else
 			{
 				//delete subject from database only if it has no professors
-				_subjectRepository.DeleteSchoolSubject(subject);
+				await _subjectRepository.DeleteSchoolSubject(subject);
 				return true;
 			}
 		}
 
 		//delete a professor from database
-		public void DeleteProfessor(Professor professor)
+		public async Task DeleteProfessor(Professor professor)
 		{
 			//get the classes of the deleted professor
-			List<SchoolClass> classesOfProfessor = GetClassesOfAProfessor(professor);
-			SchoolSubject professorSubject = GetSubjectOfProfessor(professor.Id);
+			List<SchoolClass> classesOfProfessor = await GetClassesOfAProfessor(professor);
+			SchoolSubject professorSubject = await GetSubjectOfProfessor(professor.Id);
 
             //unassign the professor from all classes
-            _classProfessorRepository.UnassignAProfessorFromAllClasses(professor);
+            await _classProfessorRepository.UnassignAProfessorFromAllClasses(professor);
 
 			//delete professor from database
-			_professorRepository.DeleteProfessor(professor);
+			await _professorRepository.DeleteProfessor(professor);
 
 			//reassign the classes to the rest of the professors, if there are any left/available
-			ICollection<Professor> professors = _subjectRepository.GetProfessorsOfASubject(professorSubject.Id);
+			ICollection<Professor> professors = await _subjectRepository.GetProfessorsOfASubject(professorSubject.Id);
 			professors = professors.OrderBy(p => p.Id).ToList();
 
             if (professors.Count > 0)
@@ -474,7 +474,7 @@ namespace School_Timetable.Services
                     {
                         foreach (Professor p in professors)
                         {
-                            AssignOneProfessorToOneClass(schoolClass, p);
+                            await AssignOneProfessorToOneClass(schoolClass, p);
                         }
                     }
                 }
@@ -482,15 +482,15 @@ namespace School_Timetable.Services
         }
 
 		//delete a class from database
-		public void DeleteClass(DeleteSchoolClassViewModel viewModel)
+		public async Task DeleteClass(DeleteSchoolClassViewModel viewModel)
 		{
 			//find out which class will be deleted, based on user input
-			SchoolClass schoolClass = _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);
+			SchoolClass schoolClass = await _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);
 
             if (schoolClass != null)
 			{
                 //get the list of professors for the class that will be deleted
-                List<Professor> professors = GetProfessorsOfAClass(schoolClass);
+                List<Professor> professors = await GetProfessorsOfAClass(schoolClass);
 
                 //unassign hours from all professors who were teaching that class
                 foreach (Professor p in professors)
@@ -502,18 +502,18 @@ namespace School_Timetable.Services
                 }
 
                 //unassign class from connections
-                _classProfessorRepository.UnassignAClass(schoolClass);
+                await _classProfessorRepository.UnassignAClass(schoolClass);
 
                 //delete the class from database
-                _schoolClassRepository.DeleteClass(schoolClass);
+                await _schoolClassRepository.DeleteClass(schoolClass);
             }
 		}
 
         //unassign all professors from all classes
-        public void UnAssignAllProfessorsFromClasses()
+        public async Task UnAssignAllProfessorsFromClasses()
 		{
-			_classProfessorRepository.UnassignAllProfessorsFromAllClasses();
-			_professorRepository.UnassignAllHoursFromEveryone();
+			await _classProfessorRepository.UnassignAllProfessorsFromAllClasses();
+			await _professorRepository.UnassignAllHoursFromEveryone();
 		}
 	}
 }
