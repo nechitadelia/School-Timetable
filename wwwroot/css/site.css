@@ -67,12 +67,14 @@ nav {
     height: auto;
 }
 
-.nav-links {
+.nav-links,
+.nav-links-unauthenticated {
     position: relative;
     top: 50%;
 }
 
-.nav-links li {
+.nav-links li,
+.nav-links-unauthenticated li {
     list-style: none;
     float: left;
     display: flex;
@@ -80,7 +82,8 @@ nav {
     align-items: center;
 }
 
-.nav-links li a {
+.nav-links li a,
+.nav-links-unauthenticated li a{
     color: #fff;
     font-size: 1em;
     margin: 0 30px;
@@ -90,7 +93,8 @@ nav {
     padding: 38px 0;
 }
 
-.link a:hover {
+.link a:hover,
+.link-unauthenticated a:hover {
     color: #fc9131;
 }
 
@@ -121,11 +125,11 @@ nav {
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
 }
 
-.link-courses a:hover {
+.link-userInfo a:hover {
     cursor: pointer;
 }
 
-.link-courses span {
+.link-userInfo span {
     margin-left: 25px;
     padding: 10px 25px;
     background-color: #fc9131;
@@ -135,7 +139,7 @@ nav {
 }
 
 @media screen and (min-width: 901px) {
-    .nav-links .link-courses:hover .dropdown-settings {
+    .nav-links .link-userInfo:hover .dropdown-settings {
         display: block;
     }
 }
@@ -341,13 +345,17 @@ footer .socialMedia-icons a:hover {
         width: 100%;
     }
 
-    .burger {
+    .link-unauthenticated {
+        margin-right: -25px;
+    }
+
+    .burger-visible {
         display: block;
         cursor: pointer;
         z-index: 100;
     }
 
-    .burger div {
+    .burger-visible div {
         width: 25px;
         height: 2px;
         background-color: #fff;
@@ -356,7 +364,7 @@ footer .socialMedia-icons a:hover {
         z-index: 100;
     }
 
-    .link-courses span {
+    .link-userInfo span {
         margin-left: 0;
     }
 
@@ -364,7 +372,7 @@ footer .socialMedia-icons a:hover {
         display: none;
     }
 
-    .link-courses {
+    .link-userInfo {
         width: 100%;
     }
 

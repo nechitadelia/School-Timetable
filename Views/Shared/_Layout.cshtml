@@ -26,16 +26,18 @@
         </a>
         <nav>
             <div>
-                <ul class="nav-links">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li class="link" id="login-link">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav-links-unauthenticated">
+                        <li class="link-unauthenticated" id="login-link">
                             <a asp-area="" asp-controller="Account" asp-action="Login" id="loginButton">Log in</a>
                         </li>
-                    }
-                    else
-                    {
-                        if (User.IsInRole("User"))
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav-links">
+                        @if (User.IsInRole("User"))
                         {
                             <li class="link">
                                 <a asp-area="" asp-controller="SchoolSubjects" asp-action="Index">Subjects</a>
@@ -46,7 +48,7 @@
                             <li class="link">
                                 <a asp-area="" asp-controller="SchoolClasses" asp-action="Index">Classes</a>
                             </li>
-                            <li class="link link-courses">
+                            <li class="link link-userInfo">
                                 <a class="userNavbar"><b>|</b><span>@User.Identity.Name</span></a>
                                 <ul class="dropdown-settings">
                                     <li>
@@ -61,12 +63,12 @@
                             </li>
                         }
 
-                        if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Admin"))
                         {
                             <li class="link">
                                 <a asp-area="" asp-controller="Account" asp-action="AllUsers">All Users</a>
                             </li>
-                            <li class="link link-courses">
+                            <li class="link link-userInfo">
                                 <a class="userNavbar"><b>|</b><span>@User.Identity.Name</span></a>
                                 <ul class="dropdown-settings">
                                     <li>
@@ -76,9 +78,9 @@
                                     </li>
                                 </ul>
                             </li>
-                        } 
-                    }
-                </ul>
+                        }
+                    </ul>
+                }
                 <div class="burger">
                     <div class="line1"></div>
                     <div class="line2"></div>

@@ -8,17 +8,22 @@
 }
 
 /* left side of the screen */
+@media only screen and (min-width: 769px) {
+    .class-buttons {
+        width: 30%;
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        padding: 50px;
+    }
+}
+
 .class-buttons {
-    width: 30%;
-    height: calc(100vh - 100px);
     background-color: #ead5bc;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    padding: 50px;
 }
 
 .schoolClass-container h1 {
@@ -50,6 +55,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .grades-buttons p {
     font-weight: bold;
     margin-bottom: 10px;
@@ -85,23 +91,25 @@
 }
 
 /* right side of the screen */
-.class-collections {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 30%;
+@media only screen and (min-width: 769px) {
+    .class-collections {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 30%;
+    }
 }
 
 .class-collections .classes {
-    width: 60%;
-    min-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .schoolClass-table {
-    width: 100%;
+    width: 80%;
+    min-width: 500px;
     margin: 50px 0;
     color: #00426d;
     background-color: #fff;
@@ -159,24 +167,25 @@
     border-radius: 5px;
 }
 
-.graduate-container {
+.graduate-container div {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 100px 0;
+    margin: 10px 0;
 }
 
-.graduate-container img {
+.graduate-container div img {
     width: 40%;
     height: auto;
     margin: 40px 0;
 }
 
-.graduate-container p {
+.graduate-container div p {
     margin: 5px 0;
     color: #00426d;
     font-weight: 500;
+    text-align: center;
 }
 
 #graduationClassform {
@@ -241,27 +250,28 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .class-buttons {
-        width: 100%;
-        height: 230px;
-        display: flex;
-        flex-direction: row;
-/*        justify-content: space-between;
-        align-content: space-between;*/
-        gap: 20px;
-/*        position: relative;
-        left: 50%;
-        transform: translateX(-50%);*/
-        margin-right: 0;
-    }
-
-    .class-collections {
-        width: 100%;
+    .schoolClass-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 230px;
-        margin-left: 0;
+    }
+
+    .class-buttons {
+        width: 100vw;
+        height: 250px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+
+    .class-collections {
+        margin-top: 20px;
     }
 
     .add-delete-buttons a,
@@ -269,6 +279,7 @@
     .grades-buttons p {
         font-size: 1rem;
     }
+
     .schoolClass-container h1 {
         margin-top: -20px;
     }
@@ -279,5 +290,53 @@
 
     .schoolClass-table {
         margin: 20px 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .class-buttons {
+        gap: 10px;
+    }
+
+    .add-delete-buttons a,
+    .grades-buttons button {
+        width: 50%;
+    }
+
+    .schoolClass-table {
+        min-width: 400px;
+    }
+}
+
+@media only screen and (max-width:430px) {
+    .class-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 450px;
+    }
+
+    .schoolClass-container h1 {
+        margin-top: 10px;
+    }
+
+    .schoolClass-table {
+        min-width: 300px;
+    }
+}
+
+@media only screen and (max-width:400) {
+    .graduate-container div {
+        width: 80%;
+    }
+
+    .graduate-container div img {
+        width: 80vw;
+        height: auto;
+    }
+
+    .graduate-container div p {
+        width: 80%;
+        margin: 5px 20px;
     }
 }

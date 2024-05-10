@@ -18,13 +18,13 @@
                 </div>
             </div>
 
-            <table class="professors-table">
+            <table class="professors-table users-table">
                 <thead>
                     <tr>
                         <th>School Name</th>
-                        <th>County</th>
+                        <th class="tertiary-column">County</th>
                         <th>City</th>
-                        <th>Email Address</th>
+                        <th class="secondary-column">Email Address</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,9 +45,9 @@
                         {
                             <tr class="user-entity">
                                 <td><b>@Model[i].SchoolName</b></td>
-                                <td>@Model[i].County</td>
+                                <td class="tertiary-column">@Model[i].County</td>
                                 <td>@Model[i].City</td>
-                                <td>@Model[i].EmailAddress</td>
+                                <td class="secondary-column">@Model[i].EmailAddress</td>
                                 <td class="delete-button-table">
                                     @Html.ActionLink($"Delete", "DeleteUser", new { userId = Model[i].Id }, new { @class = "delete-button delete-user-button" })
                                 </td>

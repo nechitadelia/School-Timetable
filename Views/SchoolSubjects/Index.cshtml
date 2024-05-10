@@ -12,12 +12,12 @@
     </form>
 
     <div class="table-container">
-        <table class="list-table">
+        <table class="list-table subjects-table">
             <thead>
                 <tr>
                     <th class="first-column">Subject name</th>
-                    <th>Hours / week</th>
-                    <th class="last-column">Years of study</th>
+                    <th class="secondary-column">Hours / week</th>
+                    <th class="last-column secondary-column">Years of study</th>
                     <th>Professors</th>
                     <th></th>
                 </tr>
@@ -35,8 +35,8 @@
                     {
                         <tr>
                             <td class="subject-name">@Model[i].Name</td>
-                            <td>@Model[i].HoursPerWeek</td>
-                            <td>
+                            <td class="secondary-column">@Model[i].HoursPerWeek</td>
+                            <td class="secondary-column">
                                 <ul>
                                     @foreach (int year in Model[i].YearsOfStudy)
                                     {

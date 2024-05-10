@@ -2,12 +2,10 @@
 //navbar styling for phone - dropdown settings for navbar (User info list)
 let dropList = document.querySelector(".dropdown-settings");
 let title = document.querySelector(".userNavbar");
-let coursesLink = document.querySelector(".link-courses");
 
 title.addEventListener("click", function () {
     if (window.innerWidth < 769) {
         dropList.classList.toggle("dropdown-active");
-        coursesLink.classList.toggle("courses-active");
 
         title.style.display = "block";
         title.style.textAlign = "center";
@@ -27,17 +25,11 @@ function navSlide() {
     const nav = document.querySelector(".nav-links");
     const navLinks = document.querySelectorAll(".link");
 
-    //if (window.innerWidth <= 900) {
-    //    burger.classList.add("burger-visible");
-    //}
-    //else {
-    //    burger.classList.remove("burger-visible");
-    //}
-
-    if (loginLink != null && typeof(loginLink) != "undefined") {
-        burger.style.display = "none";
-    } else {
-        burger.style.display = "block";
+    if (window.innerWidth <= 900 && loginLink == null) {
+        burger.classList.toggle("burger-visible");
+    }
+    else {
+        loginLink.style.display = "block";
     }
 
     burger.addEventListener("click", () => {
