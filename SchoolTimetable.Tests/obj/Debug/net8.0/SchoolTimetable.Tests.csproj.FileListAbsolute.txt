@@ -159,3 +159,4 @@ D:\Repo\School Timetable\SchoolTimetable.Tests\obj\Debug\net8.0\refint\SchoolTim
 D:\Repo\School Timetable\SchoolTimetable.Tests\obj\Debug\net8.0\SchoolTimetable.Tests.pdb
 D:\Repo\School Timetable\SchoolTimetable.Tests\obj\Debug\net8.0\SchoolTimetable.Tests.genruntimeconfig.cache
 D:\Repo\School Timetable\SchoolTimetable.Tests\obj\Debug\net8.0\ref\SchoolTimetable.Tests.dll
+D:\Repo\School Timetable\SchoolTimetable.Tests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "obFoncjSFv63Uc7UWMtpGyPugrNhKf9IesULOwDuSFLgKLzYofwvKZY1bGdVrQo63A5LSza8/pX6DFpXB1GbWw==",
+  "dgSpecHash": "F/zO15I+ULACoMlfE7WHINZwXAz65gew0Xd+/xsDoR6xBF4hvJnX4BhzLOf1ae4vIQtFZ9h3DpaLq+2JhAtvOg==",
   "success": true,
   "projectFilePath": "D:\\Repo\\School Timetable\\SchoolTimetable.Tests\\SchoolTimetable.Tests.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
+    "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\8.0.4\\microsoft.entityframeworkcore.inmemory.8.0.4.nupkg.sha512",
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.4\\microsoft.entityframeworkcore.relational.8.0.4.nupkg.sha512",
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.4\\microsoft.entityframeworkcore.sqlserver.8.0.4.nupkg.sha512",
     "C:\\Users\\Delia N\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
