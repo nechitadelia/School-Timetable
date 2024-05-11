@@ -77,7 +77,7 @@ namespace School_Timetable.Repository
         }
 
 		//assign hours to a professor
-		public async Task AssignHours(int professorId)
+		public async Task<bool> AssignHours(int professorId)
         {
             Professor professor = await GetProfessor(professorId);
 			SchoolSubject subject = await GetSubjectOfProfessor(professorId);
@@ -85,8 +85,10 @@ namespace School_Timetable.Repository
 			if (await CanAssignHours(professorId))
             {
 				professor.AssignedHours += subject.HoursPerWeek;
-                Save();
-			}
+                bool result = Save();
+                if (result == false) { return false; }
+            }
+            return true;
         }
 
         //get a professor's unassigned hours
@@ -99,21 +101,23 @@ namespace School_Timetable.Repository
         }
 
 		//unassign all hours from a professor
-		public void UnassignAllHoursFromProfessor(Professor professor)
+		public bool UnassignAllHoursFromProfessor(Professor professor)
 		{
             professor.AssignedHours = 0;
-            Save();
+            return Save();
 		}
 
 		//unassign all hours from all professors
-		public async Task UnassignAllHoursFromEveryone()
+		public async Task<bool> UnassignAllHoursFromEveryone()
         {
             ICollection<Professor> professors = await GetProfessors();
 
             foreach (Professor p in professors)
             {
-				UnassignAllHoursFromProfessor(p);
+				bool result = UnassignAllHoursFromProfessor(p);
+                if (result == false) { return false; }
             }
+            return true;
 		}
 
         //unassign hours from a professor (when a class is deleted)
@@ -123,7 +127,7 @@ namespace School_Timetable.Repository
 		}
 
 		//create a new professor
-		public async Task AddProfessor(CreateProfessorViewModel viewModel)
+		public async Task<bool> AddProfessor(CreateProfessorViewModel viewModel)
         {
             SchoolSubject subject = await _dbContext.SchoolSubjects.Where(s => s.Id == viewModel.SchoolSubjectId).FirstAsync();
 
@@ -139,11 +143,11 @@ namespace School_Timetable.Repository
             };
 
             await _dbContext.Professors.AddAsync(professor);
-            Save();
+            return Save();
 		}
 
 		//edit a professors's data
-		public async Task EditProfessor(EditProfessorViewModel viewModel)
+		public async Task<bool> EditProfessor(EditProfessorViewModel viewModel)
 		{
             Professor professor = await GetProfessor(viewModel.Id);
 
@@ -152,17 +156,20 @@ namespace School_Timetable.Repository
 				professor.FirstName = viewModel.FirstName;
 				professor.LastName = viewModel.LastName;
 
-				Save();
-			}
-		}
+				bool result = Save();
+                if (result == false) { return false; }
+            }
+
+            return true;
+        }
 
 		//delete a professor from the database
-		public async Task DeleteProfessor(Professor viewModel)
+		public async Task<bool> DeleteProfessor(Professor viewModel)
         {
 			Professor professor = await GetProfessor(viewModel.Id);
 
 			_dbContext.Professors.Remove(professor);
-			Save();
+			return Save();
 		}
 
 		//save changes to database

@@ -80,7 +80,7 @@ namespace School_Timetable.Repository
         }
 
         //edit a user data
-        public async Task EditUser(EditAppUserViewModel viewModel)
+        public async Task<bool> EditUser(EditAppUserViewModel viewModel)
         {
             AppUser user = await GetUser();
 
@@ -89,17 +89,23 @@ namespace School_Timetable.Repository
                 user.SchoolName = viewModel.SchoolName;
                 user.County = viewModel.County;
                 user.City = viewModel.City;
-                Save();
+
+                bool result = Save();
+                if (result == false) { return false; }
             }
+            return true;
         }
 
         //delete a user from database
-        public async Task DeleteUser(AppUserViewModel viewModel)
+        public async Task<bool> DeleteUser(AppUserViewModel viewModel)
         {
             AppUser user = await GetUser(viewModel.Id);
 
             _dbContext.Users.Remove(user);
-            Save();
+            bool result = Save();
+
+            if (result) { return true; }
+            else { return false; }
         }
         
         //save changes to database

@@ -107,7 +107,7 @@ namespace School_Timetable.Repository
 		}
 
 		//adding a new subject to database
-		public async Task AddSubject(CreateSchoolSubjectViewModel viewModel)
+		public async Task<bool> AddSubject(CreateSchoolSubjectViewModel viewModel)
         {
             SchoolSubject subject = new SchoolSubject
             {
@@ -121,17 +121,18 @@ namespace School_Timetable.Repository
 			};
 
             await _dbContext.SchoolSubjects.AddAsync(subject);
-            Save();
+
+            return Save();
         }
 
         //delete a subject from database
-        public async Task DeleteSchoolSubject(SchoolSubject viewModel)
+        public async Task<bool> DeleteSchoolSubject(SchoolSubject viewModel)
         {
 			SchoolSubject subject = await GetSchoolSubject(viewModel.Id);
 
 			_dbContext.SchoolSubjects.Remove(subject);
-			Save();
-		}
+            return Save();
+        }
 
 		//save changes to database
 		public bool Save()

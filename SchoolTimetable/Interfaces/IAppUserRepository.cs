@@ -20,10 +20,10 @@ namespace School_Timetable.Interfaces
         Task<AppUserViewModel> GetUserViewModel();
 
         //edit a user data
-        Task EditUser(EditAppUserViewModel viewModel);
+        Task<bool> EditUser(EditAppUserViewModel viewModel);
 
         //delete a user from database
-        Task DeleteUser(AppUserViewModel viewModel);
+        Task<bool> DeleteUser(AppUserViewModel viewModel);
 
         //save changes to database
         bool Save();

@@ -22,28 +22,28 @@ namespace School_Timetable.Interfaces
 		Task<bool> CanAssignClass(SchoolClass schoolClass, SchoolSubject schoolSubject);
 
         //assign hours to a professor
-        Task AssignHours(int professorId);
+        Task<bool> AssignHours(int professorId);
 
 		//get a professor's unassigned hours
 		Task<int> GetUnassignedHours(int professorId);
 
         //unassign all hours from a professor
-        void UnassignAllHoursFromProfessor(Professor professor);
+        bool UnassignAllHoursFromProfessor(Professor professor);
 
         //unassign all hours from all professors
-        Task UnassignAllHoursFromEveryone();
+        Task<bool> UnassignAllHoursFromEveryone();
 
         //unassign hours from a professor (when a class is deleted)
         void UnassignHoursFromProfessor(Professor professor);
 
-		//create a new professor
-		Task AddProfessor(CreateProfessorViewModel viewModel);
+        //create a new professor
+        Task<bool> AddProfessor(CreateProfessorViewModel viewModel);
 
         //edit a professors's data
-        Task EditProfessor(EditProfessorViewModel viewModel);
+        Task<bool> EditProfessor(EditProfessorViewModel viewModel);
 
-		//delete a professor from the database
-		Task DeleteProfessor(Professor viewModel);
+        //delete a professor from the database
+        Task<bool> DeleteProfessor(Professor viewModel);
 
         //save changes to database
         bool Save();

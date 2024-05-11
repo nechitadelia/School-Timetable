@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolTimetable", "SchoolTimetable\SchoolTimetable.csproj", "{8234C9F5-7797-42A7-9B50-EBD446B2955B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolTimetable.Tests", "SchoolTimetable.Tests\SchoolTimetable.Tests.csproj", "{3793310F-D1B3-4D3D-ACCB-4EF68660BB24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8234C9F5-7797-42A7-9B50-EBD446B2955B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8234C9F5-7797-42A7-9B50-EBD446B2955B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8234C9F5-7797-42A7-9B50-EBD446B2955B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3793310F-D1B3-4D3D-ACCB-4EF68660BB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3793310F-D1B3-4D3D-ACCB-4EF68660BB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3793310F-D1B3-4D3D-ACCB-4EF68660BB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3793310F-D1B3-4D3D-ACCB-4EF68660BB24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

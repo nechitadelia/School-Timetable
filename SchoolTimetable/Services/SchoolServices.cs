@@ -323,36 +323,42 @@ namespace School_Timetable.Services
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new subject to database
-        public async Task AddSubject(CreateSchoolSubjectViewModel viewModel)
+        public async Task<bool> AddSubject(CreateSchoolSubjectViewModel viewModel)
 		{
-			await _subjectRepository.AddSubject(viewModel);
+			return await _subjectRepository.AddSubject(viewModel);
 		}
         //adding a new professor to database
-        public async Task AddProfessor(CreateProfessorViewModel viewModel)
+        public async Task<bool> AddProfessor(CreateProfessorViewModel viewModel)
 		{
-            await _professorRepository.AddProfessor(viewModel);
+            return await _professorRepository.AddProfessor(viewModel);
 		}
 
 		//adding a new class to database
-		public async Task AddClass(CreateSchoolClassViewModel viewModel)
+		public async Task<bool> AddClass(CreateSchoolClassViewModel viewModel)
 		{
-			await _schoolClassRepository.AddClass(viewModel);
+			return await _schoolClassRepository.AddClass(viewModel);
 		}
 
 		//assign one professor to one class
-		public async Task AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
+		public async Task<bool> AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor)
 		{
             SchoolSubject professorSubject = professor.ProfessorSubject;
 
             if (await _professorRepository.CanAssignHours(professor.Id) && await _professorRepository.CanAssignClass(schoolClass, professorSubject))
             {
-                await _classProfessorRepository.AddProfessorToAClass(schoolClass, professor); //assigning a professor to one class subject
-                await _professorRepository.AssignHours(professor.Id);
+                bool result1 = await _classProfessorRepository.AddProfessorToAClass(schoolClass, professor); //assigning a professor to one class subject
+                bool result2 = await _professorRepository.AssignHours(professor.Id);
+
+                if (result1 == false || result2 == false)
+				{
+					return false;
+				}
             }
+			return true;
         }
 
 		//assign all professors to all classes
-		public async Task AssignAllProfessorsToAllClasses()
+		public async Task<bool> AssignAllProfessorsToAllClasses()
 		{
 			ICollection<SchoolClass> schoolClasses = await GetAllClasses();
 
@@ -370,29 +376,34 @@ namespace School_Timetable.Services
 					{
 						foreach (Professor p in professors) //iterating through all the professors of one subject
 						{
-                            await AssignOneProfessorToOneClass(schoolClass, p);
+							bool result = await AssignOneProfessorToOneClass(schoolClass, p);
+							if (result == false)
+							{
+								return false;
+							}
                         }
 					}
 				}
 			}
+			return true;
 		}
 
 		//-----------------------------------> UPDATE METHODS <-----------------------------------
 
 		//edit a professors's data
-		public async Task EditProfessor(EditProfessorViewModel viewModel)
+		public async Task<bool> EditProfessor(EditProfessorViewModel viewModel)
 		{
-			await _professorRepository.EditProfessor(viewModel);
+			return await _professorRepository.EditProfessor(viewModel);
 		}
 
 		//edit a user data
-		public async Task EditUser(EditAppUserViewModel viewModel)
+		public async Task<bool> EditUser(EditAppUserViewModel viewModel)
 		{
-			await _appUserRepository.EditUser(viewModel);
+			return await _appUserRepository.EditUser(viewModel);
 		}
 
         //graduate all classes - change classes to the next school year
-        public async Task GraduateClasses()
+        public async Task<bool> GraduateClasses()
 		{
             //unassign eighth grade classes from connections
             Stack<SchoolClass> eighthGradeClasses = await GetEighthGradeClasses();
@@ -419,15 +430,15 @@ namespace School_Timetable.Services
             }
 
 			//graduate the rest of the classes (5-7)
-            await _schoolClassRepository.GraduateClasses();
+            return await _schoolClassRepository.GraduateClasses();
         }
 
         //-----------------------------------> DELETE METHODS <-----------------------------------
 
         //delete a user from database
-        public async Task DeleteUser(AppUserViewModel viewModel)
+        public async Task<bool> DeleteUser(AppUserViewModel viewModel)
 		{
-			await _appUserRepository.DeleteUser(viewModel);
+			return await _appUserRepository.DeleteUser(viewModel);
 		}
 
         //delete a subject from database
@@ -450,7 +461,7 @@ namespace School_Timetable.Services
 		}
 
 		//delete a professor from database
-		public async Task DeleteProfessor(Professor professor)
+		public async Task<bool> DeleteProfessor(Professor professor)
 		{
 			//get the classes of the deleted professor
 			List<SchoolClass> classesOfProfessor = await GetClassesOfAProfessor(professor);
@@ -460,7 +471,7 @@ namespace School_Timetable.Services
             await _classProfessorRepository.UnassignAProfessorFromAllClasses(professor);
 
 			//delete professor from database
-			await _professorRepository.DeleteProfessor(professor);
+			bool result = await _professorRepository.DeleteProfessor(professor);
 
 			//reassign the classes to the rest of the professors, if there are any left/available
 			ICollection<Professor> professors = await _subjectRepository.GetProfessorsOfASubject(professorSubject.Id);
@@ -479,10 +490,13 @@ namespace School_Timetable.Services
                     }
                 }
             }
+
+            if (result) { return true; }
+			else { return false; }
         }
 
 		//delete a class from database
-		public async Task DeleteClass(DeleteSchoolClassViewModel viewModel)
+		public async Task<bool> DeleteClass(DeleteSchoolClassViewModel viewModel)
 		{
 			//find out which class will be deleted, based on user input
 			SchoolClass schoolClass = await _schoolClassRepository.GetLastClassFromOneYear(viewModel.YearOfStudy);
@@ -505,15 +519,25 @@ namespace School_Timetable.Services
                 await _classProfessorRepository.UnassignAClass(schoolClass);
 
                 //delete the class from database
-                await _schoolClassRepository.DeleteClass(schoolClass);
+                bool result = await _schoolClassRepository.DeleteClass(schoolClass);
+
+                if (result == false) { return false; }
             }
+
+			return true;
 		}
 
         //unassign all professors from all classes
-        public async Task UnAssignAllProfessorsFromClasses()
+        public async Task<bool> UnAssignAllProfessorsFromClasses()
 		{
-			await _classProfessorRepository.UnassignAllProfessorsFromAllClasses();
-			await _professorRepository.UnassignAllHoursFromEveryone();
+			bool result1 = await _classProfessorRepository.UnassignAllProfessorsFromAllClasses();
+			bool result2 = await _professorRepository.UnassignAllHoursFromEveryone();
+
+			if (result1 || result2)
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 }

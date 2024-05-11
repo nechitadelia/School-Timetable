@@ -19,7 +19,7 @@ namespace School_Timetable.Repository
         }
 
 		//assign one professor to one class
-		public async Task AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
+		public async Task<bool> AddProfessorToAClass(SchoolClass schoolClass, Professor professor)
 		{
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
@@ -39,7 +39,7 @@ namespace School_Timetable.Repository
 			};
 
 			await _dbContext.ClassProfessors.AddAsync(classProfessor);
-			Save();
+			return Save();
 		}
 
 		//check if a connection exists in the ClassProfessor table
@@ -113,38 +113,38 @@ namespace School_Timetable.Repository
         }
 
         //delete a collection of ClassProfessor from database
-        public void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors)
+        public bool DeleteClassProfessor(ICollection<ClassProfessor> classProfessors)
 		{
-            foreach (ClassProfessor cp in classProfessors)
+			foreach (ClassProfessor cp in classProfessors)
             {
                 _dbContext.ClassProfessors.Remove(cp);
-                Save();
             }
+			return Save();
         }
 
 		//unassign a professor from all classes
-		public async Task UnassignAProfessorFromAllClasses(Professor professor)
+		public async Task<bool> UnassignAProfessorFromAllClasses(Professor professor)
 		{
 			ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors.Where(p => p.ProfessorId == professor.Id).ToListAsync();
-			DeleteClassProfessor(cp);
+			return DeleteClassProfessor(cp);
 		}
 
 		//unassign all professors from all classes
-		public async Task UnassignAllProfessorsFromAllClasses()
+		public async Task<bool> UnassignAllProfessorsFromAllClasses()
 		{
             string? currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
             ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors
 				.Where(cp => cp.AppUserId == currentUserId)
 				.ToListAsync();
-			DeleteClassProfessor(cp);
+			return DeleteClassProfessor(cp);
         }
 
 		//delete a class from ClassProfessor table
-		public async Task UnassignAClass(SchoolClass schoolClass)
+		public async Task<bool> UnassignAClass(SchoolClass schoolClass)
 		{
 			ICollection<ClassProfessor> cp = await _dbContext.ClassProfessors.Where(c => c.SchoolClassId == schoolClass.Id).ToListAsync();
-			DeleteClassProfessor(cp);
+			return DeleteClassProfessor(cp);
 		}
 
 		//save changes to database

@@ -23,13 +23,13 @@ namespace School_Timetable.Interfaces
         Task<char> GetAvailableLetter(int yearOfStudy);
 
         //graduate all classes - change classes to the next school year
-        Task GraduateClasses();
+        Task<bool> GraduateClasses();
 
         //add new class to database
-        Task AddClass(CreateSchoolClassViewModel viewModel);
+        Task<bool> AddClass(CreateSchoolClassViewModel viewModel);
 
         //delete a class from the database
-        Task DeleteClass(SchoolClass schoolClass);
+        Task<bool> DeleteClass(SchoolClass schoolClass);
 
         //save changes to database
         bool Save();

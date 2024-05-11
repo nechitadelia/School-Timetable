@@ -9,15 +9,11 @@ namespace School_Timetable.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ISchoolServices _schoolServices;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(ILogger<HomeController> logger, ISchoolServices schoolServices, IHttpContextAccessor httpContextAccessor)
+        public HomeController(ISchoolServices schoolServices)
         {
-            _logger = logger;
             _schoolServices = schoolServices;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]

@@ -6,7 +6,7 @@ namespace School_Timetable.Interfaces
     public interface IClassProfessorRepository
 	{
         //assign one professor to one class
-        Task AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
+        Task<bool> AddProfessorToAClass(SchoolClass schoolClass, Professor professor);
 
 		//check if a connection exists in the ClassProfessor table
 		Task<bool> ConnectionExists(SchoolClass schoolClass, SchoolSubject schoolSubject);
@@ -22,16 +22,16 @@ namespace School_Timetable.Interfaces
 		Task<List<SchoolClass>> GetClassesOfAProfessor(Professor professor);
 		
 		//delete a collection of ClassProfessor from database
-		void DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);
+		bool DeleteClassProfessor(ICollection<ClassProfessor> classProfessors);
 
         //unassign a professor from all classes
-        Task UnassignAProfessorFromAllClasses(Professor professor);
+        Task<bool> UnassignAProfessorFromAllClasses(Professor professor);
 
         //unassign all professors from all classes
-        Task UnassignAllProfessorsFromAllClasses();
+        Task<bool> UnassignAllProfessorsFromAllClasses();
 
-		//delete a class from ClassProfessor table
-		Task UnassignAClass(SchoolClass schoolClass);
+        //delete a class from ClassProfessor table
+        Task<bool> UnassignAClass(SchoolClass schoolClass);
 
 		//save changes to database
 		bool Save();

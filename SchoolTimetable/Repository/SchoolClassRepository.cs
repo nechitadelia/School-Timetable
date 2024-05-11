@@ -87,7 +87,7 @@ namespace School_Timetable.Repository
         }
 
         //graduate all classes - change classes to the next school year
-        public async Task GraduateClasses()
+        public async Task<bool> GraduateClasses()
         {
             //get all the eighth grade classes and delete them
             Stack<SchoolClass> eighthGradeClasses = await GetClassesofOneYear(8);
@@ -106,13 +106,17 @@ namespace School_Timetable.Repository
                 for (int i = allClasses.Count - 1; i >= 0; i--)
                 {
                     allClasses.ElementAt(i).YearOfStudy += 1;
-                    Save();
+                    bool result = Save();
+
+                    if (result == false) { return false; }
                 }
             }
+
+            return true;
         }
 
         //add new class to database
-        public async Task AddClass(CreateSchoolClassViewModel viewModel)
+        public async Task<bool> AddClass(CreateSchoolClassViewModel viewModel)
         {
 			SchoolClass newClass = new SchoolClass
             {
@@ -122,11 +126,11 @@ namespace School_Timetable.Repository
             };
 
             _dbContext.SchoolClasses.Add(newClass);
-			Save();
-		}
+            return Save();
+        }
 
         //delete a class from the database
-        public async Task DeleteClass(SchoolClass schoolClass)
+        public async Task<bool> DeleteClass(SchoolClass schoolClass)
         {
             char lastLetter = await GetLastLetter(schoolClass.YearOfStudy);
 
@@ -136,9 +140,13 @@ namespace School_Timetable.Repository
                     .FirstAsync(c => c.YearOfStudy == schoolClass.YearOfStudy && c.ClassLetter == lastLetter);
 
                 _dbContext.SchoolClasses.Remove(existingClass);
-                Save();
+                bool result = Save();
+
+                if (result == false) { return false; }
             }
-		}
+
+            return true;
+        }
 
 		//save changes to database
 		public bool Save()

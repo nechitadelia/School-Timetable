@@ -98,48 +98,48 @@ namespace School_Timetable.Interfaces
         //-----------------------------------> CREATE METHODS <-----------------------------------
 
         //adding a new subject to database
-        Task AddSubject(CreateSchoolSubjectViewModel viewModel);
+        Task<bool> AddSubject(CreateSchoolSubjectViewModel viewModel);
 
-		//adding a new professor to database
-		Task AddProfessor(CreateProfessorViewModel viewModel);
+        //adding a new professor to database
+        Task<bool> AddProfessor(CreateProfessorViewModel viewModel);
 
         //adding a new class to database
-        Task AddClass(CreateSchoolClassViewModel viewModel);
+        Task<bool> AddClass(CreateSchoolClassViewModel viewModel);
 
         //assign one professor to one class
-        Task AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
+        Task<bool> AssignOneProfessorToOneClass(SchoolClass schoolClass, Professor professor);
 
         //assign all professors to all classes
-        Task AssignAllProfessorsToAllClasses();
+        Task<bool> AssignAllProfessorsToAllClasses();
 
         //-----------------------------------> UPDATE METHODS <-----------------------------------
 
         //edit a professors's data
-        Task EditProfessor(EditProfessorViewModel viewModel);
+        Task<bool> EditProfessor(EditProfessorViewModel viewModel);
 
-		//edit a user data
-		Task EditUser(EditAppUserViewModel viewModel);
+        //edit a user data
+        Task<bool> EditUser(EditAppUserViewModel viewModel);
 
         //graduate all classes - change classes to the next school year
-        Task GraduateClasses();
+        Task<bool> GraduateClasses();
 
 
-		//-----------------------------------> DELETE METHODS <-----------------------------------
+        //-----------------------------------> DELETE METHODS <-----------------------------------
 
-		//delete a user from database
-		Task DeleteUser(AppUserViewModel viewModel);
+        //delete a user from database
+        Task<bool> DeleteUser(AppUserViewModel viewModel);
 
         //delete a subject from database
         Task<bool> DeleteSchoolSubject(SchoolSubject subject);
 
-		//delete a professor from database
-		Task DeleteProfessor(Professor professor);
+        //delete a professor from database
+        Task<bool> DeleteProfessor(Professor professor);
 
         //delete a class from database
-        Task DeleteClass(DeleteSchoolClassViewModel viewModel);
+        Task<bool> DeleteClass(DeleteSchoolClassViewModel viewModel);
 
         //unassign all professors from all classes
-        Task UnAssignAllProfessorsFromClasses();
+        Task<bool> UnAssignAllProfessorsFromClasses();
 
     }
 }

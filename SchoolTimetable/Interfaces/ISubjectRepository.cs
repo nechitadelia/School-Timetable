@@ -25,11 +25,11 @@ namespace School_Timetable.Interfaces
 		//check if year of study was selected by user or not (convert bool to char)
 		char CheckSelectedYear(bool yearOfStudy);
 
-		//adding a new subject to database
-		Task AddSubject(CreateSchoolSubjectViewModel viewModel);
+        //adding a new subject to database
+        Task<bool> AddSubject(CreateSchoolSubjectViewModel viewModel);
 
-		//delete a subject from database
-		Task DeleteSchoolSubject(SchoolSubject viewModel);
+        //delete a subject from database
+        Task<bool> DeleteSchoolSubject(SchoolSubject viewModel);
 
 		//save changes to database
 		bool Save();
