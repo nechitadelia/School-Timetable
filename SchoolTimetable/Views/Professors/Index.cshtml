@@ -1,0 +1,116 @@
+﻿@using School_Timetable.ViewModels
+
+@{
+    bool checkSubjects = (bool)ViewData["noSubjects"];
+}
+@model List<ProfessorViewModel>
+
+<div class="professors-container">
+
+    <h1>Professors</h1>
+
+    @if (checkSubjects)
+    {
+        <p class="noSubjects-error visually-hidden"></p>
+    }
+    else
+    {
+        <p class="noSubjects-error visually-hidden">No existing subjects</p>
+    }
+
+    <form method="post">
+        <div class="search-wrapper">
+            <div class="searchbar">
+                <span id="search-icon">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+                <input type="search" id="search" placeholder="Search professor" spellcheck="false" data-professors />
+            </div>
+        </div>
+
+        <div class="professors-buttons-container">
+            @if (checkSubjects)
+            {
+                <a class="create-button" asp-area="" asp-controller="Professors" asp-action="Create">Add Professor</a>
+            }
+            else
+            {
+                <a class="create-button" id="add-professor">Add Professor</a>
+            }
+            
+            @if (Model.Count != 0)
+            {
+                <button type="submit" class="btn btn-warning assign-button" asp-controller="Professors" asp-action="Assign">Assign all professors to classes</button>
+                <button type="submit" class="btn btn-danger unassign-button" asp-controller="Professors" asp-action="UnAssignAll">Unassign all professors from classes</button>
+            }
+            else
+            {
+                <button class="disabled-button" disabled >Assign all professors to classes</button>
+                <button class="disabled-button" disabled >Unassign all professors from classes</button>
+            }
+        </div>       
+
+        <table class="professors-table">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th class="secondary-column">Subject</th>
+                    <th class="secondary-column">Unassigned hours</th>
+                    <th>Classes</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="noexistingProfessors">No existing professors</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="noProfessorsFound hide">No professors found</td>
+                    </tr>
+
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr class="professor-entity">
+                            <td class="professor-lastName">@Model[i].LastName</td>
+                            <td class="professor-firstName">@Model[i].FirstName</td>
+                            <td class="secondary-column">@Model[i].ProfessorSubject.Name</td>
+                            <td class="unassigned-hours secondary-column">@Model[i].UnassignedHours h</td>
+                            @if (Model[i].ClassesOfProfessor.Count > 0)
+                            {
+                                <td class="professors-classes-list">
+                                    <ul>
+                                        @foreach (SchoolClass schoolClass in Model[i].ClassesOfProfessor)
+                                        {
+                                            <li>
+                                                <i class="fa-solid fa-check"></i>
+                                                @(schoolClass.YearOfStudy + " " + schoolClass.ClassLetter)
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="text-danger">No classes</td>
+                            }
+                            <td class="edit-buttons-table">
+                                <div>
+                                    @Html.ActionLink($"Edit", "Edit", new { professorId = Model[i].Id }, new { @class = "edit-button edit-professor-button" })
+                                    @Html.ActionLink($"Delete", "Delete", new { professorId = Model[i].Id }, new { @class = "delete-button delete-professor-button" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                } 
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<script src="~/js/IndexProfessor.js" asp-append-version="true"></script>

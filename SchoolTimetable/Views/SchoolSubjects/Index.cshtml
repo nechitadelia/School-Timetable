@@ -1,0 +1,82 @@
+﻿@using School_Timetable.ViewModels
+
+@model List<SchoolSubjectViewModel>
+
+<div class="form-container subjects-container">
+    <h1 class="index-subjects-title">Subjects</h1>
+
+    <form method="post">
+        <div class="subjects-buttons-container">
+            <a class="create-button" asp-area="" asp-controller="SchoolSubjects" asp-action="Create">Add School Subject</a>
+        </div>
+    </form>
+
+    <div class="table-container">
+        <table class="list-table subjects-table">
+            <thead>
+                <tr>
+                    <th class="first-column">Subject name</th>
+                    <th class="secondary-column">Hours / week</th>
+                    <th class="last-column secondary-column">Years of study</th>
+                    <th>Professors</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="noexistingSubjects">No existing subjects</td>
+                    </tr>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="subject-name">@Model[i].Name</td>
+                            <td class="secondary-column">@Model[i].HoursPerWeek</td>
+                            <td class="secondary-column">
+                                <ul>
+                                    @foreach (int year in Model[i].YearsOfStudy)
+                                    {
+                                        <li>@year</li>
+                                    }
+                                </ul>
+                            </td>
+
+                            @if (Model[i].Professors == null || Model[i].Professors.Count == 0)
+                            {
+                                <td class="text-danger existingProfessors-error">No professors</td>
+                            }
+                            else
+                            {
+                                <td class="subject-professor existingProfessors-error">
+                                    <ul>
+                                        @for (int j = 0; j < Model[i].Professors.Count; j++)
+                                        {
+                                            <li><span>@Model[i].Professors[j].LastName</span> @(" " + Model[i].Professors[j].FirstName)</li>
+                                        }
+                                    </ul>
+                                </td>
+                            }
+
+                            <td class="delete-button-table">
+                                @if (Model[i].Professors == null || Model[i].Professors.Count == 0)
+                                {
+                                    @Html.ActionLink($"Delete", "Delete", new { subjectId = Model[i].Id }, new { @class = "delete-button delete-subject-button" })
+                                }
+                                else
+                                {
+                                    <button class="delete-button delete-subject-button">Delete</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/js/IndexSchoolSubject.js" asp-append-version="true"></script>

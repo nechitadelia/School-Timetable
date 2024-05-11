@@ -1,0 +1,23 @@
+﻿@using School_Timetable.ViewModels
+
+@model AppUserViewModel
+
+<div class="homepage-container">
+    <div class="homepage-headings">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <h1 id="title-unauthenticatedUser">Welcome to the school planner!</h1>
+            <h2>
+                Here you can easily organise and manage all the classes and professors of the school,
+                getting ready for a new academic year in just a few clicks!
+            </h2>
+            <a asp-area="" asp-controller="Account" asp-action="Register" id="registerButton">Create new account</a>
+        }
+        else
+        {
+            <input type="hidden" asp-for="Id" value="@Model.Id" readonly />
+
+            <h1 id="title-authenticatedUser">Welcome, <span>@Model.SchoolName!</span></h1>
+        }
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@using School_Timetable.ViewModels
+
+@model EditAppUserViewModel
+
+<div class="info-container">
+	<div class="form-container">
+		<div class="back-button-container">
+			<a class="back-button" asp-area="" asp-controller="Account" asp-action="Info">Back to info</a>
+		</div>
+
+		<h1>Edit Info</h1>
+
+		<form method="post" id="editUserform">
+			<input type="hidden" asp-for="Id" value="@Model.Id" readonly />
+
+			<div class="mt-3">
+				<label for="firstName" class="form-label">School Name</label>
+				<input type="text" class="form-control" asp-for="SchoolName" id="SchoolName" />
+				<span asp-validation-for="SchoolName" class="text-danger"></span>
+			</div>
+
+			<div class="mt-3">
+				<label for="lastName" class="form-label">County</label>
+				<input type="text" class="form-control" asp-for="County" id="County" />
+				<span asp-validation-for="County" class="text-danger"></span>
+			</div>
+
+			<div class="mt-3">
+				<label for="lastName" class="form-label">City</label>
+				<input type="text" class="form-control" asp-for="City" id="City" />
+				<span asp-validation-for="City" class="text-danger"></span>
+			</div>
+		</form>
+
+		<div class="save-button-user">
+			<div>
+				<button type="submit" class="edit-button" id="editUserButton" asp-controller="Account" asp-action="Edit">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="~/js/EditUserInfo.js" asp-append-version="true"></script>

@@ -1,0 +1,239 @@
+﻿.subjects-container {
+    margin-bottom: 100px;
+    width: 100%;
+}
+
+.subjects-container form {
+    width: 100%; 
+}
+
+.index-subjects-title {
+    margin-top: 150px !important;
+}
+
+.subjects-buttons-container {
+    width: 80%;
+    max-width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.subjects-buttons-container a {
+    border-radius: 70px;
+    padding: 10px 30px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.list-table {
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.list-table thead {
+    background-color: #a3bac8;
+}
+
+.list-table thead th {
+    color: #00426d;
+    padding: 17px 10px 17px 30px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.first-column {
+    border-right: 2px solid #a3bac8;
+    width: 25%;
+}
+
+.list-table tbody tr:nth-of-type(even) {
+    background-color: #f4f6f8;
+}
+
+.list-table tbody td {
+    padding: 15px 10px 15px 30px;
+}
+
+.subject-name {
+    color: #00426d;
+    width: 25%;
+    font-weight: bold;
+}
+
+.subject-professor {
+    color: #6e7082;
+    min-width: 170px;
+}
+
+.list-table tbody ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.list-table tbody ul li {
+    padding: 2px 0;
+}
+
+.list-table span {
+    font-weight: 700;
+}
+
+.noexistingSubjects {
+    color: #b7394b;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #ffcdd2;
+    border-right: 2px solid #ffcdd2;
+}
+
+/*checkbox styling*/
+.yearsOfStudy-wrapper p {
+    border-bottom: 1.5px solid #d5d5d5;
+    padding: 5px 0;
+}
+.all-check-wrapper {
+    width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+}
+.check-wrapper {
+    width: 100%;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.check-wrapper input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 22px;
+    width: 22px;
+    background-color: #d5d5d5;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.check-wrapper label {
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.check-wrapper input[type="checkbox"]:after {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 15px;
+    color: white;
+    display: none;
+}
+
+.check-wrapper input[type="checkbox"]:hover {
+    background-color: #a5a5a5;
+}
+
+.check-wrapper input[type="checkbox"]:checked {
+    background-color: #0e8858;
+}
+
+.check-wrapper input[type="checkbox"]:checked:after {
+    display: block;
+}
+
+@media screen and (max-width:830px) {
+    .subjects-container .secondary-column {
+        display: none;
+    }
+
+    .subject-name {
+        width: 30%;
+    }
+
+    .delete-button-table {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width:530px) {
+    .subjects-buttons-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .list-table {
+        width: 100%;
+        margin: 0;
+    }
+
+    .first-column {
+        width: none;
+    }
+
+    .subject-name {
+        width: none;
+    }
+
+    .delete-button-table {
+        width: none;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .delete-subject-button {
+        min-width: 60px;
+        padding: 5px 10px;
+        margin-right: 10px;
+    }
+
+    .subjects-table thead th {
+        padding: 15px 10px;
+    }
+
+    .subjects-table tbody td {
+        padding: 10px;
+    }
+
+    .all-check-wrapper {
+        grid-gap: 5px;
+    }
+
+    .check-wrapper {
+        padding: 0;
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .check-wrapper label {
+        position: relative;
+        top: 45%;
+        transform: translateY(-50%);
+    }
+}

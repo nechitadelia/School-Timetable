@@ -1,0 +1,196 @@
+﻿@using School_Timetable.ViewModels
+
+@model SchoolClassCollectionsViewModel
+
+<div class="schoolClass-container">
+    <div class="class-buttons">
+        <div class="add-delete-buttons">
+            <h1>Classes</h1>
+            <a class="create-button" asp-area="" asp-controller="SchoolClasses" asp-action="Create">
+                Add Class
+            </a>
+            <a class="delete-button" asp-area="" asp-controller="SchoolClasses" asp-action="Delete">
+                Delete Class
+            </a>
+            <a class="graduate-button" asp-area="" asp-controller="SchoolClasses" asp-action="GraduateClasses">
+                Graduate classes
+            </a>
+        </div>
+                
+        <div class="grades-buttons">
+            <p>Pick a year of study:</p>
+            <button class="grd-button fifth-grade-button">Fifth Grade</button>
+            <button class="grd-button sixth-grade-button darken-button">Sixth Grade</button>
+            <button class="grd-button seventh-grade-button darken-button">Seventh Grade</button>
+            <button class="grd-button eighth-grade-button darken-button">Eighth Grade</button>
+        </div>
+    </div>
+
+    <div class="class-collections">
+        @* -------------fifth grade tables------------- *@
+        <div class="classes fifth-grade-classes">
+            @if (Model.fifthGradeClasses.Count == 0)
+            {
+                <div class="noClasses">
+                    <p>No existing classes for fifth grade</p>
+                </div>
+            }
+            else
+            {
+                for (int i = Model.fifthGradeClasses.Count - 1; i >= 0; i--)
+                {
+                    <table class="schoolClass-table">
+                        <thead class="schoolClass-tableHead">
+                            <tr>
+                                <th colspan="2">@Model.fifthGradeClasses.ElementAt(i).YearOfStudy @Model.fifthGradeClasses.ElementAt(i).ClassLetter</th>
+                            </tr>
+                        </thead>
+                        <tbody class="schoolClass-tableBody">
+                            @for (int j = 0; j < Model.fifthGradeSubjects.Count; j++)
+                            {
+                                <tr>
+                                    <td class="schoolClass-subject">
+                                        @Model.fifthGradeSubjects[j].Name
+                                    </td>
+                                    @if (Model.fifthGradeProfessors[i][j] != null)
+                                    {
+                                        <td>@(Model.fifthGradeProfessors[i][j].LastName + " " + Model.fifthGradeProfessors[i][j].FirstName)</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">No professor assigned</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+
+        @* -------------sixth grade tables------------- *@
+        <div class="classes sixth-grade-classes hidden-elem">
+            @if (Model.sixthGradeClasses.Count == 0)
+            {
+                <div class="noClasses">
+                    <p>No existing classes for sixth grade</p>
+                </div>
+            }
+            else
+            {
+                for (int i = Model.sixthGradeClasses.Count - 1; i >= 0; i--)
+                {
+                    <table class="schoolClass-table">
+                        <thead class="schoolClass-tableHead">
+                            <tr>
+                                <th colspan="2">@Model.sixthGradeClasses.ElementAt(i).YearOfStudy @Model.sixthGradeClasses.ElementAt(i).ClassLetter</th>
+                            </tr>
+                        </thead>
+                        <tbody class="schoolClass-tableBody">
+                            @for (int j = 0; j < Model.sixthGradeSubjects.Count; j++)
+                            {
+                                <tr>
+                                    <td class="schoolClass-subject">
+                                        @Model.sixthGradeSubjects[j].Name
+                                    </td>
+                                    @if (Model.sixthGradeProfessors[i][j] != null)
+                                    {
+                                        <td>@(Model.sixthGradeProfessors[i][j].LastName + " " + Model.sixthGradeProfessors[i][j].FirstName)</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">No professor assigned</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+
+        @* -------------seventh grade tables------------- *@
+        <div class="classes seventh-grade-classes hidden-elem">
+            @if (Model.seventhGradeClasses.Count == 0)
+            {
+                <div class="noClasses">
+                    <p>No existing classes for seventh grade</p>
+                </div>
+            }
+            else
+            {
+                for (int i = Model.seventhGradeClasses.Count - 1; i >= 0; i--)
+                {
+                    <table class="schoolClass-table">
+                        <thead class="schoolClass-tableHead">
+                            <tr>
+                                <th colspan="2">@Model.seventhGradeClasses.ElementAt(i).YearOfStudy @Model.seventhGradeClasses.ElementAt(i).ClassLetter</th>
+                            </tr>
+                        </thead>
+                        <tbody class="schoolClass-tableBody">
+                            @for (int j = 0; j < Model.seventhGradeSubjects.Count; j++)
+                            {
+                                <tr>
+                                    <td class="schoolClass-subject">
+                                        @Model.seventhGradeSubjects[j].Name
+                                    </td>
+                                    @if (Model.seventhGradeProfessors[i][j] != null)
+                                    {
+                                        <td>@(Model.seventhGradeProfessors[i][j].LastName + " " + Model.seventhGradeProfessors[i][j].FirstName)</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">No professor assigned</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+
+        @* -------------eighth grade tables------------- *@
+        <div class="classes eighth-grade-classes hidden-elem">
+            @if (Model.eighthGradeClasses.Count == 0)
+            {
+                <div class="noClasses">
+                    <p>No existing classes for eighth grade</p>
+                </div>
+            }
+            else
+            {
+                for (int i = Model.eighthGradeClasses.Count - 1; i >= 0; i--)
+                {
+                    <table class="schoolClass-table">
+                        <thead class="schoolClass-tableHead">
+                            <tr>
+                                <th colspan="2">@Model.eighthGradeClasses.ElementAt(i).YearOfStudy @Model.eighthGradeClasses.ElementAt(i).ClassLetter</th>
+                            </tr>
+                        </thead>
+                        <tbody class="schoolClass-tableBody">
+                            @for (int j = 0; j < Model.eighthGradeSubjects.Count; j++)
+                            {
+                                <tr>
+                                    <td class="schoolClass-subject">
+                                        @Model.eighthGradeSubjects[j].Name
+                                    </td>
+                                    @if (Model.eighthGradeProfessors[i][j] != null)
+                                    {
+                                        <td>@(Model.eighthGradeProfessors[i][j].LastName + " " + Model.eighthGradeProfessors[i][j].FirstName)</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">No professor assigned</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/js/SchoolClasses.js" asp-append-version="true"></script>
