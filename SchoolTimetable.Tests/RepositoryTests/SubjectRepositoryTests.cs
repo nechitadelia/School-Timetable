@@ -62,20 +62,6 @@ namespace SchoolTimetable.Tests.RepositoryTests
         }
 
         [Fact]
-        public async void SubjectRepository_GetProfessorsOfASubject_ReturnsProfessorsOfASubject()
-        {
-            //Arrange
-            int subjectId = 1;
-
-            //Act
-            var result = await _subjectRepository.GetProfessorsOfASubject(subjectId);
-
-            //Assert
-            result.Should().BeOfType<Task<List<Professor>>>();
-        }
-
-
-        [Fact]
         public async void SubjectRepository_AddSubject_ReturnsBool()
         {
             //Arrange

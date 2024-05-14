@@ -1,0 +1,59 @@
+﻿.users-container {
+    margin-bottom: 100px;
+}
+
+.delete-user-button {
+    border-radius: 70px;
+    padding: 7px 20px;
+    border: none;
+    margin-right: 15px;
+}
+
+.delete-button-user {
+    margin-bottom: 100px;
+}
+
+.noexistingUsers,
+.noUsersFound {
+    color: #b7394b;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #ffcdd2;
+    border-right: 2px solid #ffcdd2;
+}
+
+@media screen and (max-width:730px) {
+    .users-container .secondary-column {
+        display: none;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .users-container .tertiary-column {
+        display: none;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .users-table {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .delete-user-button {
+        min-width: 60px;
+        padding: 5px 10px;
+        margin-right: 0;
+    }
+
+    .users-table thead th {
+        padding: 15px 10px;
+    }
+
+    .users-table tbody td {
+        padding: 10px;
+    }
+}

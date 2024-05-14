@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Repo\\School Timetable\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8234C9F5-7797-42A7-9B50-EBD446B2955B}|SchoolTimetable\\SchoolTimetable.csproj|d:\\repo\\school timetable\\schooltimetable\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8234C9F5-7797-42A7-9B50-EBD446B2955B}|SchoolTimetable\\SchoolTimetable.csproj|solutionrelative:schooltimetable\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Repo\\School Timetable\\SchoolTimetable\\appsettings.json",
+              "RelativeDocumentMoniker": "SchoolTimetable\\appsettings.json",
+              "ToolTip": "D:\\Repo\\School Timetable\\SchoolTimetable\\appsettings.json",
+              "RelativeToolTip": "SchoolTimetable\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-11T15:21:34.852Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
