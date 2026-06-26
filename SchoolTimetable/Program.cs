@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using School_Timetable.Data;
 using School_Timetable.Interfaces;
 using School_Timetable.Models;
@@ -22,7 +20,7 @@ namespace School_Timetable
 
             //injection of the db context
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolTimetable")));
+                options.UseInMemoryDatabase("SchoolTimetable"));
 
             //add identity
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -52,6 +50,13 @@ namespace School_Timetable
 
             var app = builder.Build();
 
+            // Seed demo data into the in-memory database
+            using (IServiceScope scope = app.Services.CreateScope())
+            {
+                AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                DbSeeder.Seed(db);
+            }
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -65,9 +70,9 @@ namespace School_Timetable
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
